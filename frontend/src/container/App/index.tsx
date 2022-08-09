@@ -1,7 +1,8 @@
 import React from "react";
+import Headers from "src/component/Menu";
 
 function App() {
-  return <h1>Hello World</h1>;
+  return <Headers />;
 }
 
 export default App;

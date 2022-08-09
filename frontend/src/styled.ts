@@ -59,6 +59,7 @@ export const NavBar = styled.div`
 export const ShareButton = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
   height: 230px;
   width: 100%;
 
@@ -84,4 +85,12 @@ export const ShareButton = styled.div`
 export const ImageMain = styled.img`
   width: 100%;
   height: auto;
+  transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+`;
+
+export const Footer = styled.div`
+  position: absolute;
+  top: 50%;
+  color: #6e6a61;
+  font-size: 80%;
 `;

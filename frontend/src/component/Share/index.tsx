@@ -1,7 +1,7 @@
 import React from "react";
-import { ShareButton } from "src/styled";
+import { ShareButton, Footer } from "src/styled";
 
-export default function Share(): JSX.Element {
+export default function Share({ footer }: { footer: boolean }): JSX.Element {
   return (
     <ShareButton>
       <a
@@ -17,6 +17,11 @@ export default function Share(): JSX.Element {
         <img src={require("./twitter.png")} alt="twitter" />
       </a>
       <p>Share</p>
+      {footer ? (
+        <Footer>Reproduction interdite - Copyright Angeline Desdevises</Footer>
+      ) : (
+        <></>
+      )}
     </ShareButton>
   );
 }

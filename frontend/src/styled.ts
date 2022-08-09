@@ -34,22 +34,31 @@ export const NavBar = styled.div`
   font-weight: bold;
   width: 80%;
   margin: 0 auto;
-  > div:nth-of-type(2n + 1) {
+  a {
     width: max-content;
     margin-left: 25px;
+    text-decoration: none;
+    color: #000;
   }
 
-  > div:nth-of-type(1) {
+  > a:nth-of-type(1) {
     margin-left: 0;
   }
 
-  > div:nth-of-type(2n) {
+  > div {
     opacity: 0.15;
     font-size: 40%;
     margin-left: 25px;
   }
 
-  > div:nth-of-type(3) {
+  > div:nth-of-type(2) {
+    opacity: 1;
+    font-size: 100%;
+    margin-left: 0;
+    position: relative;
+  }
+
+  > div:nth-of-type(2) {
     background: url(https://bucket1.format-assets.com/theme_versions/8549292/assets/images/arrow-down.svg)
       right 64% no-repeat;
     padding-right: 30px;
@@ -83,7 +92,11 @@ export const ShareButton = styled.div`
 `;
 
 export const ImageMain = styled.img`
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
+  max-width: 1100px;
   height: auto;
   transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 `;
@@ -93,4 +106,22 @@ export const Footer = styled.div`
   top: 50%;
   color: #6e6a61;
   font-size: 80%;
+`;
+
+export const ArticleNavBar = styled.div`
+  position: absolute;
+  left: 25px;
+  width: max-content;
+  background-color: #fff;
+  z-index: 10;
+
+  div {
+    z-index: 10;
+    height: 30px;
+    width: 100%;
+  }
+
+  div:nth-of-type(1) {
+    margin-top: 3%;
+  }
 `;

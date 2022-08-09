@@ -8,11 +8,24 @@ export default function Headers(): JSX.Element {
   return (
     <>
       <H1>Angeline Desdevises</H1>
-      <Navigation />
+      <Navigation
+        reportage={[
+          "SAN MARCU 2022",
+          "Reportage : Agriculture Passion ou Prison",
+          "Pélerinage Gitans , Saintes Maries de la Mer",
+          "Reportage initiative citoyenne",
+          "Confrérie SAN MARCU, Corse",
+          "Reportage finaliste concours SOPHOT - Galerie Fait et Cause",
+          "Ganesh Festival",
+        ]}
+      />
       <Share footer={false} />
       <Suspense
         fallback={
-          <div style={{ height: "100vh", width: "100vw" }}> LOADING </div>
+          <div style={{ height: "100vh", width: "100vw", textAlign: "center" }}>
+            {" "}
+            LOADING{" "}
+          </div>
         }
       >
         <Temp />

@@ -15,20 +15,41 @@ body {
   src: url(font/BentonSans_Condensed_Regular.otf);
 } */
 
-@keyframes test1 {
+@keyframes barre1 {
   0% {
     transform: rotate(0deg) translate(0%, 0%);
   }
   100% {
-    transform: translateY(200%) rotate(45deg);
+    transform: translateY(350%) rotate(45deg);
   }
 }
 
-@keyframes test2 {
+@keyframes barre2 {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(300%);
+  }
+}
+
+@keyframes barre3 {
   0% {
     transform: rotate(0deg);
   }
   100% {
-    transform: translateY(-200%) rotate(-45deg);
+    transform: translateY(-350%) rotate(-45deg);
+  }
+}
+
+@keyframes NavBarPhone {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

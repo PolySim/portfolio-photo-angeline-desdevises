@@ -16,12 +16,15 @@ export default function Navigation({
       }
     };
 
-    ref.current.addEventListener("mouseover", () => isOver(true));
-    ref.current.addEventListener("mouseout", () => isOver(false));
-
+    if (ref.current) {
+      ref.current.addEventListener("mouseover", () => isOver(true));
+      ref.current.addEventListener("mouseout", () => isOver(false));
+    }
     return () => {
-      ref.current.removeEventListener("mouseover", () => isOver(true));
-      ref.current.removeEventListener("mouseout", () => isOver(false));
+      if (ref.current) {
+        ref.current.removeEventListener("mouseover", () => isOver(true));
+        ref.current.removeEventListener("mouseout", () => isOver(false));
+      }
     };
   }, []);
 

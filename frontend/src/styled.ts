@@ -3,17 +3,18 @@ import styled from "styled-components";
 export const MenuButton = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 45%;
+  position: relative;
+  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
   transform-origin: center;
+  width: 40px;
+  height: 40px;
 
   div:nth-of-type(n) {
-    height: 50px;
-    width: 200px;
+    height: 2px;
+    width: 70%;
     background-color: #000;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
     border-radius: 15px;
   }
 `;
@@ -104,13 +105,13 @@ export const ImageMain = styled.img`
 export const Footer = styled.div`
   position: absolute;
   top: 50%;
-  color: #6e6a61;
+  color: #555555;
   font-size: 80%;
 `;
 
 export const ArticleNavBar = styled.div`
   position: absolute;
-  left: 25px;
+  left: 15px;
   width: max-content;
   background-color: #fff;
   z-index: 10;
@@ -119,9 +120,90 @@ export const ArticleNavBar = styled.div`
     z-index: 10;
     height: 30px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    padding-left: 10px;
+
+    :hover {
+      background-color: #eee;
+    }
   }
 
   div:nth-of-type(1) {
     margin-top: 3%;
+  }
+`;
+
+export const ArticleNavBarPhone = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 64px);
+  animation: NavBarPhone 0.45s forwards;
+  overflow-y: scroll;
+
+  a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    margin-top: 35px;
+    width: 100%;
+    text-align: center;
+
+    :hover {
+      transform: scale(1.2);
+      transition: transform 0.2s;
+    }
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    width: 100%;
+
+    a {
+      font-weight: bold;
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+
+      :hover {
+        transform: scale(1.2);
+        transition: transform 0.2s;
+      }
+    }
+
+    a:nth-of-type(1) {
+      font-weight: normal;
+      font-size: 90%;
+      margin-top: 0;
+
+      :hover {
+        transform: scale(1);
+      }
+    }
+  }
+`;
+
+export const Header = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 64px;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 15px;
+    height: 100%;
+    font-size: 25px;
+    color: #232323;
   }
 `;

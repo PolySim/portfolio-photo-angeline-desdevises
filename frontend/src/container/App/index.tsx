@@ -1,8 +1,16 @@
-import React from "react";
-import Headers from "src/component/Menu";
+import React, { useState, useEffect } from "react";
+import FirstPage from "src/component/FirstPage";
 
 function App() {
-  return <Headers />;
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+  }, []);
+  return <FirstPage width={width} />;
 }
 
 export default App;

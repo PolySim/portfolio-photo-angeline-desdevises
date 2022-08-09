@@ -55,3 +55,33 @@ export const NavBar = styled.div`
     padding-right: 30px;
   }
 `;
+
+export const ShareButton = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 230px;
+  width: 100%;
+
+  a {
+    position: relative;
+    top: 25%;
+    width: 50px;
+    height: 10%;
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+
+  p {
+    position: relative;
+    top: 27%;
+    font-size: 90%;
+  }
+`;
+
+export const ImageMain = styled.img`
+  width: 100%;
+  height: auto;
+`;

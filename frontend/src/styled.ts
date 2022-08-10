@@ -46,30 +46,23 @@ export const NavBar = styled.div`
   a {
     width: max-content;
     margin-left: 25px;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #000;
   }
 
-  > a:nth-of-type(1) {
-    margin-left: 0;
-  }
-
-  > div {
+  > div:nth-of-type(2n) {
     opacity: 0.15;
     font-size: 40%;
     margin-left: 25px;
+  }
+
+  > div {
     margin-bottom: 20px;
   }
 
-  > div:nth-of-type(2) {
-    opacity: 1;
-    font-size: 100%;
-    margin-left: 0;
+  > div:nth-of-type(3) {
     position: relative;
   }
 
-  > div:nth-of-type(2) {
+  > div:nth-of-type(3) {
     background: url(https://bucket1.format-assets.com/theme_versions/8549292/assets/images/arrow-down.svg)
       right 64% no-repeat;
     padding-right: 30px;
@@ -214,6 +207,41 @@ export const Header = styled.div`
     left: 15px;
     height: 100%;
     font-size: 25px;
-    color: #232323;
+  }
+`;
+
+export const GridPortfolio = styled.div`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template: repeat(6, max-content) / repeat(3, max-content);
+
+  div {
+    width: 32vw;
+    height: 200px;
+    margin: 0.5vw;
+    background-color: bisque;
+    transition: transform 0.25s;
+    opacity: 0;
+    animation: ApparitionImage 0.6s forwards;
+
+    :hover {
+      transform: scale(0.98);
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    grid-template: repeat(8, max-content) / repeat(2, max-content);
+    div {
+      width: 48vw;
+      margin: 1vw;
+    }
+  }
+
+  @media screen and (min-width: 1100px) {
+    div {
+      width: 360px;
+      margin: 6px;
+    }
   }
 `;

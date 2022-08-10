@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavBar, ArticleNavBar } from "src/styled";
+import { Link } from "react-router-dom";
 
 export default function Navigation({
   reportage,
@@ -30,10 +31,19 @@ export default function Navigation({
 
   return (
     <NavBar>
-      <a href="">PORTFOLIO</a>
+      <div>
+        <Link
+          to="/portfolio"
+          style={{ textDecoration: "none", color: "#000", marginLeft: "0" }}
+        >
+          PORTFOLIO
+        </Link>
+      </div>
       <div>⚫</div>
       <div ref={ref}>
-        <a href="">REPORTAGE</a>
+        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+          REPORTAGE
+        </Link>
         <ArticleNavBar>
           {over ? (
             reportage.map((article) => {
@@ -45,13 +55,29 @@ export default function Navigation({
         </ArticleNavBar>
       </div>
       <div>⚫</div>
-      <a href="">PORTRAITS</a>
+      <div>
+        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+          PORTRAITS
+        </Link>
+      </div>
       <div>⚫</div>
-      <a href="">PUBLICATIONS</a>
+      <div>
+        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+          PUBLICATIONS
+        </Link>
+      </div>
       <div>⚫</div>
-      <a href="">CONTACT</a>
+      <div>
+        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+          CONTACT
+        </Link>
+      </div>
       <div>⚫</div>
-      <a href="">A PROPOS</a>
+      <div>
+        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+          A PROPOS
+        </Link>
+      </div>
     </NavBar>
   );
 }

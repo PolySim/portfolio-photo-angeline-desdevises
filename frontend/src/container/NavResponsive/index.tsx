@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Header, ArticleNavBarPhone } from "src/styled";
 import Button from "src/component/Menu/Button";
+import { Link } from "react-router-dom";
 import Share from "src/component/Share";
 
 export default function NavResponsive({
@@ -21,26 +22,62 @@ export default function NavResponsive({
   return (
     <>
       <Header>
-        <h1>Angeline Desdevises</h1>
+        <Link to="/" style={{ textDecoration: "none", color: "#232323" }}>
+          <h1>Angeline Desdevises</h1>
+        </Link>
         <Button click={click} setClick={setClick} />
       </Header>
       {click ? (
         <ArticleNavBarPhone>
-          <a href="">PORTFOLIO</a>
+          <Link
+            to="/portfolio"
+            style={{ textDecoration: "none", color: "#000" }}
+          >
+            PORTFOLIO
+          </Link>
           <div>
-            <a href="">REPORTAGE</a>
+            <Link
+              to="/portfolio"
+              style={{ textDecoration: "none", color: "#000" }}
+            >
+              REPORTAGE
+            </Link>
             {reportage.map((article) => {
               return (
-                <a href="" key={article}>
+                <Link
+                  to="/portfolio"
+                  style={{ textDecoration: "none", color: "#000" }}
+                  key={article}
+                >
                   {article}
-                </a>
+                </Link>
               );
             })}
           </div>
-          <a href="">PORTRAITS</a>
-          <a href="">PUBLICATIONS</a>
-          <a href="">CONTACT</a>
-          <a href="">A PROPOS</a>
+          <Link
+            to="/portfolio"
+            style={{ textDecoration: "none", color: "#000" }}
+          >
+            PORTRAITS
+          </Link>
+          <Link
+            to="/portfolio"
+            style={{ textDecoration: "none", color: "#000" }}
+          >
+            PUBLICATIONS
+          </Link>
+          <Link
+            to="/portfolio"
+            style={{ textDecoration: "none", color: "#000" }}
+          >
+            CONTACT
+          </Link>
+          <Link
+            to="/portfolio"
+            style={{ textDecoration: "none", color: "#000" }}
+          >
+            A PROPOS
+          </Link>
         </ArticleNavBarPhone>
       ) : (
         <></>

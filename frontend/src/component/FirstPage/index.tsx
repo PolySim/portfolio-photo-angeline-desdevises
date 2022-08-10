@@ -11,7 +11,9 @@ export default function FirstPage({ width }: { width: number }): JSX.Element {
     <>
       {width > 770 ? (
         <>
-          <H1>Angeline Desdevises</H1>
+          <H1>
+            <h1>Angeline Desdevises</h1>
+          </H1>
           <Navigation
             reportage={[
               "SAN MARCU 2022",

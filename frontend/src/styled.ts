@@ -19,12 +19,20 @@ export const MenuButton = styled.div`
   }
 `;
 
-export const H1 = styled.h1`
+export const H1 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 12.5vh;
   width: 100%;
+
+  h1 {
+    transition: opacity 0.5s;
+  }
+
+  h1:hover {
+    opacity: 0.7;
+  }
 `;
 
 export const NavBar = styled.div`
@@ -38,6 +46,7 @@ export const NavBar = styled.div`
   a {
     width: max-content;
     margin-left: 25px;
+    margin-bottom: 20px;
     text-decoration: none;
     color: #000;
   }
@@ -50,6 +59,7 @@ export const NavBar = styled.div`
     opacity: 0.15;
     font-size: 40%;
     margin-left: 25px;
+    margin-bottom: 20px;
   }
 
   > div:nth-of-type(2) {
@@ -70,14 +80,14 @@ export const ShareButton = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  height: 230px;
+  height: 180px;
   width: 100%;
 
   a {
     position: relative;
     top: 25%;
     width: 50px;
-    height: 10%;
+    height: 11%;
   }
 
   img {

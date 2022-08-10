@@ -22,7 +22,11 @@ export default function NavResponsive({
   return (
     <>
       <Header>
-        <Link to="/" style={{ textDecoration: "none", color: "#232323" }}>
+        <Link
+          to="/"
+          style={{ textDecoration: "none", color: "#232323" }}
+          onClick={() => setClick(false)}
+        >
           <h1>Angeline Desdevises</h1>
         </Link>
         <Button click={click} setClick={setClick} />
@@ -32,6 +36,7 @@ export default function NavResponsive({
           <Link
             to="/portfolio"
             style={{ textDecoration: "none", color: "#000" }}
+            onClick={() => setClick(false)}
           >
             PORTFOLIO
           </Link>
@@ -39,6 +44,7 @@ export default function NavResponsive({
             <Link
               to="/portfolio"
               style={{ textDecoration: "none", color: "#000" }}
+              onClick={() => setClick(false)}
             >
               REPORTAGE
             </Link>
@@ -48,6 +54,7 @@ export default function NavResponsive({
                   to="/portfolio"
                   style={{ textDecoration: "none", color: "#000" }}
                   key={article}
+                  onClick={() => setClick(false)}
                 >
                   {article}
                 </Link>
@@ -57,24 +64,28 @@ export default function NavResponsive({
           <Link
             to="/portfolio"
             style={{ textDecoration: "none", color: "#000" }}
+            onClick={() => setClick(false)}
           >
             PORTRAITS
           </Link>
           <Link
             to="/portfolio"
             style={{ textDecoration: "none", color: "#000" }}
+            onClick={() => setClick(false)}
           >
             PUBLICATIONS
           </Link>
           <Link
             to="/portfolio"
             style={{ textDecoration: "none", color: "#000" }}
+            onClick={() => setClick(false)}
           >
             CONTACT
           </Link>
           <Link
             to="/portfolio"
             style={{ textDecoration: "none", color: "#000" }}
+            onClick={() => setClick(false)}
           >
             A PROPOS
           </Link>

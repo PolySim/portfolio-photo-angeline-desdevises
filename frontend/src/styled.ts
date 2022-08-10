@@ -5,7 +5,7 @@ export const MenuButton = styled.div`
   flex-direction: column;
   position: relative;
   top: 40%;
-  left: 50%;
+  margin: 0 10px 0 auto;
   transform-origin: center;
   width: 40px;
   height: 40px;

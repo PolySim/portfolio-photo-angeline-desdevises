@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { MainContext } from "src/context";
 import { GridPortfolio } from "src/styled";
 import Share from "src/component/Share";
-import { Link } from "react-router-dom";
+import Image from "src/component/Portfolio/Image";
 
 const createTab = (length: number) => {
   let tab = [];
@@ -20,13 +20,7 @@ export default function Portfolio(): JSX.Element {
     <>
       <GridPortfolio>
         {createTab(18).map((elt, indices: number) => (
-          <Link
-            to={`/portfolio/${indices}`}
-            onClick={() => setDisplayImage(true)}
-            key={`${indices}portfolioImage`}
-          >
-            <div style={{ animationDelay: `${indices * 0.2}s` }}></div>
-          </Link>
+          <Image indices={indices} key={`${indices}portfolioImage`} />
         ))}
       </GridPortfolio>
       <Share footer={true} />

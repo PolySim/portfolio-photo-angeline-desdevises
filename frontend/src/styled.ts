@@ -216,23 +216,26 @@ export const GridPortfolio = styled.div`
   justify-content: center;
   grid-template: repeat(6, max-content) / repeat(3, max-content);
 
-  div {
+  img {
     width: 32vw;
-    height: 200px;
+    height: auto;
     margin: 0.5vw;
     background-color: bisque;
-    transition: transform 0.25s;
     opacity: 0;
     animation: ApparitionImage 0.6s forwards;
+  }
 
+  a {
+    transition: transform 0.25s;
     :hover {
-      transform: scale(0.98);
+      transform: scale(0.95);
+      z-index: 10;
     }
   }
 
   @media screen and (max-width: 520px) {
     grid-template: repeat(8, max-content) / repeat(2, max-content);
-    div {
+    img {
       width: 48vw;
       margin: 1vw;
     }
@@ -242,6 +245,31 @@ export const GridPortfolio = styled.div`
     div {
       width: 360px;
       margin: 6px;
+    }
+  }
+`;
+
+export const DisplayImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  > div {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+
+    svg {
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      height: 100%;
     }
   }
 `;

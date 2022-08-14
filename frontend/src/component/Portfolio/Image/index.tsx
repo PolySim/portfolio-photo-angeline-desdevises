@@ -9,12 +9,18 @@ export default function Image({ indices }: { indices: number }): JSX.Element {
   const inViewport = useVisible(ref, "50px");
 
   return (
-    <Link to={`/portfolio/${indices}`} onClick={() => setDisplayImage(true)}>
+    <Link
+      to={`/portfolio/${indices}`}
+      onClick={() => setDisplayImage(true)}
+      style={{ opacity: inViewport ? "1" : "0" }}
+    >
       <img
         ref={ref}
         data-src={require("./landscape.jpg")}
         alt="landscape"
-        style={{ animationDelay: `${indices * 0.2}s` }}
+        style={{
+          animationDelay: `${indices * 0.2}s`,
+        }}
       />
     </Link>
   );

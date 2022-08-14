@@ -225,6 +225,12 @@ export const GridPortfolio = styled.div`
     animation: ApparitionImage 0.6s forwards;
   }
 
+  div {
+    width: 32vw;
+    height: 100px;
+    background-color: aliceblue;
+  }
+
   a {
     transition: transform 0.25s;
     :hover {
@@ -256,20 +262,75 @@ export const DisplayImage = styled.div`
   width: 100vw;
   height: 100vh;
 
-  > div {
+  > div:nth-of-type(1) {
+    display: flex;
+    justify-content: right;
+    align-items: top;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    div {
+      margin-right: 30px;
+      margin-top: 30px;
+      transition: opacity 0.5s;
+      z-index: 100;
+      cursor: pointer;
+    }
+  }
+
+  > div:nth-of-type(2) {
     display: flex;
     position: absolute;
+    justify-content: space-between;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    overflow: hidden;
+    background-color: transparent;
 
-    svg {
+    button {
       display: flex;
       align-items: center;
-      z-index: 10;
+      width: 35%;
       height: 100%;
+      background-color: transparent;
+      border: none;
+      opacity: 0;
+      z-index: 10;
+      cursor: pointer;
+
+      div {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #f4e9ce;
+      }
+    }
+
+    button:nth-of-type(1) {
+      justify-content: left;
+
+      div {
+        margin-left: 40px;
+      }
+
+      :hover {
+        opacity: 1;
+      }
+    }
+
+    button:nth-of-type(2) {
+      justify-content: right;
+
+      div {
+        margin-right: 40px;
+      }
+
+      :hover {
+        opacity: 1;
+      }
     }
   }
 `;

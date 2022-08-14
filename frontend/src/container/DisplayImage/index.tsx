@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { MainContext } from "src/context";
 import { useParams } from "react-router-dom";
 import { DisplayImage } from "src/styled";
 import { Style } from "src/type";
@@ -7,6 +8,9 @@ export default function Image({}): JSX.Element {
   const { id } = useParams();
   const [bigger, setBigger] = useState<number>(0);
   const ref: any = useRef(null);
+  const { setDisplayImage } = useContext(MainContext);
+  const [onMove, setOnMove] = useState<boolean>(false);
+  let last: number = 0;
 
   const style: Style[] = [
     { width: "100%", height: "auto" },
@@ -24,11 +28,64 @@ export default function Image({}): JSX.Element {
         }
       }
     };
+    const handleMove = () => {
+      setOnMove(true);
+      last += 1;
+      const timer = setTimeout(() => {
+        last -= 1;
+        if (last === 0) {
+          setOnMove(false);
+        }
+      }, 1000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    };
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMove);
+    setDisplayImage(true);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleResize);
+    };
   }, []);
 
   return (
     <DisplayImage>
+      <div>
+        <div style={{ opacity: onMove ? "1" : "0" }}>
+          <svg
+            aria-label="Fermer"
+            color="#000"
+            fill="#000"
+            height="40"
+            role="img"
+            viewBox="0 0 24 24"
+            width="40"
+          >
+            <polyline
+              fill="none"
+              points="20.643 3.357 12 12 3.353 20.647"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3"
+            ></polyline>
+            <line
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3"
+              x1="20.649"
+              x2="3.354"
+              y1="20.649"
+              y2="3.354"
+            ></line>
+          </svg>
+        </div>
+      </div>
       <img
         style={style[bigger]}
         src={require("./landscape.jpg")}
@@ -36,12 +93,20 @@ export default function Image({}): JSX.Element {
         ref={ref}
       />
       <div>
-        <svg>
-          <path d="M2.615 21L21.708 1.907c.39-.39.39-1.023 0-1.413-.394-.393-1.024-.39-1.414 0l-19.8 19.8C.297 20.49.2 20.744.2 21c0 .257.098.51.293.706l19.8 19.8c.39.39 1.024.39 1.414 0 .393-.393.39-1.023 0-1.413L2.616 21z"></path>
-        </svg>
-        <svg>
-          <path d="M19.385 21L.292 40.093c-.39.39-.39 1.023 0 1.413.394.393 1.024.39 1.414 0l19.8-19.8c.196-.195.293-.45.293-.705 0-.257-.098-.51-.293-.706L1.707.494C1.316.103.682.103.292.493c-.393.393-.39 1.023 0 1.413L19.384 21z"></path>
-        </svg>
+        <button>
+          <div>
+            <svg width="50px" height="50px" viewBox="0 0 24 24">
+              <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>
+            </svg>
+          </div>
+        </button>
+        <button>
+          <div>
+            <svg width="50px" height="50px" viewBox="0 0 24 24">
+              <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>
+            </svg>
+          </div>
+        </button>
       </div>
     </DisplayImage>
   );

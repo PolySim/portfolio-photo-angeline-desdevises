@@ -257,9 +257,11 @@ export const GridPortfolio = styled.div`
 
 export const DisplayImage = styled.div`
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   width: 100vw;
+  min-width: 100vw;
   height: 100vh;
 
   > div:nth-of-type(1) {
@@ -270,10 +272,10 @@ export const DisplayImage = styled.div`
     width: 100%;
     height: 100%;
 
-    div {
+    a {
       margin-right: 30px;
       margin-top: 30px;
-      transition: opacity 0.5s;
+      transition: opacity 0.5s ease-in-out;
       z-index: 100;
       cursor: pointer;
     }
@@ -298,6 +300,7 @@ export const DisplayImage = styled.div`
       background-color: transparent;
       border: none;
       opacity: 0;
+      transition: opacity 0.3s ease-in-out;
       z-index: 10;
       cursor: pointer;
 
@@ -311,6 +314,7 @@ export const DisplayImage = styled.div`
 
     button:nth-of-type(1) {
       justify-content: left;
+      cursor: default;
 
       div {
         margin-left: 40px;
@@ -318,11 +322,13 @@ export const DisplayImage = styled.div`
 
       :hover {
         opacity: 1;
+        cursor: pointer;
       }
     }
 
     button:nth-of-type(2) {
       justify-content: right;
+      cursor: default;
 
       div {
         margin-right: 40px;
@@ -330,6 +336,7 @@ export const DisplayImage = styled.div`
 
       :hover {
         opacity: 1;
+        cursor: pointer;
       }
     }
   }

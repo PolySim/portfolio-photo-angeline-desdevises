@@ -276,6 +276,7 @@ export const DisplayImage = styled.div`
       margin-right: 30px;
       margin-top: 30px;
       transition: opacity 0.5s ease-in-out;
+      height: min-content;
       z-index: 100;
       cursor: pointer;
     }
@@ -324,6 +325,10 @@ export const DisplayImage = styled.div`
         opacity: 1;
         cursor: pointer;
       }
+
+      @media screen and (max-width: 770px) {
+        display: none;
+      }
     }
 
     button:nth-of-type(2) {
@@ -337,6 +342,10 @@ export const DisplayImage = styled.div`
       :hover {
         opacity: 1;
         cursor: pointer;
+      }
+
+      @media screen and (max-width: 770px) {
+        display: none;
       }
     }
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { RefObject } from "react";
 
 export type MainContextType = {
   setDisplayImage: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,5 +12,5 @@ export type Style = {
 export type BigImageProps = {
   id: number;
   display: number;
-  setDisplay: React.Dispatch<React.SetStateAction<number>>;
+  onToggleDisplay: (add: boolean) => void;
 };

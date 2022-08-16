@@ -7,7 +7,7 @@ import { Style, BigImageProps } from "src/type";
 export default function BigImage({
   id,
   display,
-  setDisplay,
+  onToggleDisplay,
 }: BigImageProps): JSX.Element {
   const [bigger, setBigger] = useState<number>(0);
   const ref: any = useRef(null);
@@ -19,22 +19,6 @@ export default function BigImage({
     { width: "100%", height: "auto" },
     { width: "auto", height: "100%" },
   ];
-
-  const onToggleDisplay = (add: boolean) => {
-    if (add) {
-      if (display === 17) {
-        setDisplay(0);
-      } else {
-        setDisplay(display + 1);
-      }
-    } else {
-      if (display === 0) {
-        setDisplay(17);
-      } else {
-        setDisplay(display - 1);
-      }
-    }
-  };
 
   useEffect(() => {
     if (ref.current) {
@@ -89,7 +73,12 @@ export default function BigImage({
   return (
     <DisplayImage>
       <div>
-        <Link to={"/portfolio"} style={{ opacity: onMove ? "1" : "0" }}>
+        <Link
+          to={"/portfolio"}
+          style={{
+            opacity: onMove ? "1" : window.innerWidth < 770 ? "0.6" : "0",
+          }}
+        >
           <svg
             aria-label="Fermer"
             color="#000"

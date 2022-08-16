@@ -30,8 +30,6 @@ export default function BigImage({
         (display === 17 && id === 0)
       ) {
         ref.current.src = ref.current.dataset.src;
-      } else {
-        ref.current.src = "";
       }
     }
   }, [display]);

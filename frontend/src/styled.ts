@@ -327,7 +327,7 @@ export const DisplayImage = styled.div`
       }
 
       @media screen and (max-width: 770px) {
-        display: none;
+        opacity: 0;
       }
     }
 
@@ -345,7 +345,7 @@ export const DisplayImage = styled.div`
       }
 
       @media screen and (max-width: 770px) {
-        display: none;
+        opacity: 0;
       }
     }
   }

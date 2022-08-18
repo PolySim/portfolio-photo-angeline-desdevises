@@ -5,6 +5,7 @@ import Portfolio from "src/component/Portfolio";
 import Images from "src/container/DisplayImage";
 import { Routes, Route } from "react-router-dom";
 import { MainContext } from "src/context";
+import A_Propos from "src/component/A_Propos";
 
 function App() {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -37,6 +38,7 @@ function App() {
             <Route path="*" element={<FirstPage />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/portfolio/:id" element={<Images />} />
+            <Route path="/apropos" element={<A_Propos />} />
           </Routes>
         )}
       </MainContext.Provider>

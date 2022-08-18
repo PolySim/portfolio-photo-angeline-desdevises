@@ -77,7 +77,7 @@ export default function Navigation({
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none" }}>
+        <Link to="/apropos" style={{ textDecoration: "none" }}>
           A PROPOS
         </Link>
       </div>

@@ -357,3 +357,68 @@ export const DisplayImage = styled.div`
     }
   }
 `;
+
+export const Propos = styled.div`
+  > div:nth-of-type(1) {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    @media screen and (max-width: 640px) {
+      flex-direction: column;
+    }
+
+    > div:nth-of-type(1) {
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 3%;
+      width: 50%;
+      height: max-content;
+      img {
+        width: 80%;
+        height: auto;
+      }
+
+      @media screen and (max-width: 640px) {
+        width: 100%;
+        position: relative;
+        img {
+          width: 90%;
+        }
+      }
+    }
+
+    > div:nth-of-type(2) {
+      padding-right: 4%;
+      width: 46%;
+
+      h1 {
+        font-size: 57px;
+        color: #0b0b0b;
+        margin-bottom: 24px;
+      }
+
+      h4 {
+        margin-top: 50px;
+        font-size: 20px;
+        color: #555555;
+      }
+
+      > div {
+        margin-top: 12px;
+        line-height: 20.4px;
+        font-size: 12px;
+        color: #555555;
+      }
+
+      @media screen and (max-width: 640px) {
+        width: 90%;
+        padding: 0 5%;
+        h1 {
+          margin-top: 20px;
+          font-size: max(12px, 6vw);
+        }
+      }
+    }
+  }
+`;

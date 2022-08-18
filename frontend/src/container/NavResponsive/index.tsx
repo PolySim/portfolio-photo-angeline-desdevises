@@ -83,7 +83,7 @@ export default function NavResponsive({
             CONTACT
           </Link>
           <Link
-            to="/portfolio"
+            to="/apropos"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >

@@ -31,7 +31,7 @@ export const H1 = styled.div`
   }
 
   h1:hover {
-    opacity: 0.7;
+    color: #7cc4c5;
   }
 `;
 
@@ -46,6 +46,11 @@ export const NavBar = styled.div`
   a {
     width: max-content;
     margin-left: 25px;
+    color: #000;
+  }
+
+  a:hover {
+    color: #7cc4c5;
   }
 
   > div:nth-of-type(2n) {
@@ -73,25 +78,27 @@ export const ShareButton = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  height: 180px;
   width: 100%;
 
   a {
     position: relative;
     top: 25%;
-    width: 50px;
-    height: 11%;
   }
 
-  img {
-    height: 100%;
-    width: auto;
+  svg {
+    transition: transform 0.2s;
+    margin-right: 30px;
+  }
+
+  svg:hover {
+    fill: #7cc4c5;
+    transform: rotate(-20deg) scale(1.2);
   }
 
   p {
     position: relative;
-    top: 27%;
-    font-size: 90%;
+    top: 31%;
+    font-size: 100%;
   }
 `;
 
@@ -107,7 +114,7 @@ export const ImageMain = styled.img`
 
 export const Footer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 90%;
   color: #555555;
   font-size: 80%;
 `;

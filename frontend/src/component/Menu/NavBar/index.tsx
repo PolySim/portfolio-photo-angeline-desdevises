@@ -34,14 +34,17 @@ export default function Navigation({
       <div>
         <Link
           to="/portfolio"
-          style={{ textDecoration: "none", color: "#000", marginLeft: "0" }}
+          style={{ textDecoration: "none", marginLeft: "0" }}
         >
           PORTFOLIO
         </Link>
       </div>
       <div>⚫</div>
       <div ref={ref}>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link
+          to="/portfolio"
+          style={{ textDecoration: "none", color: over ? "#7cc4c5" : "#000" }}
+        >
           REPORTAGE
         </Link>
         <ArticleNavBar>
@@ -56,25 +59,25 @@ export default function Navigation({
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/portfolio" style={{ textDecoration: "none" }}>
           PORTRAITS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/portfolio" style={{ textDecoration: "none" }}>
           PUBLICATIONS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/portfolio" style={{ textDecoration: "none" }}>
           CONTACT
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/portfolio" style={{ textDecoration: "none" }}>
           A PROPOS
         </Link>
       </div>

@@ -64,7 +64,7 @@ export default function BigImage({
     setDisplayImage(true);
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleResize);
+      window.removeEventListener("mousemove", handleMove);
     };
   }, []);
 

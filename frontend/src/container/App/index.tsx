@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FirstPage from "src/component/FirstPage";
 import Header from "src/container/Header";
-import Portfolio from "src/component/Portfolio";
+import Grid from "src/component/Portfolio";
 import Images from "src/container/DisplayImage";
 import { Routes, Route } from "react-router-dom";
 import { MainContext } from "src/context";
@@ -36,9 +36,13 @@ function App() {
         ) : (
           <Routes>
             <Route path="*" element={<FirstPage />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:id" element={<Images />} />
+            <Route path="/portfolio" element={<Grid name="portfolio" />} />
+            <Route path="/reportage" element={<Grid name="reportage" />} />
+            <Route path="/portraits" element={<Grid name="portrait" />} />
+            <Route path="/publications" element={<Grid name="publication" />} />
             <Route path="/apropos" element={<A_Propos />} />
+            <Route path="/contact" element={<FirstPage />} />
+            <Route path="/:name/:id" element={<Images />} />
           </Routes>
         )}
       </MainContext.Provider>

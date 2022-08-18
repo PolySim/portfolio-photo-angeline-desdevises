@@ -42,15 +42,23 @@ export default function Navigation({
       <div>⚫</div>
       <div ref={ref}>
         <Link
-          to="/portfolio"
+          to="/reportage"
           style={{ textDecoration: "none", color: over ? "#7cc4c5" : "#000" }}
         >
           REPORTAGE
         </Link>
         <ArticleNavBar>
           {over ? (
-            reportage.map((article) => {
-              return <div key={article}>{article}</div>;
+            reportage.map((article, i) => {
+              return (
+                <Link
+                  to={`/reportage${i}`}
+                  style={{ textDecoration: "none", color: "#000" }}
+                  key={article}
+                >
+                  {article}
+                </Link>
+              );
             })
           ) : (
             <></>
@@ -59,19 +67,19 @@ export default function Navigation({
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none" }}>
+        <Link to="/portraits" style={{ textDecoration: "none" }}>
           PORTRAITS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none" }}>
+        <Link to="/publications" style={{ textDecoration: "none" }}>
           PUBLICATIONS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none" }}>
+        <Link to="/contact" style={{ textDecoration: "none" }}>
           CONTACT
         </Link>
       </div>

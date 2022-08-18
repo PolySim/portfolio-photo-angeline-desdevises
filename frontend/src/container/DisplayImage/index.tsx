@@ -13,7 +13,7 @@ const createTab = (length: number): number[] => {
 };
 
 export default function Images(): JSX.Element {
-  const { id } = useParams();
+  const { name, id } = useParams();
   const [display, setDisplay] = useState<number>(parseInt(id || "0"));
   const ref: any = useRef(null);
   const [lastX, setLastX] = useState<number>(0);

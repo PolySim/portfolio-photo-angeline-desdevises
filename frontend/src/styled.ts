@@ -126,7 +126,7 @@ export const ArticleNavBar = styled.div`
   background-color: #fff;
   z-index: 10;
 
-  div {
+  a {
     z-index: 10;
     height: 30px;
     width: 100%;
@@ -134,13 +134,14 @@ export const ArticleNavBar = styled.div`
     align-items: center;
     border-radius: 15px;
     padding-left: 10px;
+    margin-left: 0;
 
     :hover {
       background-color: #eee;
     }
   }
 
-  div:nth-of-type(1) {
+  a:nth-of-type(1) {
     margin-top: 3%;
   }
 `;
@@ -230,12 +231,6 @@ export const GridPortfolio = styled.div`
     background-color: bisque;
     opacity: 0;
     animation: ApparitionImage 0.6s forwards;
-  }
-
-  div {
-    width: 32vw;
-    height: 100px;
-    background-color: aliceblue;
   }
 
   a {

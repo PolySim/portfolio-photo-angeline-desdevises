@@ -42,16 +42,16 @@ export default function NavResponsive({
           </Link>
           <div>
             <Link
-              to="/portfolio"
+              to="/reportage"
               style={{ textDecoration: "none", color: "#000" }}
               onClick={() => setClick(false)}
             >
               REPORTAGE
             </Link>
-            {reportage.map((article) => {
+            {reportage.map((article, i) => {
               return (
                 <Link
-                  to="/portfolio"
+                  to={`/reportage${i}`}
                   style={{ textDecoration: "none", color: "#000" }}
                   key={article}
                   onClick={() => setClick(false)}
@@ -62,21 +62,21 @@ export default function NavResponsive({
             })}
           </div>
           <Link
-            to="/portfolio"
+            to="/portraits"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             PORTRAITS
           </Link>
           <Link
-            to="/portfolio"
+            to="/publications"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             PUBLICATIONS
           </Link>
           <Link
-            to="/portfolio"
+            to="/contact"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >

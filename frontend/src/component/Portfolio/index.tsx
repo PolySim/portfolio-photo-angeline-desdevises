@@ -12,7 +12,7 @@ const createTab = (length: number) => {
   return tab;
 };
 
-export default function Portfolio(): JSX.Element {
+export default function Grid({ name }: { name: string }): JSX.Element {
   const { setDisplayImage } = useContext(MainContext);
   useEffect(() => setDisplayImage(false), []);
 
@@ -20,7 +20,11 @@ export default function Portfolio(): JSX.Element {
     <>
       <GridPortfolio>
         {createTab(18).map((elt, indices: number) => (
-          <Image indices={indices} key={`${indices}portfolioImage`} />
+          <Image
+            name={name}
+            indices={indices}
+            key={`${indices}portfolioImage`}
+          />
         ))}
       </GridPortfolio>
       <Share footer={true} />

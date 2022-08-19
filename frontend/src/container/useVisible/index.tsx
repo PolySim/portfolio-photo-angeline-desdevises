@@ -14,16 +14,14 @@ export const useVisible = (rootElRef: any, top: string) => {
       );
       ob.observe(rootElRef.current);
       return () => {
-        // ob.unobserve(rootElRef.current);
+        if (rootElRef.current) {
+          ob.unobserve(rootElRef.current);
+        }
       };
     }
   }, []);
   if (visible) {
     rootElRef.current.src = rootElRef.current.dataset.src;
-  } else {
-    if (rootElRef.current) {
-      rootElRef.current.src = "";
-    }
   }
   return visible;
 };

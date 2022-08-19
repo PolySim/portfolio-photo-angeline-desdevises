@@ -222,19 +222,19 @@ export const GridPortfolio = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;
-  grid-template: repeat(6, max-content) / repeat(3, max-content);
+  grid-template-columns: repeat(3, max-content);
 
   img {
     width: 32vw;
     height: auto;
     margin: 0.5vw;
-    background-color: bisque;
     opacity: 0;
     animation: ApparitionImage 0.6s forwards;
   }
 
   a {
     transition: transform 0.25s;
+    height: fit-content;
     :hover {
       transform: scale(0.95);
       z-index: 10;

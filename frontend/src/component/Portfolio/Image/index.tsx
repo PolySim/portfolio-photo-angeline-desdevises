@@ -12,7 +12,7 @@ export default function Image({
 }): JSX.Element {
   const { setDisplayImage } = useContext(MainContext);
   const ref = useRef<any>(null);
-  const inViewport = useVisible(ref, "50px");
+  const inViewport = useVisible(ref, "100px");
 
   return (
     <Link
@@ -22,7 +22,11 @@ export default function Image({
     >
       <img
         ref={ref}
-        data-src={require("./landscape.jpg")}
+        data-src={
+          indices % 2 === 0
+            ? require("./landscape.jpg")
+            : require("./portrait.jpg")
+        }
         alt="landscape"
         style={{
           animationDelay: `${indices * 0.2}s`,

@@ -6,6 +6,7 @@ import Images from "src/container/DisplayImage";
 import { Routes, Route } from "react-router-dom";
 import { MainContext } from "src/context";
 import A_Propos from "src/component/A_Propos";
+import Contact from "src/component/Contact";
 
 function App() {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -41,7 +42,7 @@ function App() {
             <Route path="/portraits" element={<Grid name="portrait" />} />
             <Route path="/publications" element={<Grid name="publication" />} />
             <Route path="/apropos" element={<A_Propos />} />
-            <Route path="/contact" element={<FirstPage />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/:name/:id" element={<Images />} />
           </Routes>
         )}

@@ -16,46 +16,33 @@ export default function A_Propos(): JSX.Element {
           <div>
             <h1>Biographie (fr)</h1>
             <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-              ipsam, velit aspernatur eius labore odio voluptate debitis
-              quibusdam cumque, beatae ad quam ea maiores consequuntur culpa
-              magni omnis adipisci voluptatem quaerat sunt, mollitia sit natus.
-              Quae et esse id ad, aperiam, modi repellat voluptatum adipisci
-              nemo itaque dolores quisquam corrupti? Repudiandae necessitatibus
-              sit labore aspernatur. Ex, facere, eligendi neque quasi quae in,
-              quidem repellendus culpa aperiam totam iure. Officia modi minima
-              aut tenetur esse ex fugit dolorum placeat doloribus. Id repellat
-              quo recusandae dolore est perferendis facere, cumque facilis
-              necessitatibus dignissimos modi maiores possimus aliquam,
-              voluptates cum, veritatis amet officiis ducimus. Consectetur quasi
-              optio, velit animi repellendus reprehenderit veritatis
-              voluptatibus illum. Quas ea maiores omnis nam molestiae vitae
-              culpa magnam quos corporis similique ipsam veritatis maxime,
-              quidem, laudantium incidunt quibusdam enim, magni qui sunt sequi.
-              Quia molestiae provident perspiciatis nesciunt voluptatem
-              pariatur? Odit quas unde nulla? Amet minima iure in?
+              Photographe indépendante basée à Rennes et originaire de
+              Normandie, j'ai façonné ma pratique de la photo de façon
+              autodidacte depuis l'adolescence. Après trois années d'étude en
+              information et communication, je me suis dirigée vers un service
+              civique au Club de la Presse de Bretagne. J'ai mené des missions
+              d'éducation aux médias et côtoyé de près le monde de la presse au
+              sens large. Mon travail s'articule essentiellement autour de la
+              photo d'actualité et documentaire. Les questions de société sont
+              mes sujets de prédilections. J'ai une approche diversifiée de la
+              photographie et m'intéresse également aux thématiques de la
+              mémoire, des origines et de la transmission, à la façon dont les
+              récits individuels peuvent faire échos à des histoires
+              collectives.
             </div>
             <h4>Biography (EN)</h4>
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Laboriosam, labore. Ipsam natus provident illo, tempora pariatur
-              doloremque quas optio consequatur quam impedit temporibus mollitia
-              quibusdam, esse quod cumque odio atque deleniti accusamus? Quaerat
-              beatae ducimus accusantium voluptatibus animi adipisci illo
-              numquam nesciunt molestias quos tenetur consequuntur excepturi
-              modi corporis rem natus, id reprehenderit? Corrupti est, ad
-              recusandae consectetur veritatis doloremque velit, tempora ut
-              laudantium alias quaerat voluptas? Reprehenderit, cumque ea. Sunt
-              doloremque aliquid odit veritatis facilis provident omnis, esse
-              tenetur commodi unde, fugit quibusdam ut quisquam consectetur
-              voluptas assumenda! Temporibus iste laborum modi qui quo odit
-              fuga, officia provident vero cupiditate cumque officiis quasi
-              laudantium magnam labore dolorem soluta nihil blanditiis, nisi
-              doloribus omnis, eos ab eaque. Odit reiciendis amet tempore omnis
-              maxime inventore, eius saepe excepturi explicabo laudantium illum
-              voluptatibus reprehenderit ratione exercitationem at sapiente.
-              Excepturi, modi ipsa? Blanditiis ut voluptatem vitae aut quos
-              reiciendis placeat harum. Ullam, sequi!
+              Freelance photographer based in Rennes and originally from
+              Normandy, I shaped my practice of photography in a self-taught way
+              since my teenage years. After three years of study in information
+              and communication, I decided to do a civic service at the Press
+              Club of Brittany. I led missions of education to the media and was
+              in close contact with the world of the press in a broad sense. My
+              work is mainly based on news and documentary photography. Social
+              issues are my favorite subjects. I have a diversified approach to
+              photography and I am also interested in the themes of memory,
+              origins and transmission, in the way individual stories can echo
+              collective histories.
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["Desdevises", "PROPOS", "Swipeable"]
+  "cSpell.words": ["Desdevises", "PROPOS", "Swipeable"],
+  "python.formatting.provider": "black"
 }

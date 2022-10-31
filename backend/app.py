@@ -1,4 +1,37 @@
 import mysql.connector
+import flask
+import os
+import sys
+from flask import Flask, request, send_file, render_template
+from flask_cors import CORS
+import json
+
+cur_path = os.path.abspath(".")
+sys.path.append(cur_path)
+
+app = Flask(__name__)
+CORS(app, supports_credentials=True)
+
+picFolder = os.path.join("./static")
+app.config['UPLOAD_FOLDER'] = picFolder
+
+# Response Header Wrapper function, setting appropriate header permissions
+
+FRONTEND_URL = "http://localhost:3000"
+
+def add_response_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', FRONTEND_URL)
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization,Cache-Control')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
+
+@app.route('/hello')
+def say_hello_world():
+    return flask.jsonify({'result': "Hello Connected React World!!!"})
 
 def convertToBinaryData(filename):
     # Convert digital data to binary format
@@ -6,8 +39,7 @@ def convertToBinaryData(filename):
         binaryData = file.read()
     return binaryData
 
-
-def insertBLOB(emp_id, photo):
+def insertBLOB(photo, portfolio, page):
     print("Inserting BLOB into python_employee table")
     try:
         connection = mysql.connector.connect(host='127.0.0.1',
@@ -17,12 +49,12 @@ def insertBLOB(emp_id, photo):
 
         cursor = connection.cursor()
         sql_insert_blob_query = """ INSERT INTO image
-                          (id, img, portfolio, page) VALUES (%s,%s,%s,%s)"""
+                          (img, portfolio, page) VALUES (%s,%s,%s)"""
 
         empPicture = convertToBinaryData(photo)
 
         # Convert data into tuple format
-        insert_blob_tuple = (emp_id, empPicture, False, 3)
+        insert_blob_tuple = (empPicture, portfolio, page)
         result = cursor.execute(sql_insert_blob_query, insert_blob_tuple)
         connection.commit()
         print("Image and file inserted successfully as a BLOB into python_employee table", result)
@@ -35,3 +67,15 @@ def insertBLOB(emp_id, photo):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+            
+@app.route('/api/images')
+def get_images():
+    try:
+        response = flask.make_response(convertToBinaryData("D:\Laban/001.jpg"))
+        response.headers.set('Content-Type', 'image/jpg')
+        return response
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response

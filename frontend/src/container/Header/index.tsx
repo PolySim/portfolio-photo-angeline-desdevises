@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { H1 } from "src/styled";
 import Navigation from "src/component/Menu/NavBar";
 import NavResponsive from "../NavResponsive";
 import Share from "src/component/Share";
 import { Link } from "react-router-dom";
+import { MainContext } from "src/context";
 
 export default function Header({
   width,
@@ -14,6 +15,12 @@ export default function Header({
   click: boolean;
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
+  const { pagesInformation } = useContext(MainContext);
+
+  const nameReportage: string[] = pagesInformation.map(
+    (reportage) => reportage[0]
+  );
+  console.log(nameReportage);
   return (
     <>
       {" "}
@@ -24,32 +31,14 @@ export default function Header({
               <h1>Angeline Desdevises</h1>
             </Link>
           </H1>
-          <Navigation
-            reportage={[
-              "SAN MARCU 2022",
-              "Reportage : Agriculture Passion ou Prison",
-              "Pélerinage Gitans , Saintes Maries de la Mer",
-              "Reportage initiative citoyenne",
-              "Confrérie SAN MARCU, Corse",
-              "Reportage finaliste concours SOPHOT - Galerie Fait et Cause",
-              "Ganesh Festival",
-            ]}
-          />
+          <Navigation reportage={nameReportage} />
           <Share footer={false} />
         </>
       ) : (
         <NavResponsive
           click={click}
           setClick={setClick}
-          reportage={[
-            "SAN MARCU 2022",
-            "Reportage : Agriculture Passion ou Prison",
-            "Pélerinage Gitans , Saintes Maries de la Mer",
-            "Reportage initiative citoyenne",
-            "Confrérie SAN MARCU, Corse",
-            "Reportage finaliste concours SOPHOT - Galerie Fait et Cause",
-            "Ganesh Festival",
-          ]}
+          reportage={nameReportage}
         />
       )}{" "}
     </>

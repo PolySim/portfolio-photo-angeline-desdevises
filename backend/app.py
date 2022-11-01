@@ -31,6 +31,7 @@ def add_response_headers(response):
 
 
 @app.route('/hello')
+#  Test Connection
 def say_hello_world():
     return flask.jsonify({'result': "Hello Connected React World!!!"})
 
@@ -151,9 +152,9 @@ def get_image_information():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=6789)
-    # for i in range(1, 36):
+    # for i in range(1, 26):
     #     if i < 10:
-    #         link = "D:/ANGELINE/liban/0" + str(i) +".jpg"
+    #         link = "D:/ANGELINE/Raouche/00" + str(i) +".jpg"
     #     else:
-    #         link = "D:/ANGELINE/liban/" + str(i) +".jpg"
-    #     insertBLOB(link, False, 4, i)
+    #         link = "D:/ANGELINE/Raouche/0" + str(i) +".jpg"
+    #     insertBLOB(link, False, 3, i)

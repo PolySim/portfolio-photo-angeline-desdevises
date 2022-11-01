@@ -3,4 +3,5 @@ import { MainContextType } from "src/type";
 
 export const MainContext = React.createContext<MainContextType>({
   setDisplayImage: () => {},
+  pagesInformation: [],
 });

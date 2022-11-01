@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FirstPage from "src/component/FirstPage";
 import Header from "src/container/Header";
 import Grid from "src/component/Portfolio";
 import Images from "src/container/DisplayImage";
 import { Routes, Route } from "react-router-dom";
 import { MainContext } from "src/context";
-import A_Propos from "src/component/A_Propos";
+import APropos from "src/component/A_Propos";
 import Contact from "src/component/Contact";
+import pages_information from "src/API/pages_information";
 
 function App() {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [click, setClick] = useState<boolean>(false);
   const [displayImage, setDisplayImage] = useState<boolean>(false);
+  const [pagesInformation, setPagesInformation] = useState<string[][]>([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,11 +22,20 @@ function App() {
     window.addEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    async function getData(): Promise<void> {
+      const information = await pages_information();
+      setPagesInformation(information);
+    }
+    getData();
+  }, []);
+
   return (
     <>
       <MainContext.Provider
         value={{
           setDisplayImage,
+          pagesInformation,
         }}
       >
         {displayImage ? (
@@ -41,7 +52,7 @@ function App() {
             <Route path="/reportage" element={<Grid name="reportage" />} />
             <Route path="/portraits" element={<Grid name="portrait" />} />
             <Route path="/publications" element={<Grid name="publication" />} />
-            <Route path="/apropos" element={<A_Propos />} />
+            <Route path="/apropos" element={<APropos />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/:name/:id" element={<Images />} />
           </Routes>

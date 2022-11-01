@@ -2,7 +2,7 @@ import React from "react";
 import { Propos } from "src/styled";
 import Share from "src/component/Share";
 
-export default function A_Propos(): JSX.Element {
+export default function APropos(): JSX.Element {
   return (
     <>
       <Propos>

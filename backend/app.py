@@ -1,3 +1,4 @@
+from unittest import result
 import mysql.connector
 import flask
 import os
@@ -68,7 +69,8 @@ def insertBLOB(photo, portfolio, page):
             connection.close()
             print("MySQL connection is closed")
             
-@app.route('/api/images')
+@app.route('/image', methods=['GET'])
+# Return image from Mysql DB
 def get_images():
     try:
         response = flask.make_response(convertToBinaryData("D:\Laban/001.jpg"))
@@ -79,3 +81,34 @@ def get_images():
         response = flask.make_response(
             "Dataset screen display unsuccessful...", 403)
         return response
+    
+@app.route('/api/pages', methods=['GET'])
+# Return reportage information
+def get_information():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1',
+                                             database='portfolioangeline',
+                                             user='root',
+                                             passwd='root')
+        cursor = connection.cursor()
+        # SELECT ALL reportage without portrait and publication
+        sql_requests = """SELECT * FROM pages WHERE (id != 1 AND id != 2);"""
+        cursor.execute(sql_requests)
+        result = cursor.fetchall()
+        return flask.jsonify(result)
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+        
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=6789)

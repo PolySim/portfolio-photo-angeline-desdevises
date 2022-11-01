@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useVisible = (rootElRef: any, top: string) => {
   const [visible, setVisible] = useState(false);

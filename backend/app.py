@@ -92,6 +92,11 @@ def get_images():
         response = flask.make_response(
             "Dataset screen display unsuccessful...", 403)
         return response
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
     
 @app.route('/api/pages', methods=['GET'])
 # Return reportage information
@@ -132,7 +137,7 @@ def get_image_information():
                                              passwd='root')
         cursor = connection.cursor()
         # SELECT ALL images in one reportage 
-        sql_requests = """SELECT id, portfolio, number FROM images WHERE page = %s;"""
+        sql_requests = """SELECT id, portfolio FROM images WHERE page = %s ORDER BY number;"""
         cursor.execute(sql_requests, num)
         result = cursor.fetchall()
         return flask.jsonify(result)

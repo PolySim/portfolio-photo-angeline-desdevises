@@ -51,7 +51,7 @@ export default function NavResponsive({
             {reportage.map((article, i) => {
               return (
                 <Link
-                  to={`/reportage${article[1]}`}
+                  to={`/reportage/${article[1]}`}
                   style={{ textDecoration: "none", color: "#000" }}
                   key={article[0]}
                   onClick={() => setClick(false)}

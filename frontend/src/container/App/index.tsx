@@ -52,6 +52,10 @@ function App() {
             <Route path="*" element={<FirstPage />} />
             <Route path="/portfolio" element={<Grid name="portfolio" />} />
             <Route path="/reportage" element={<Grid name="reportage" />} />
+            <Route
+              path="/reportage/:numero"
+              element={<Grid name="reportage" />}
+            />
             <Route path="/portraits" element={<Grid name="portrait" />} />
             <Route path="/publications" element={<Grid name="publication" />} />
             <Route path="/apropos" element={<APropos />} />

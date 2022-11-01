@@ -52,7 +52,7 @@ export default function Navigation({
             reportage.map((article, i) => {
               return (
                 <Link
-                  to={`/reportage${article[1]}`}
+                  to={`/reportage/${article[1]}`}
                   style={{ textDecoration: "none", color: "#000" }}
                   key={article[0]}
                 >

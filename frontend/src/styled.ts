@@ -237,6 +237,7 @@ export const GridPortfolio = styled.div`
 
   a {
     transition: transform 0.25s;
+    min-height: 21.5vw;
     height: fit-content;
     :hover {
       transform: scale(0.95);
@@ -249,6 +250,10 @@ export const GridPortfolio = styled.div`
     img {
       width: 48vw;
       margin: 1vw;
+    }
+
+    a {
+      min-height: 32.5vw;
     }
   }
 

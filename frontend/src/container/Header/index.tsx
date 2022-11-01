@@ -17,8 +17,8 @@ export default function Header({
 }): JSX.Element {
   const { pagesInformation } = useContext(MainContext);
 
-  const nameReportage: string[] = pagesInformation.map(
-    (reportage) => reportage[0]
+  const nameReportage: [string, number][] = pagesInformation.map(
+    (reportage) => [reportage[0], reportage[1]]
   );
   return (
     <>

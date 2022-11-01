@@ -13,7 +13,9 @@ function App() {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [click, setClick] = useState<boolean>(false);
   const [displayImage, setDisplayImage] = useState<boolean>(false);
-  const [pagesInformation, setPagesInformation] = useState<string[][]>([]);
+  const [pagesInformation, setPagesInformation] = useState<
+    [string, number, string][]
+  >([]);
 
   useEffect(() => {
     const handleResize = () => {

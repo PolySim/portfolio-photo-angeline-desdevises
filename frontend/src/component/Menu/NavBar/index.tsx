@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Navigation({
   reportage,
 }: {
-  reportage: string[];
+  reportage: [string, number][];
 }): JSX.Element {
   const [over, setOver] = useState<boolean>(false);
   const ref: React.MutableRefObject<any> = useRef(null);
@@ -52,11 +52,11 @@ export default function Navigation({
             reportage.map((article, i) => {
               return (
                 <Link
-                  to={`/reportage${i}`}
+                  to={`/reportage${article[1]}`}
                   style={{ textDecoration: "none", color: "#000" }}
-                  key={article}
+                  key={article[0]}
                 >
-                  {article}
+                  {article[0]}
                 </Link>
               );
             })

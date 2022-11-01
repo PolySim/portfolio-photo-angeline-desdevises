@@ -2,7 +2,7 @@ import React from "react";
 
 export type MainContextType = {
   setDisplayImage: React.Dispatch<React.SetStateAction<boolean>>;
-  pagesInformation: string[][];
+  pagesInformation: [string, number, string][];
 };
 
 export type Style = {

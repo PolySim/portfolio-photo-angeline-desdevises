@@ -155,6 +155,7 @@ export const ArticleNavBarPhone = styled.div`
   height: calc(100vh - 64px);
   animation: NavBarPhone 0.45s forwards;
   overflow-y: scroll;
+  margin-bottom: 24px;
 
   a {
     text-decoration: none;
@@ -208,6 +209,7 @@ export const Header = styled.div`
   display: flex;
   width: 100%;
   height: 64px;
+  margin-bottom: 24px;
 
   h1 {
     display: flex;

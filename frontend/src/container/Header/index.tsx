@@ -20,7 +20,6 @@ export default function Header({
   const nameReportage: string[] = pagesInformation.map(
     (reportage) => reportage[0]
   );
-  console.log(nameReportage);
   return (
     <>
       {" "}

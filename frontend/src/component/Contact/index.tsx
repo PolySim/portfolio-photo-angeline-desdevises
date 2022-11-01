@@ -26,7 +26,7 @@ export default function Contact(): JSX.Element {
     <>
       <ContactPage>
         <div>
-          <img src={require("./landscape.jpg")} alt="Landscape" />
+          <img src={require("./contact.jpg")} alt="Landscape" />
         </div>
         <div>
           <h2>Contact</h2>
@@ -38,8 +38,8 @@ export default function Contact(): JSX.Element {
           </p>
           <div>
             <div>
-              <p>Phone</p>
-              <p>06 99 05 69 30</p>
+              {/* <p>Phone</p>
+              <p>06 99 05 69 30</p> */}
               <p>Email</p>
               <p>angeline.desdevises@gmail.com</p>
             </div>

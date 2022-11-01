@@ -40,7 +40,7 @@ def convertToBinaryData(filename):
         binaryData = file.read()
     return binaryData
 
-def insertBLOB(photo, portfolio, page):
+def insertBLOB(photo, portfolio, page, number):
     print("Inserting BLOB into python_employee table")
     try:
         connection = mysql.connector.connect(host='127.0.0.1',
@@ -49,13 +49,13 @@ def insertBLOB(photo, portfolio, page):
                                              password='root')
 
         cursor = connection.cursor()
-        sql_insert_blob_query = """ INSERT INTO image
-                          (img, portfolio, page) VALUES (%s,%s,%s)"""
+        sql_insert_blob_query = """ INSERT INTO images
+                          (img, portfolio, page, number) VALUES (%s,%s,%s,%s)"""
 
         empPicture = convertToBinaryData(photo)
 
         # Convert data into tuple format
-        insert_blob_tuple = (empPicture, portfolio, page)
+        insert_blob_tuple = (empPicture, portfolio, page, number)
         result = cursor.execute(sql_insert_blob_query, insert_blob_tuple)
         connection.commit()
         print("Image and file inserted successfully as a BLOB into python_employee table", result)
@@ -73,7 +73,17 @@ def insertBLOB(photo, portfolio, page):
 # Return image from Mysql DB
 def get_images():
     try:
-        response = flask.make_response(convertToBinaryData("D:\Laban/001.jpg"))
+        num = (request.args.get('num'),)
+        connection = mysql.connector.connect(host='127.0.0.1',
+                                             database='portfolioangeline',
+                                             user='root',
+                                             passwd='root')
+        cursor = connection.cursor()
+        # SELECT ALL reportage without portrait and publication
+        sql_requests = """SELECT img FROM images WHERE id = %s;"""
+        cursor.execute(sql_requests, num)
+        result = cursor.fetchall()
+        response = flask.make_response(result[0][0])
         response.headers.set('Content-Type', 'image/jpg')
         return response
     except Exception as e:
@@ -84,7 +94,7 @@ def get_images():
     
 @app.route('/api/pages', methods=['GET'])
 # Return reportage information
-def get_information():
+def get_pages_information():
     try:
         connection = mysql.connector.connect(host='127.0.0.1',
                                              database='portfolioangeline',
@@ -109,6 +119,41 @@ def get_information():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
-        
+
+@app.route('/api/images', methods=['GET'])
+# Return image information
+def get_image_information():
+    try:
+        num = (request.args.get('num'),)
+        connection = mysql.connector.connect(host='127.0.0.1',
+                                             database='portfolioangeline',
+                                             user='root',
+                                             passwd='root')
+        cursor = connection.cursor()
+        # SELECT ALL images in one reportage 
+        sql_requests = """SELECT id, portfolio, number FROM images WHERE page = %s;"""
+        cursor.execute(sql_requests, num)
+        result = cursor.fetchall()
+        return flask.jsonify(result)
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=6789)
+    # for i in range(1, 36):
+    #     if i < 10:
+    #         link = "D:/ANGELINE/liban/0" + str(i) +".jpg"
+    #     else:
+    #         link = "D:/ANGELINE/liban/" + str(i) +".jpg"
+    #     insertBLOB(link, False, 4, i)

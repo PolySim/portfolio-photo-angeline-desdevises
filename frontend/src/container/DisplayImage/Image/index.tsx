@@ -36,17 +36,17 @@ export default function BigImage({
     }
   }, [display]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (ref.current) {
-        if (ref.current.offsetWidth > window.innerWidth) {
-          setBigger(0);
-        }
-        if (ref.current.offsetHeight > window.innerHeight) {
-          setBigger(1);
-        }
+  const handleResize = () => {
+    if (ref.current) {
+      if (ref.current.offsetWidth > window.innerWidth) {
+        setBigger(0);
       }
-    };
+      if (ref.current.offsetHeight > window.innerHeight) {
+        setBigger(1);
+      }
+    }
+  };
+  useEffect(() => {
     const handleMove = () => {
       setOnMove(true);
       last += 1;
@@ -68,7 +68,7 @@ export default function BigImage({
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMove);
     };
-  }, []);
+  }, [bigger]);
 
   return (
     <DisplayImage>
@@ -111,6 +111,7 @@ export default function BigImage({
         </div>
       </div>
       <img
+        onLoad={() => handleResize()}
         style={style[bigger]}
         data-src={`${cleAPI}/image?num=${id}`}
         alt={`${id}`}

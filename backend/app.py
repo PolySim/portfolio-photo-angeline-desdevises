@@ -157,9 +157,9 @@ def get_image_information():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=6789)
-    # for i in range(1, 26):
+    # for i in range(1, 16):
     #     if i < 10:
-    #         link = "D:/ANGELINE/Raouche/00" + str(i) +".jpg"
+    #         link = "D:\ANGELINE/belleile/0" + str(i) +".jpg"
     #     else:
-    #         link = "D:/ANGELINE/Raouche/0" + str(i) +".jpg"
-    #     insertBLOB(link, False, 3, i)
+    #         link = "D:/ANGELINE/belleile/" + str(i) +".jpg"
+    #     insertBLOB(link, False, 5, i)

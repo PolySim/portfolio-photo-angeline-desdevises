@@ -1,23 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useWindowScroll } from "react-use";
+import React, { useState } from "react";
+// import { useWindowScroll } from "react-use";
 import BigImage from "src/container/DisplayImage/Image";
-import { useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 
-const createTab = (length: number): number[] => {
-  let tab = [];
-  for (let i = 0; i < length; i++) {
-    tab.push(i);
-  }
-  return tab;
-};
-
-export default function Images(): JSX.Element {
-  const { name, id } = useParams();
-  const [display, setDisplay] = useState<number>(parseInt(id || "0"));
-  const ref: any = useRef(null);
-  const [lastX, setLastX] = useState<number>(0);
-  const { x } = useWindowScroll();
+export default function Images({
+  imagesData,
+  focus,
+}: {
+  imagesData: [number, number][];
+  focus: number;
+}): JSX.Element {
+  const listImages = imagesData.map((image) => image[0]);
+  const [display, setDisplay] = useState<number>(listImages.indexOf(focus));
+  // const ref: any = useRef(null);
+  // const [lastX, setLastX] = useState<number>(0);
+  // const { x } = useWindowScroll();
 
   const handlers = useSwipeable({
     onSwiped: (eventData) => {
@@ -31,33 +28,41 @@ export default function Images(): JSX.Element {
 
   const onToggleDisplay = (add: boolean) => {
     if (add) {
-      if (display === 17) {
+      if (display === listImages.length - 1) {
         setDisplay(0);
       } else {
         setDisplay(display + 1);
       }
     } else {
       if (display === 0) {
-        setDisplay(17);
+        setDisplay(listImages.length - 1);
       } else {
         setDisplay(display - 1);
       }
     }
   };
 
-  useEffect(() => {
-    if (x > lastX) {
-      onToggleDisplay(true);
-      window.moveTo(0, 0);
-    } else if (x < lastX) {
-      onToggleDisplay(false);
-      window.moveTo(0, 0);
-    }
-    setLastX(x);
-  }, [x]);
+  // useEffect(() => {
+  //   if (x > lastX) {
+  //     onToggleDisplay(true);
+  //     window.moveTo(0, 0);
+  //   } else if (x < lastX) {
+  //     onToggleDisplay(false);
+  //     window.moveTo(0, 0);
+  //   }
+  //   setLastX(x);
+  // }, [x]);
 
   return (
-    <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        position: "absolute",
+        top: "0",
+      }}
+    >
       <div
         {...handlers}
         style={{
@@ -66,12 +71,13 @@ export default function Images(): JSX.Element {
           transition: "transform 0.8s ease-in-out",
         }}
       >
-        {createTab(18).map((elt) => (
+        {imagesData.map((elt) => (
           <BigImage
             key={`${elt}Image`}
-            id={elt}
+            id={elt[0]}
             display={display}
             onToggleDisplay={onToggleDisplay}
+            listImages={listImages}
           />
         ))}
       </div>

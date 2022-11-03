@@ -41,13 +41,7 @@ export default function NavResponsive({
             PORTFOLIO
           </Link>
           <div>
-            <Link
-              to="/reportage"
-              style={{ textDecoration: "none", color: "#000" }}
-              onClick={() => setClick(false)}
-            >
-              REPORTAGE
-            </Link>
+            <p style={{ textDecoration: "none", color: "#000" }}>REPORTAGE</p>
             {reportage.map((article, i) => {
               return (
                 <Link

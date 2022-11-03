@@ -5,13 +5,15 @@ import Share from "src/component/Share";
 import Image from "src/component/Portfolio/Image";
 import images_information from "src/API/images_information";
 import { useParams } from "react-router-dom";
+import Images from "src/container/DisplayImage";
 
 export default function Grid({ name }: { name: string }): JSX.Element {
   const params = useParams();
   const reportage = params.numero || "1";
 
-  const { setDisplayImage } = useContext(MainContext);
+  const { displayImage, setDisplayImage } = useContext(MainContext);
   const [imagesData, setImagesData] = useState<[number, number][]>([]);
+  const [focus, setFocus] = useState<number>(-1);
   useEffect(() => setDisplayImage(false), []);
 
   // Get all image data from one reportage
@@ -27,16 +29,23 @@ export default function Grid({ name }: { name: string }): JSX.Element {
 
   return (
     <>
-      <GridPortfolio>
-        {imagesData.map((elt, indices: number) => (
-          <Image
-            name={name}
-            indices={elt[0]}
-            key={`${indices}portfolioImage`}
-          />
-        ))}
-      </GridPortfolio>
-      <Share footer={true} />
+      {displayImage ? (
+        <Images imagesData={imagesData} focus={focus} />
+      ) : (
+        <>
+          <GridPortfolio>
+            {imagesData.map((elt, indices: number) => (
+              <Image
+                name={name}
+                indices={elt[0]}
+                key={`${indices}portfolioImage`}
+                setFocus={setFocus}
+              />
+            ))}
+          </GridPortfolio>
+          <Share footer={true} />
+        </>
+      )}
     </>
   );
 }

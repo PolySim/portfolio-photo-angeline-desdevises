@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { MainContext } from "src/context";
 import { DisplayImage } from "src/styled";
-import { Link } from "react-router-dom";
 import { Style, BigImageProps } from "src/type";
+
+const cleAPI = process.env.REACT_APP_API_URL;
 
 export default function BigImage({
   id,
   display,
   onToggleDisplay,
+  listImages,
 }: BigImageProps): JSX.Element {
   const [bigger, setBigger] = useState<number>(0);
   const ref: any = useRef(null);
@@ -23,11 +25,11 @@ export default function BigImage({
   useEffect(() => {
     if (ref.current) {
       if (
-        id === display ||
-        id === display - 1 ||
-        id === display + 1 ||
-        (display === 0 && id === 17) ||
-        (display === 17 && id === 0)
+        id === listImages[display] ||
+        id === listImages[display - 1] ||
+        id === listImages[display + 1] ||
+        (display === 0 && id === listImages[listImages.length - 1]) ||
+        (display === 17 && id === listImages[0])
       ) {
         ref.current.src = ref.current.dataset.src;
       }
@@ -71,11 +73,11 @@ export default function BigImage({
   return (
     <DisplayImage>
       <div>
-        <Link
-          to={"/portfolio"}
+        <div
           style={{
             opacity: onMove ? "1" : window.innerWidth < 770 ? "0.6" : "0",
           }}
+          onClick={() => setDisplayImage(false)}
         >
           <svg
             aria-label="Fermer"
@@ -106,11 +108,11 @@ export default function BigImage({
               y2="3.354"
             ></line>
           </svg>
-        </Link>
+        </div>
       </div>
       <img
         style={style[bigger]}
-        data-src={require("./landscape.jpg")}
+        data-src={`${cleAPI}/image?num=${id}`}
         alt={`${id}Image`}
         ref={ref}
       />

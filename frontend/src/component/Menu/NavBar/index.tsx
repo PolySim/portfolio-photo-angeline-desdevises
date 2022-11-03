@@ -41,12 +41,9 @@ export default function Navigation({
       </div>
       <div>⚫</div>
       <div ref={ref}>
-        <Link
-          to="/reportage"
-          style={{ textDecoration: "none", color: over ? "#7cc4c5" : "#000" }}
-        >
+        <p style={{ textDecoration: "none", color: over ? "#7cc4c5" : "#000" }}>
           REPORTAGE
-        </Link>
+        </p>
         <ArticleNavBar>
           {over ? (
             reportage.map((article, i) => {

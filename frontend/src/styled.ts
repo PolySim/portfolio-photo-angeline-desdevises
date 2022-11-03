@@ -43,7 +43,8 @@ export const NavBar = styled.div`
   font-weight: bold;
   width: 80%;
   margin: 0 auto;
-  a {
+  a,
+  p {
     width: max-content;
     margin-left: 25px;
     color: #000;
@@ -157,7 +158,8 @@ export const ArticleNavBarPhone = styled.div`
   overflow-y: scroll;
   margin-bottom: 24px;
 
-  a {
+  a,
+  p {
     text-decoration: none;
     color: #000;
     font-weight: bold;
@@ -192,7 +194,7 @@ export const ArticleNavBarPhone = styled.div`
       }
     }
 
-    a:nth-of-type(1) {
+    p:nth-of-type(1) {
       font-weight: normal;
       font-size: 90%;
       margin-top: 0;
@@ -233,10 +235,12 @@ export const GridPortfolio = styled.div`
     margin: 0.5vw;
   }
 
-  a {
+  div {
     transition: transform 0.25s;
     min-height: 21.5vw;
     height: fit-content;
+    cursor: pointer;
+
     :hover {
       transform: scale(0.95);
       z-index: 10;
@@ -250,12 +254,12 @@ export const GridPortfolio = styled.div`
       margin: 1vw;
     }
 
-    a {
+    div {
       min-height: 32.5vw;
     }
   }
 
-  @media screen and (min-width: 1100px) {
+  @media screen and (max-width: 1100px) {
     div {
       width: 360px;
       margin: 6px;
@@ -280,7 +284,7 @@ export const DisplayImage = styled.div`
     width: 100%;
     height: 100%;
 
-    a {
+    div {
       margin-right: 30px;
       margin-top: 30px;
       transition: opacity 0.5s ease-in-out;

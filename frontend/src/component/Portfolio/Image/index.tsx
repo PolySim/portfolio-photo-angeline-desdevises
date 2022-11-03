@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from "react";
 import { MainContext } from "src/context";
-import { Link } from "react-router-dom";
 import { useVisible } from "src/container/useVisible";
 
 const cleAPI = process.env.REACT_APP_API_URL;
@@ -8,18 +7,22 @@ const cleAPI = process.env.REACT_APP_API_URL;
 export default function Image({
   name,
   indices,
+  setFocus,
 }: {
   name: string;
   indices: number;
+  setFocus: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element {
   const { setDisplayImage } = useContext(MainContext);
   const ref = useRef<any>(null);
-  const inViewport = useVisible(ref, "50px");
+  const inViewport = useVisible(ref, "200px");
 
   return (
-    <Link
-      to={`/${name}/${indices}`}
-      onClick={() => setDisplayImage(true)}
+    <div
+      onClick={() => {
+        setDisplayImage(true);
+        setFocus(indices);
+      }}
       style={{ opacity: inViewport ? "1" : "0" }}
       onContextMenu={(e) => e.preventDefault()}
     >
@@ -31,6 +34,6 @@ export default function Image({
           animationDelay: `${indices * 0.2}s`,
         }}
       />
-    </Link>
+    </div>
   );
 }

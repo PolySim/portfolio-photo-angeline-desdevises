@@ -231,8 +231,6 @@ export const GridPortfolio = styled.div`
     width: 32vw;
     height: auto;
     margin: 0.5vw;
-    opacity: 0;
-    animation: ApparitionImage 0.6s forwards;
   }
 
   a {

@@ -6,14 +6,6 @@ import Image from "src/component/Portfolio/Image";
 import images_information from "src/API/images_information";
 import { useParams } from "react-router-dom";
 
-const createTab = (length: number) => {
-  let tab = [];
-  for (let i = 0; i < length; i++) {
-    tab.push(i);
-  }
-  return tab;
-};
-
 export default function Grid({ name }: { name: string }): JSX.Element {
   const params = useParams();
   const reportage = params.numero || "1";
@@ -31,7 +23,7 @@ export default function Grid({ name }: { name: string }): JSX.Element {
     if (imagesData.length === 0) {
       getData();
     }
-  }, [params]);
+  }, [reportage]);
 
   return (
     <>

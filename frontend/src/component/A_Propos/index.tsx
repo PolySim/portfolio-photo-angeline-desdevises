@@ -11,6 +11,7 @@ export default function APropos(): JSX.Element {
             <img
               src={require("./portrait.jpg")}
               alt="Portrait d'Angeline Desdevises"
+              onContextMenu={(e) => e.preventDefault()}
             />
           </div>
           <div>

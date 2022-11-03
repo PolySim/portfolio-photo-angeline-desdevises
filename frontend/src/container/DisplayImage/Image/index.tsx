@@ -113,8 +113,9 @@ export default function BigImage({
       <img
         style={style[bigger]}
         data-src={`${cleAPI}/image?num=${id}`}
-        alt={`${id}Image`}
+        alt={`${id}`}
         ref={ref}
+        onContextMenu={(e) => e.preventDefault()}
       />
       <div>
         <button onClick={() => onToggleDisplay(false)}>
@@ -127,7 +128,7 @@ export default function BigImage({
         <button onClick={() => onToggleDisplay(true)}>
           <div>
             <svg width="50px" height="50px" viewBox="0 0 24 24">
-              <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>
+              <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>
             </svg>
           </div>
         </button>

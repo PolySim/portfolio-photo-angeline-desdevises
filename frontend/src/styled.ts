@@ -259,10 +259,14 @@ export const GridPortfolio = styled.div`
     }
   }
 
-  @media screen and (max-width: 1100px) {
+  @media screen and (min-width: 1100px) {
     div {
       width: 360px;
       margin: 6px;
+    }
+
+    img {
+      width: 360px;
     }
   }
 `;
@@ -308,7 +312,7 @@ export const DisplayImage = styled.div`
     button {
       display: flex;
       align-items: center;
-      width: 35%;
+      width: 25%;
       height: 100%;
       background-color: transparent;
       border: none;
@@ -316,13 +320,27 @@ export const DisplayImage = styled.div`
       transition: opacity 0.3s ease-in-out;
       z-index: 10;
       cursor: pointer;
+    }
 
-      div {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #f4e9ce;
-      }
+    button:nth-of-type(1):hover {
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.0001) 100%
+      );
+    }
+    button:nth-of-type(2):hover {
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.0001) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+    }
+
+    svg {
+      stroke: white;
+      fill: white;
+      opacity: 0.8;
     }
 
     button:nth-of-type(1) {
@@ -354,6 +372,10 @@ export const DisplayImage = styled.div`
       :hover {
         opacity: 1;
         cursor: pointer;
+      }
+
+      svg {
+        transform: rotate(180deg);
       }
 
       @media screen and (max-width: 770px) {

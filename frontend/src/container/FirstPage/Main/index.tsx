@@ -14,6 +14,7 @@ export default function Main(): JSX.Element {
       style={{ opacity: load ? "1" : "0" }}
       src={require("./home.jpg")}
       alt="Angeline Desdevises"
+      onContextMenu={(e) => e.preventDefault()}
     />
   );
 }

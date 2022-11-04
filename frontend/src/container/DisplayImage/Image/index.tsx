@@ -70,6 +70,25 @@ export default function BigImage({
     };
   }, [bigger]);
 
+  useEffect(() => {
+    const keyDownReset = (event: {
+      key: string;
+      preventDefault: () => void;
+    }) => {
+      if (event.key === "Escape") {
+        setDisplayImage(false);
+      } else if (event.key === "ArrowRight") {
+        onToggleDisplay(true);
+      } else if (event.key === "ArrowLeft") {
+        onToggleDisplay(false);
+      }
+    };
+    document.addEventListener("keydown", keyDownReset);
+    return () => {
+      document.removeEventListener("keydown", keyDownReset);
+    };
+  }, [display]);
+
   return (
     <DisplayImage>
       <div>

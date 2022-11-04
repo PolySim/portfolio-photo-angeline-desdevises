@@ -235,7 +235,7 @@ export const GridPortfolio = styled.div`
     margin: 0.5vw;
   }
 
-  div {
+  > div {
     transition: transform 0.25s;
     min-height: 21.5vw;
     height: fit-content;
@@ -582,5 +582,24 @@ export const ContactPage = styled.div`
         }
       }
     }
+  }
+`;
+
+export const Description = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  div:nth-of-type(1) {
+    width: 80%;
+    font-size: 16px;
+    color: #333;
+  }
+  div:nth-of-type(2) {
+    font-weight: bold;
+    font-size: 14px;
+    color: #070707;
+    padding-bottom: 24px;
   }
 `;

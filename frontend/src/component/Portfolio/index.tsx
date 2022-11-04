@@ -6,11 +6,13 @@ import Image from "src/component/Portfolio/Image";
 import images_information from "src/API/images_information";
 import { useParams } from "react-router-dom";
 import Images from "src/container/DisplayImage";
+import DescriptionView from "src/component/Portfolio/Description";
 
 export default function Grid(): JSX.Element {
   const params = useParams();
   const reportage = params.numero || "1";
-  const { displayImage, setDisplayImage } = useContext(MainContext);
+  const { displayImage, setDisplayImage, pagesInformation } =
+    useContext(MainContext);
   const [imagesData, setImagesData] = useState<[number, number][]>([]);
   const [focus, setFocus] = useState<number>(-1);
   useEffect(() => setDisplayImage(false), []);
@@ -24,6 +26,21 @@ export default function Grid(): JSX.Element {
     getData();
   }, [reportage]);
 
+  const text: () => string = () => {
+    let shortText: string = "";
+    pagesInformation.forEach((page) => {
+      if (page[1] === parseInt(reportage) && page[2]) {
+        shortText = page[2].slice(0, 100);
+      }
+    });
+    if (shortText === "") {
+      return "";
+    }
+    let goodText = shortText.split(" ");
+    goodText.pop();
+    return goodText.join(" ") + " ...";
+  };
+
   return (
     <>
       {displayImage ? (
@@ -31,12 +48,26 @@ export default function Grid(): JSX.Element {
       ) : (
         <>
           <GridPortfolio>
-            {imagesData.map((elt, indices: number) => (
-              <Image
-                indices={elt[0]}
-                key={`${elt[0]}portfolioImage`}
-                setFocus={setFocus}
-              />
+            {imagesData.map((elt, i: number) => (
+              <>
+                {" "}
+                {i === 1 && text() !== "" ? (
+                  <>
+                    <DescriptionView text={text()} />
+                    <Image
+                      indices={elt[0]}
+                      key={`${elt[0]}portfolioImage`}
+                      setFocus={setFocus}
+                    />
+                  </>
+                ) : (
+                  <Image
+                    indices={elt[0]}
+                    key={`${elt[0]}portfolioImage`}
+                    setFocus={setFocus}
+                  />
+                )}
+              </>
             ))}
           </GridPortfolio>
           <Share footer={true} />

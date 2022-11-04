@@ -108,7 +108,7 @@ def get_pages_information():
                                              passwd='root')
         cursor = connection.cursor()
         # SELECT ALL reportage without portrait and publication
-        sql_requests = """SELECT * FROM pages WHERE (id != 1 AND id != 2 AND is != 6);"""
+        sql_requests = """SELECT * FROM pages WHERE (id != 1 AND id != 2 AND id != 6);"""
         cursor.execute(sql_requests)
         result = cursor.fetchall()
         return flask.jsonify(result)

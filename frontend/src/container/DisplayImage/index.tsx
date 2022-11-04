@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-// import { useWindowScroll } from "react-use";
+import React, { useState, useContext } from "react";
 import BigImage from "src/container/DisplayImage/Image";
 import { useSwipeable } from "react-swipeable";
+import { useParams } from "react-router-dom";
+import { MainContext } from "src/context";
 
 export default function Images({
   imagesData,
@@ -10,11 +11,28 @@ export default function Images({
   imagesData: [number, number][];
   focus: number;
 }): JSX.Element {
+  const { pagesInformation } = useContext(MainContext);
+  const params = useParams();
+  const reportage = params.numero || "1";
+
+  const text: () => string = () => {
+    let description: string = "";
+    pagesInformation.forEach((page) => {
+      if (page[1] === parseInt(reportage) && page[2]) {
+        description = page[2];
+      }
+    });
+    return description;
+  };
+
   const listImages = imagesData.map((image) => image[0]);
-  const [display, setDisplay] = useState<number>(listImages.indexOf(focus));
-  // const ref: any = useRef(null);
-  // const [lastX, setLastX] = useState<number>(0);
-  // const { x } = useWindowScroll();
+  const [display, setDisplay] = useState<number>(
+    focus === -1
+      ? 1
+      : text() === "" || listImages.indexOf(focus) < 1
+      ? listImages.indexOf(focus)
+      : listImages.indexOf(focus) + 1
+  );
 
   const handlers = useSwipeable({
     onSwiped: (eventData) => {
@@ -28,30 +46,24 @@ export default function Images({
 
   const onToggleDisplay = (add: boolean) => {
     if (add) {
-      if (display === listImages.length - 1) {
+      if (
+        (text() === "" && display === listImages.length - 1) ||
+        display === listImages.length
+      ) {
         setDisplay(0);
       } else {
         setDisplay(display + 1);
       }
     } else {
       if (display === 0) {
-        setDisplay(listImages.length - 1);
+        text() === ""
+          ? setDisplay(listImages.length - 1)
+          : setDisplay(listImages.length);
       } else {
         setDisplay(display - 1);
       }
     }
   };
-
-  // useEffect(() => {
-  //   if (x > lastX) {
-  //     onToggleDisplay(true);
-  //     window.moveTo(0, 0);
-  //   } else if (x < lastX) {
-  //     onToggleDisplay(false);
-  //     window.moveTo(0, 0);
-  //   }
-  //   setLastX(x);
-  // }, [x]);
 
   return (
     <div
@@ -71,14 +83,45 @@ export default function Images({
           transition: "transform 0.8s ease-in-out",
         }}
       >
-        {imagesData.map((elt) => (
-          <BigImage
-            key={`${elt}Image`}
-            id={elt[0]}
-            display={display}
-            onToggleDisplay={onToggleDisplay}
-            listImages={listImages}
-          />
+        {imagesData.map((elt, i: number) => (
+          <>
+            {i === 1 && text() !== "" ? (
+              <>
+                <BigImage
+                  id={elt[0]}
+                  display={display}
+                  onToggleDisplay={onToggleDisplay}
+                  listImages={listImages}
+                  text={text()}
+                />
+                <BigImage
+                  id={elt[0]}
+                  display={display}
+                  onToggleDisplay={onToggleDisplay}
+                  listImages={listImages}
+                  text=""
+                />
+              </>
+            ) : i === 0 ? (
+              <BigImage
+                key={`${elt}Image`}
+                id={elt[0]}
+                display={display}
+                onToggleDisplay={onToggleDisplay}
+                listImages={listImages}
+                text=""
+              />
+            ) : (
+              <BigImage
+                key={`${elt}Image`}
+                id={elt[0]}
+                display={display}
+                onToggleDisplay={onToggleDisplay}
+                listImages={listImages}
+                text=""
+              />
+            )}
+          </>
         ))}
       </div>
     </div>

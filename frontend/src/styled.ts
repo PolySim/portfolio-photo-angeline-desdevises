@@ -603,3 +603,18 @@ export const Description = styled.div`
     padding-bottom: 24px;
   }
 `;
+
+export const BigDescription = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: fit-content;
+  max-height: 70%;
+  padding: min(48px, 14vh);
+  font-size: 16px;
+  color: #555;
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 10%);
+  overflow: scroll;
+  z-index: 100;
+`;

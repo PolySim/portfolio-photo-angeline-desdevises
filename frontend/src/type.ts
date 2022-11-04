@@ -16,4 +16,5 @@ export type BigImageProps = {
   display: number;
   onToggleDisplay: (add: boolean) => void;
   listImages: number[];
+  text: string;
 };

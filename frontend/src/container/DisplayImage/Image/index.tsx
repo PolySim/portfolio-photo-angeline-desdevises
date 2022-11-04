@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { MainContext } from "src/context";
-import { DisplayImage } from "src/styled";
+import { DisplayImage, BigDescription } from "src/styled";
 import { Style, BigImageProps } from "src/type";
 
 const cleAPI = process.env.REACT_APP_API_URL;
@@ -10,6 +10,7 @@ export default function BigImage({
   display,
   onToggleDisplay,
   listImages,
+  text,
 }: BigImageProps): JSX.Element {
   const [bigger, setBigger] = useState<number>(0);
   const ref: any = useRef(null);
@@ -129,14 +130,18 @@ export default function BigImage({
           </svg>
         </div>
       </div>
-      <img
-        onLoad={() => handleResize()}
-        style={style[bigger]}
-        data-src={`${cleAPI}/image?num=${id}`}
-        alt={`${id}`}
-        ref={ref}
-        onContextMenu={(e) => e.preventDefault()}
-      />
+      {text === "" ? (
+        <img
+          onLoad={() => handleResize()}
+          style={style[bigger]}
+          data-src={`${cleAPI}/image?num=${id}`}
+          alt={`${id}`}
+          ref={ref}
+          onContextMenu={(e) => e.preventDefault()}
+        />
+      ) : (
+        <BigDescription>{text}</BigDescription>
+      )}
       <div>
         <button onClick={() => onToggleDisplay(false)}>
           <div>

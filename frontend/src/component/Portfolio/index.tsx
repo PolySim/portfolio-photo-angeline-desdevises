@@ -53,7 +53,7 @@ export default function Grid(): JSX.Element {
                 {" "}
                 {i === 1 && text() !== "" ? (
                   <>
-                    <DescriptionView text={text()} />
+                    <DescriptionView text={text()} setFocus={setFocus} />
                     <Image
                       indices={elt[0]}
                       key={`${elt[0]}portfolioImage`}
@@ -62,7 +62,7 @@ export default function Grid(): JSX.Element {
                   </>
                 ) : (
                   <Image
-                    indices={elt[0]}
+                    indices={i === 0 ? elt[0] : elt[0]}
                     key={`${elt[0]}portfolioImage`}
                     setFocus={setFocus}
                   />

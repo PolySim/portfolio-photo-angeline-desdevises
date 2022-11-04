@@ -10,7 +10,6 @@ import Images from "src/container/DisplayImage";
 export default function Grid({ name }: { name: string }): JSX.Element {
   const params = useParams();
   const reportage = params.numero || "1";
-
   const { displayImage, setDisplayImage } = useContext(MainContext);
   const [imagesData, setImagesData] = useState<[number, number][]>([]);
   const [focus, setFocus] = useState<number>(-1);
@@ -22,9 +21,7 @@ export default function Grid({ name }: { name: string }): JSX.Element {
       const data = await images_information(parseInt(reportage));
       setImagesData(data);
     }
-    if (imagesData.length === 0) {
-      getData();
-    }
+    getData();
   }, [reportage]);
 
   return (
@@ -38,7 +35,7 @@ export default function Grid({ name }: { name: string }): JSX.Element {
               <Image
                 name={name}
                 indices={elt[0]}
-                key={`${indices}portfolioImage`}
+                key={`${elt[0]}portfolioImage`}
                 setFocus={setFocus}
               />
             ))}

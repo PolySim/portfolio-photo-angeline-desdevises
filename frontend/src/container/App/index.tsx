@@ -61,7 +61,6 @@ function App() {
             <Route path="/publications" element={<Grid name="publication" />} />
             <Route path="/apropos" element={<APropos />} />
             <Route path="/contact" element={<Contact />} />
-            {/* <Route path="/:name/:id" element={<Images />} /> */}
           </Routes>
         )}
       </MainContext.Provider>

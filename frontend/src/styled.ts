@@ -31,7 +31,7 @@ export const H1 = styled.div`
   }
 
   h1:hover {
-    opacity: 0.7;
+    color: #7cc4c5;
   }
 `;
 
@@ -43,9 +43,15 @@ export const NavBar = styled.div`
   font-weight: bold;
   width: 80%;
   margin: 0 auto;
-  a {
+  a,
+  p {
     width: max-content;
     margin-left: 25px;
+    color: #000;
+  }
+
+  a:hover {
+    color: #7cc4c5;
   }
 
   > div:nth-of-type(2n) {
@@ -73,25 +79,28 @@ export const ShareButton = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  height: 180px;
   width: 100%;
 
   a {
     position: relative;
     top: 25%;
-    width: 50px;
-    height: 11%;
+    height: fit-content;
   }
 
-  img {
-    height: 100%;
-    width: auto;
+  svg {
+    transition: transform 0.2s;
+    margin-right: 30px;
+  }
+
+  svg:hover {
+    fill: #7cc4c5;
+    transform: rotate(-20deg) scale(1.2);
   }
 
   p {
     position: relative;
-    top: 27%;
-    font-size: 90%;
+    top: 31%;
+    font-size: 100%;
   }
 `;
 
@@ -107,9 +116,19 @@ export const ImageMain = styled.img`
 
 export const Footer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 90%;
   color: #555555;
   font-size: 80%;
+  text-align: center;
+  p:nth-of-type(2) {
+    margin-top: 6px;
+    margin-bottom: 24px;
+  }
+  a {
+    text-decoration: underline;
+
+    color: #555555;
+  }
 `;
 
 export const ArticleNavBar = styled.div`
@@ -119,7 +138,7 @@ export const ArticleNavBar = styled.div`
   background-color: #fff;
   z-index: 10;
 
-  div {
+  a {
     z-index: 10;
     height: 30px;
     width: 100%;
@@ -127,13 +146,14 @@ export const ArticleNavBar = styled.div`
     align-items: center;
     border-radius: 15px;
     padding-left: 10px;
+    margin-left: 0;
 
     :hover {
       background-color: #eee;
     }
   }
 
-  div:nth-of-type(1) {
+  a:nth-of-type(1) {
     margin-top: 3%;
   }
 `;
@@ -146,8 +166,10 @@ export const ArticleNavBarPhone = styled.div`
   height: calc(100vh - 64px);
   animation: NavBarPhone 0.45s forwards;
   overflow-y: scroll;
+  margin-bottom: 24px;
 
-  a {
+  a,
+  p {
     text-decoration: none;
     color: #000;
     font-weight: bold;
@@ -182,7 +204,7 @@ export const ArticleNavBarPhone = styled.div`
       }
     }
 
-    a:nth-of-type(1) {
+    p:nth-of-type(1) {
       font-weight: normal;
       font-size: 90%;
       margin-top: 0;
@@ -199,6 +221,7 @@ export const Header = styled.div`
   display: flex;
   width: 100%;
   height: 64px;
+  margin-bottom: 24px;
 
   h1 {
     display: flex;
@@ -214,25 +237,20 @@ export const GridPortfolio = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;
-  grid-template: repeat(6, max-content) / repeat(3, max-content);
+  grid-template-columns: repeat(3, max-content);
 
   img {
     width: 32vw;
     height: auto;
     margin: 0.5vw;
-    background-color: bisque;
-    opacity: 0;
-    animation: ApparitionImage 0.6s forwards;
   }
 
-  div {
-    width: 32vw;
-    height: 100px;
-    background-color: aliceblue;
-  }
-
-  a {
+  > div {
     transition: transform 0.25s;
+    min-height: 21.5vw;
+    height: fit-content;
+    cursor: pointer;
+
     :hover {
       transform: scale(0.95);
       z-index: 10;
@@ -245,12 +263,20 @@ export const GridPortfolio = styled.div`
       width: 48vw;
       margin: 1vw;
     }
+
+    div {
+      min-height: 32.5vw;
+    }
   }
 
   @media screen and (min-width: 1100px) {
     div {
       width: 360px;
       margin: 6px;
+    }
+
+    img {
+      width: 360px;
     }
   }
 `;
@@ -272,7 +298,7 @@ export const DisplayImage = styled.div`
     width: 100%;
     height: 100%;
 
-    a {
+    div {
       margin-right: 30px;
       margin-top: 30px;
       transition: opacity 0.5s ease-in-out;
@@ -296,7 +322,7 @@ export const DisplayImage = styled.div`
     button {
       display: flex;
       align-items: center;
-      width: 35%;
+      width: 25%;
       height: 100%;
       background-color: transparent;
       border: none;
@@ -304,13 +330,27 @@ export const DisplayImage = styled.div`
       transition: opacity 0.3s ease-in-out;
       z-index: 10;
       cursor: pointer;
+    }
 
-      div {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #f4e9ce;
-      }
+    button:nth-of-type(1):hover {
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.0001) 100%
+      );
+    }
+    button:nth-of-type(2):hover {
+      background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.0001) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+    }
+
+    svg {
+      stroke: white;
+      fill: white;
+      opacity: 0.8;
     }
 
     button:nth-of-type(1) {
@@ -344,9 +384,247 @@ export const DisplayImage = styled.div`
         cursor: pointer;
       }
 
+      svg {
+        transform: rotate(180deg);
+      }
+
       @media screen and (max-width: 770px) {
         opacity: 0;
       }
     }
   }
+`;
+
+export const Propos = styled.div`
+  > div:nth-of-type(1) {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    @media screen and (max-width: 640px) {
+      flex-direction: column;
+    }
+
+    > div:nth-of-type(1) {
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 3%;
+      width: 50%;
+      height: max-content;
+      img {
+        width: 80%;
+        height: auto;
+      }
+
+      @media screen and (max-width: 640px) {
+        width: 100%;
+        position: relative;
+        img {
+          width: 90%;
+        }
+      }
+    }
+
+    > div:nth-of-type(2) {
+      padding-right: 4%;
+      width: 46%;
+
+      h1 {
+        font-size: 57px;
+        color: #0b0b0b;
+        margin-bottom: 24px;
+      }
+
+      h4 {
+        margin-top: 50px;
+        font-size: 20px;
+        color: #555555;
+      }
+
+      > div {
+        margin-top: 12px;
+        line-height: 20.4px;
+        font-size: 12px;
+        color: #555555;
+      }
+
+      @media screen and (max-width: 640px) {
+        width: 90%;
+        padding: 0 5%;
+        h1 {
+          margin-top: 20px;
+          font-size: max(12px, 6vw);
+        }
+      }
+    }
+  }
+`;
+
+export const ContactPage = styled.div`
+  > div:nth-of-type(1) {
+    width: 85%;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  > div:nth-of-type(2) {
+    h2 {
+      text-align: center;
+      font-size: 34px;
+      margin-top: 30px;
+    }
+
+    > p {
+      width: 50%;
+      margin: 30px auto 0;
+      line-height: 150%;
+      font-size: 12px;
+      text-align: center;
+      color: #555555;
+    }
+
+    > div {
+      display: flex;
+      width: 50%;
+      margin: 20px auto 0;
+      > div:nth-of-type(1) {
+        width: 50%;
+        p {
+          font-size: 12px;
+          color: #555555;
+        }
+
+        p:nth-of-type(2n + 1) {
+          font-weight: bold;
+          font-size: 15px;
+          margin-top: 24px;
+        }
+
+        p:nth-of-type(2n) {
+          margin-top: 6px;
+        }
+      }
+
+      > div:nth-of-type(2) {
+        margin-left: 20%;
+        width: 100%;
+        height: max-content;
+
+        > form {
+          border: 1px solid #555555;
+          width: 100%;
+          height: max-content;
+          input {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-bottom: 1px solid #555555;
+            color: #555555;
+            padding: 18px;
+            font-size: 14px;
+            height: 48px;
+            outline: none;
+          }
+
+          textarea {
+            box-sizing: border-box;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            outline: none;
+            overflow-wrap: break-word;
+            resize: vertical;
+            height: 130px;
+          }
+        }
+        > input {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          cursor: pointer;
+          box-sizing: border-box;
+          margin-top: 24px;
+          border: 1px solid #555555;
+          height: 50px;
+          width: 75%;
+          color: #555555;
+          background-color: transparent;
+          transition: all 0.4s;
+
+          :hover {
+            color: #000;
+            background-color: #7cc4c5;
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 770px) {
+      h2 {
+        font-size: 8vw;
+      }
+
+      > p {
+        width: 85%;
+        text-align: left;
+      }
+
+      > div {
+        flex-direction: column;
+        width: 85%;
+
+        > div:nth-of-type(2) {
+          margin-left: 0;
+          margin-top: 24px;
+
+          > input {
+            width: 50%;
+            font-size: 4vw;
+            background-color: #7cc4c5;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const Description = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  div:nth-of-type(1) {
+    width: 80%;
+    font-size: 16px;
+    color: #333;
+  }
+  div:nth-of-type(2) {
+    font-weight: bold;
+    font-size: 14px;
+    color: #070707;
+    padding-bottom: 24px;
+  }
+`;
+
+export const BigDescription = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: fit-content;
+  max-height: 70%;
+  padding: min(48px, 14vh);
+  font-size: 16px;
+  color: #555;
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 10%);
+  overflow: scroll;
+  z-index: 100;
 `;

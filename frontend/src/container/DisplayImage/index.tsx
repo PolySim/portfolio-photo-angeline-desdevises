@@ -1,23 +1,38 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useWindowScroll } from "react-use";
+import React, { useState, useContext } from "react";
 import BigImage from "src/container/DisplayImage/Image";
-import { useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
+import { useParams } from "react-router-dom";
+import { MainContext } from "src/context";
 
-const createTab = (length: number): number[] => {
-  let tab = [];
-  for (let i = 0; i < length; i++) {
-    tab.push(i);
-  }
-  return tab;
-};
+export default function Images({
+  imagesData,
+  focus,
+}: {
+  imagesData: [number, number][];
+  focus: number;
+}): JSX.Element {
+  const { pagesInformation } = useContext(MainContext);
+  const params = useParams();
+  const reportage = params.numero || "1";
 
-export default function Images(): JSX.Element {
-  const { id } = useParams();
-  const [display, setDisplay] = useState<number>(parseInt(id || "0"));
-  const ref: any = useRef(null);
-  const [lastX, setLastX] = useState<number>(0);
-  const { x } = useWindowScroll();
+  const text: () => string = () => {
+    let description: string = "";
+    pagesInformation.forEach((page) => {
+      if (page[1] === parseInt(reportage) && page[2]) {
+        description = page[2];
+      }
+    });
+    return description;
+  };
+
+  const listImages = imagesData.map((image) => image[0]);
+  const [display, setDisplay] = useState<number>(
+    focus === -1
+      ? 1
+      : text() === "" || listImages.indexOf(focus) < 1
+      ? listImages.indexOf(focus)
+      : listImages.indexOf(focus) + 1
+  );
 
   const handlers = useSwipeable({
     onSwiped: (eventData) => {
@@ -31,33 +46,35 @@ export default function Images(): JSX.Element {
 
   const onToggleDisplay = (add: boolean) => {
     if (add) {
-      if (display === 17) {
+      if (
+        (text() === "" && display === listImages.length - 1) ||
+        display === listImages.length
+      ) {
         setDisplay(0);
       } else {
         setDisplay(display + 1);
       }
     } else {
       if (display === 0) {
-        setDisplay(17);
+        text() === ""
+          ? setDisplay(listImages.length - 1)
+          : setDisplay(listImages.length);
       } else {
         setDisplay(display - 1);
       }
     }
   };
 
-  useEffect(() => {
-    if (x > lastX) {
-      onToggleDisplay(true);
-      window.moveTo(0, 0);
-    } else if (x < lastX) {
-      onToggleDisplay(false);
-      window.moveTo(0, 0);
-    }
-    setLastX(x);
-  }, [x]);
-
   return (
-    <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        position: "absolute",
+        top: "0",
+      }}
+    >
       <div
         {...handlers}
         style={{
@@ -66,13 +83,45 @@ export default function Images(): JSX.Element {
           transition: "transform 0.8s ease-in-out",
         }}
       >
-        {createTab(18).map((elt) => (
-          <BigImage
-            key={`${elt}Image`}
-            id={elt}
-            display={display}
-            onToggleDisplay={onToggleDisplay}
-          />
+        {imagesData.map((elt, i: number) => (
+          <>
+            {i === 1 && text() !== "" ? (
+              <>
+                <BigImage
+                  id={elt[0]}
+                  display={display}
+                  onToggleDisplay={onToggleDisplay}
+                  listImages={listImages}
+                  text={text()}
+                />
+                <BigImage
+                  id={elt[0]}
+                  display={display}
+                  onToggleDisplay={onToggleDisplay}
+                  listImages={listImages}
+                  text=""
+                />
+              </>
+            ) : i === 0 ? (
+              <BigImage
+                key={`${elt}Image`}
+                id={elt[0]}
+                display={display}
+                onToggleDisplay={onToggleDisplay}
+                listImages={listImages}
+                text=""
+              />
+            ) : (
+              <BigImage
+                key={`${elt}Image`}
+                id={elt[0]}
+                display={display}
+                onToggleDisplay={onToggleDisplay}
+                listImages={listImages}
+                text=""
+              />
+            )}
+          </>
         ))}
       </div>
     </div>

@@ -11,7 +11,7 @@ export default function NavResponsive({
 }: {
   click: boolean;
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
-  reportage: string[];
+  reportage: [string, number][];
 }): JSX.Element {
   const [load, setLoad] = useState<boolean>(false);
 
@@ -34,56 +34,50 @@ export default function NavResponsive({
       {click ? (
         <ArticleNavBarPhone>
           <Link
-            to="/portfolio"
+            to="/portfolio/6"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             PORTFOLIO
           </Link>
           <div>
-            <Link
-              to="/portfolio"
-              style={{ textDecoration: "none", color: "#000" }}
-              onClick={() => setClick(false)}
-            >
-              REPORTAGE
-            </Link>
-            {reportage.map((article) => {
+            <p style={{ textDecoration: "none", color: "#000" }}>REPORTAGE</p>
+            {reportage.map((article, i) => {
               return (
                 <Link
-                  to="/portfolio"
+                  to={`/reportage/${article[1]}`}
                   style={{ textDecoration: "none", color: "#000" }}
-                  key={article}
+                  key={article[0]}
                   onClick={() => setClick(false)}
                 >
-                  {article}
+                  {article[0]}
                 </Link>
               );
             })}
           </div>
           <Link
-            to="/portfolio"
+            to="/portraits/1"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             PORTRAITS
           </Link>
           <Link
-            to="/portfolio"
+            to="/publications/2"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             PUBLICATIONS
           </Link>
           <Link
-            to="/portfolio"
+            to="/contact"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             CONTACT
           </Link>
           <Link
-            to="/portfolio"
+            to="/apropos"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >

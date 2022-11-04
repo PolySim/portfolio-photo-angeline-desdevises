@@ -12,8 +12,9 @@ export default function Main(): JSX.Element {
   return (
     <ImageMain
       style={{ opacity: load ? "1" : "0" }}
-      src={require("./portrait.jpg")}
+      src={require("./home.jpg")}
       alt="Angeline Desdevises"
+      onContextMenu={(e) => e.preventDefault()}
     />
   );
 }

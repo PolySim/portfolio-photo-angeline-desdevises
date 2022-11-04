@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Navigation({
   reportage,
 }: {
-  reportage: string[];
+  reportage: [string, number][];
 }): JSX.Element {
   const [over, setOver] = useState<boolean>(false);
   const ref: React.MutableRefObject<any> = useRef(null);
@@ -33,21 +33,29 @@ export default function Navigation({
     <NavBar>
       <div>
         <Link
-          to="/portfolio"
-          style={{ textDecoration: "none", color: "#000", marginLeft: "0" }}
+          to="/portfolio/6"
+          style={{ textDecoration: "none", marginLeft: "0" }}
         >
           PORTFOLIO
         </Link>
       </div>
       <div>⚫</div>
       <div ref={ref}>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <p style={{ textDecoration: "none", color: over ? "#7cc4c5" : "#000" }}>
           REPORTAGE
-        </Link>
+        </p>
         <ArticleNavBar>
           {over ? (
-            reportage.map((article) => {
-              return <div key={article}>{article}</div>;
+            reportage.map((article, i) => {
+              return (
+                <Link
+                  to={`/reportage/${article[1]}`}
+                  style={{ textDecoration: "none", color: "#000" }}
+                  key={article[0]}
+                >
+                  {article[0]}
+                </Link>
+              );
             })
           ) : (
             <></>
@@ -56,25 +64,25 @@ export default function Navigation({
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/portraits/1" style={{ textDecoration: "none" }}>
           PORTRAITS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/publications/2" style={{ textDecoration: "none" }}>
           PUBLICATIONS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/contact" style={{ textDecoration: "none" }}>
           CONTACT
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portfolio" style={{ textDecoration: "none", color: "#000" }}>
+        <Link to="/apropos" style={{ textDecoration: "none" }}>
           A PROPOS
         </Link>
       </div>

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { MainContext } from "src/context";
-import { DisplayImage } from "src/styled";
-import { Link } from "react-router-dom";
+import { DisplayImage, BigDescription } from "src/styled";
 import { Style, BigImageProps } from "src/type";
+
+const cleAPI = process.env.REACT_APP_API_URL;
 
 export default function BigImage({
   id,
   display,
   onToggleDisplay,
+  listImages,
+  text,
 }: BigImageProps): JSX.Element {
   const [bigger, setBigger] = useState<number>(0);
   const ref: any = useRef(null);
@@ -23,28 +26,28 @@ export default function BigImage({
   useEffect(() => {
     if (ref.current) {
       if (
-        id === display ||
-        id === display - 1 ||
-        id === display + 1 ||
-        (display === 0 && id === 17) ||
-        (display === 17 && id === 0)
+        id === listImages[display] ||
+        id === listImages[display - 1] ||
+        id === listImages[display + 1] ||
+        (display === 0 && id === listImages[listImages.length - 1]) ||
+        (display === 17 && id === listImages[0])
       ) {
         ref.current.src = ref.current.dataset.src;
       }
     }
   }, [display]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (ref.current) {
-        if (ref.current.offsetWidth > window.innerWidth) {
-          setBigger(0);
-        }
-        if (ref.current.offsetHeight > window.innerHeight) {
-          setBigger(1);
-        }
+  const handleResize = () => {
+    if (ref.current) {
+      if (ref.current.offsetWidth > window.innerWidth) {
+        setBigger(0);
       }
-    };
+      if (ref.current.offsetHeight > window.innerHeight) {
+        setBigger(1);
+      }
+    }
+  };
+  useEffect(() => {
     const handleMove = () => {
       setOnMove(true);
       last += 1;
@@ -64,18 +67,37 @@ export default function BigImage({
     setDisplayImage(true);
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleResize);
+      window.removeEventListener("mousemove", handleMove);
     };
-  }, []);
+  }, [bigger]);
+
+  useEffect(() => {
+    const keyDownReset = (event: {
+      key: string;
+      preventDefault: () => void;
+    }) => {
+      if (event.key === "Escape") {
+        setDisplayImage(false);
+      } else if (event.key === "ArrowRight") {
+        onToggleDisplay(true);
+      } else if (event.key === "ArrowLeft") {
+        onToggleDisplay(false);
+      }
+    };
+    document.addEventListener("keydown", keyDownReset);
+    return () => {
+      document.removeEventListener("keydown", keyDownReset);
+    };
+  }, [display]);
 
   return (
     <DisplayImage>
       <div>
-        <Link
-          to={"/portfolio"}
+        <div
           style={{
             opacity: onMove ? "1" : window.innerWidth < 770 ? "0.6" : "0",
           }}
+          onClick={() => setDisplayImage(false)}
         >
           <svg
             aria-label="Fermer"
@@ -106,14 +128,20 @@ export default function BigImage({
               y2="3.354"
             ></line>
           </svg>
-        </Link>
+        </div>
       </div>
-      <img
-        style={style[bigger]}
-        data-src={require("./landscape.jpg")}
-        alt={`${id}Image`}
-        ref={ref}
-      />
+      {text === "" ? (
+        <img
+          onLoad={() => handleResize()}
+          style={style[bigger]}
+          data-src={`${cleAPI}/image?num=${id}`}
+          alt={`${id}`}
+          ref={ref}
+          onContextMenu={(e) => e.preventDefault()}
+        />
+      ) : (
+        <BigDescription>{text}</BigDescription>
+      )}
       <div>
         <button onClick={() => onToggleDisplay(false)}>
           <div>
@@ -125,7 +153,7 @@ export default function BigImage({
         <button onClick={() => onToggleDisplay(true)}>
           <div>
             <svg width="50px" height="50px" viewBox="0 0 24 24">
-              <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>
+              <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>
             </svg>
           </div>
         </button>

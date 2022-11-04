@@ -47,7 +47,19 @@ export default function Share({ footer }: { footer: boolean }): JSX.Element {
       </a>
       <p>Follow me</p>
       {footer ? (
-        <Footer>Reproduction interdite - Copyright Angeline Desdevises</Footer>
+        <Footer>
+          <p>Reproduction interdite - Copyright Angeline Desdevises</p>
+          <p>
+            Développé par{" "}
+            <a
+              href="https://www.instagram.com/simondesdevises/?hl=fr"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Simon Desdevises
+            </a>
+          </p>
+        </Footer>
       ) : (
         <></>
       )}

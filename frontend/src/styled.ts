@@ -119,6 +119,16 @@ export const Footer = styled.div`
   top: 90%;
   color: #555555;
   font-size: 80%;
+  text-align: center;
+  p:nth-of-type(2) {
+    margin-top: 6px;
+    margin-bottom: 24px;
+  }
+  a {
+    text-decoration: underline;
+
+    color: #555555;
+  }
 `;
 
 export const ArticleNavBar = styled.div`

@@ -34,7 +34,7 @@ export default function NavResponsive({
       {click ? (
         <ArticleNavBarPhone>
           <Link
-            to="/portfolio"
+            to="/portfolio/6"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
@@ -56,14 +56,14 @@ export default function NavResponsive({
             })}
           </div>
           <Link
-            to="/portraits"
+            to="/portraits/1"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
             PORTRAITS
           </Link>
           <Link
-            to="/publications"
+            to="/publications/2"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >

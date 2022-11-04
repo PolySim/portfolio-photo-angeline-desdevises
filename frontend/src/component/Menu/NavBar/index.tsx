@@ -33,7 +33,7 @@ export default function Navigation({
     <NavBar>
       <div>
         <Link
-          to="/portfolio"
+          to="/portfolio/6"
           style={{ textDecoration: "none", marginLeft: "0" }}
         >
           PORTFOLIO
@@ -64,13 +64,13 @@ export default function Navigation({
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/portraits" style={{ textDecoration: "none" }}>
+        <Link to="/portraits/1" style={{ textDecoration: "none" }}>
           PORTRAITS
         </Link>
       </div>
       <div>⚫</div>
       <div>
-        <Link to="/publications" style={{ textDecoration: "none" }}>
+        <Link to="/publications/2" style={{ textDecoration: "none" }}>
           PUBLICATIONS
         </Link>
       </div>

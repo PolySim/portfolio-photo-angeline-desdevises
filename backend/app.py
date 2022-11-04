@@ -108,7 +108,7 @@ def get_pages_information():
                                              passwd='root')
         cursor = connection.cursor()
         # SELECT ALL reportage without portrait and publication
-        sql_requests = """SELECT * FROM pages WHERE (id != 1 AND id != 2);"""
+        sql_requests = """SELECT * FROM pages WHERE (id != 1 AND id != 2 AND is != 6);"""
         cursor.execute(sql_requests)
         result = cursor.fetchall()
         return flask.jsonify(result)
@@ -157,9 +157,9 @@ def get_image_information():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=6789)
-    # for i in range(1, 16):
+    # for i in range(1, 4):
     #     if i < 10:
-    #         link = "D:\ANGELINE/belleile/0" + str(i) +".jpg"
+    #         link = "D:\ANGELINE/portfolio/0" + str(i) +".jpg"
     #     else:
     #         link = "D:/ANGELINE/belleile/" + str(i) +".jpg"
-    #     insertBLOB(link, False, 5, i)
+    #     insertBLOB(link, False, 6, i)

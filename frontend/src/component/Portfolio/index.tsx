@@ -7,7 +7,7 @@ import images_information from "src/API/images_information";
 import { useParams } from "react-router-dom";
 import Images from "src/container/DisplayImage";
 
-export default function Grid({ name }: { name: string }): JSX.Element {
+export default function Grid(): JSX.Element {
   const params = useParams();
   const reportage = params.numero || "1";
   const { displayImage, setDisplayImage } = useContext(MainContext);
@@ -33,7 +33,6 @@ export default function Grid({ name }: { name: string }): JSX.Element {
           <GridPortfolio>
             {imagesData.map((elt, indices: number) => (
               <Image
-                name={name}
                 indices={elt[0]}
                 key={`${elt[0]}portfolioImage`}
                 setFocus={setFocus}

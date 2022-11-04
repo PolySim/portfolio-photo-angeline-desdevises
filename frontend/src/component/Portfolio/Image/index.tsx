@@ -5,11 +5,9 @@ import { useVisible } from "src/container/useVisible";
 const cleAPI = process.env.REACT_APP_API_URL;
 
 export default function Image({
-  name,
   indices,
   setFocus,
 }: {
-  name: string;
   indices: number;
   setFocus: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element {

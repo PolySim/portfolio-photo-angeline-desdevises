@@ -1,4 +1,3 @@
-from unittest import result
 import mysql.connector
 import flask
 import os
@@ -44,10 +43,10 @@ def convertToBinaryData(filename):
 def insertBLOB(photo, portfolio, page, number):
     print("Inserting BLOB into python_employee table")
     try:
-        connection = mysql.connector.connect(host='127.0.0.1',
+        connection = mysql.connector.connect(host='portfolio-angeline-desdevises.csxzsuq5gl22.eu-west-3.rds.amazonaws.com',
                                              database='portfolioangeline',
-                                             user='root',
-                                             password='root')
+                                             user='polysim',
+                                             password='BaStA_2014!IsBaCk')
 
         cursor = connection.cursor()
         sql_insert_blob_query = """ INSERT INTO images
@@ -75,10 +74,10 @@ def insertBLOB(photo, portfolio, page, number):
 def get_images():
     try:
         num = (request.args.get('num'),)
-        connection = mysql.connector.connect(host='127.0.0.1',
+        connection = mysql.connector.connect(host='portfolio-angeline-desdevises.csxzsuq5gl22.eu-west-3.rds.amazonaws.com',
                                              database='portfolioangeline',
-                                             user='root',
-                                             passwd='root')
+                                             user='polysim',
+                                             passwd='BaStA_2014!IsBaCk')
         cursor = connection.cursor()
         # SELECT ALL reportage without portrait and publication
         sql_requests = """SELECT img FROM images WHERE id = %s;"""
@@ -102,10 +101,10 @@ def get_images():
 # Return reportage information
 def get_pages_information():
     try:
-        connection = mysql.connector.connect(host='127.0.0.1',
+        connection = mysql.connector.connect(host='portfolio-angeline-desdevises.csxzsuq5gl22.eu-west-3.rds.amazonaws.com',
                                              database='portfolioangeline',
-                                             user='root',
-                                             passwd='root')
+                                             user='polysim',
+                                             passwd='BaStA_2014!IsBaCk')
         cursor = connection.cursor()
         # SELECT ALL reportage without portrait and publication
         sql_requests = """SELECT * FROM pages WHERE (id != 1 AND id != 2 AND id != 6);"""
@@ -131,10 +130,10 @@ def get_pages_information():
 def get_image_information():
     try:
         num = (request.args.get('num'),)
-        connection = mysql.connector.connect(host='127.0.0.1',
+        connection = mysql.connector.connect(host='portfolio-angeline-desdevises.csxzsuq5gl22.eu-west-3.rds.amazonaws.com',
                                              database='portfolioangeline',
-                                             user='root',
-                                             passwd='root')
+                                             user='polysim',
+                                             passwd='BaStA_2014!IsBaCk')
         cursor = connection.cursor()
         # SELECT ALL images in one reportage 
         sql_requests = """SELECT id, portfolio FROM images WHERE page = %s ORDER BY number;"""
@@ -156,7 +155,7 @@ def get_image_information():
             print("MySQL connection is closed")
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=6789)
+    app.run(debug=True, host="0.0.0.0", port=5000)
     # for i in range(1, 4):
     #     if i < 10:
     #         link = "D:\ANGELINE/portfolio/0" + str(i) +".jpg"

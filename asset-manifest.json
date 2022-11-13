@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/portfolio-photo-angeline-desdevises/static/css/main.95097974.css",
-    "main.js": "/portfolio-photo-angeline-desdevises/static/js/main.841ef9c5.js",
+    "main.js": "/portfolio-photo-angeline-desdevises/static/js/main.b205a3d9.js",
     "static/js/800.4b57c898.chunk.js": "/portfolio-photo-angeline-desdevises/static/js/800.4b57c898.chunk.js",
     "static/media/contact.jpg": "/portfolio-photo-angeline-desdevises/static/media/contact.8dd38468043313813478.jpg",
     "static/media/home.jpg": "/portfolio-photo-angeline-desdevises/static/media/home.bd03ebfcb5db852724aa.jpg",
     "static/media/portrait.jpg": "/portfolio-photo-angeline-desdevises/static/media/portrait.78b7e675ed2f6a9129d8.jpg",
     "index.html": "/portfolio-photo-angeline-desdevises/index.html",
     "main.95097974.css.map": "/portfolio-photo-angeline-desdevises/static/css/main.95097974.css.map",
-    "main.841ef9c5.js.map": "/portfolio-photo-angeline-desdevises/static/js/main.841ef9c5.js.map",
+    "main.b205a3d9.js.map": "/portfolio-photo-angeline-desdevises/static/js/main.b205a3d9.js.map",
     "800.4b57c898.chunk.js.map": "/portfolio-photo-angeline-desdevises/static/js/800.4b57c898.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.95097974.css",
-    "static/js/main.841ef9c5.js"
+    "static/js/main.b205a3d9.js"
   ]
 }

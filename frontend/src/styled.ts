@@ -245,6 +245,10 @@ export const GridPortfolio = styled.div`
     margin: 0.5vw;
   }
 
+  div {
+    width: 33vw;
+  }
+
   > div {
     transition: transform 0.25s;
     min-height: 21.5vw;
@@ -265,7 +269,7 @@ export const GridPortfolio = styled.div`
     }
 
     div {
-      min-height: 32.5vw;
+      width: 50vw;
     }
   }
 

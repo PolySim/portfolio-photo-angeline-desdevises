@@ -84,9 +84,9 @@ export default function Images({
         }}
       >
         {imagesData.map((elt, i: number) => (
-          <>
+          <div key={i}>
             {i === 1 && text() !== "" ? (
-              <>
+              <div key={`${i}text`} style={{ display: "flex" }}>
                 <BigImage
                   id={elt[0]}
                   display={display}
@@ -101,10 +101,10 @@ export default function Images({
                   listImages={listImages}
                   text=""
                 />
-              </>
+              </div>
             ) : i === 0 ? (
               <BigImage
-                key={`${elt}Image`}
+                key={`${i}Image`}
                 id={elt[0]}
                 display={display}
                 onToggleDisplay={onToggleDisplay}
@@ -113,7 +113,7 @@ export default function Images({
               />
             ) : (
               <BigImage
-                key={`${elt}Image`}
+                key={`${i}Image`}
                 id={elt[0]}
                 display={display}
                 onToggleDisplay={onToggleDisplay}
@@ -121,7 +121,7 @@ export default function Images({
                 text=""
               />
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

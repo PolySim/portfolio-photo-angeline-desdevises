@@ -140,7 +140,9 @@ export default function BigImage({
           onContextMenu={(e) => e.preventDefault()}
         />
       ) : (
-        <BigDescription>{text}</BigDescription>
+        <BigDescription>
+          <div>{text}</div>
+        </BigDescription>
       )}
       <div>
         <button onClick={() => onToggleDisplay(false)}>

@@ -33,20 +33,27 @@ def add_response_headers(response):
 
 
 @app.route('/')
-def test():
+def main():
     return render_template('build/index.html')
 
 @app.route('/portfolio-photo-angeline-desdevises/static/<path>/<name>')
-def test2(path=None, name=None):
-    
+def static_file(path=None, name=None):
     return send_file("static/"+path+"/"+name)
 
+@app.route('/favicon/<name>')
+def favicon(name=None):
+    return send_file("favicon/"+name)
+
+@app.route('/<article>/favicon/<name>')
+def favicon_in_article(article=None, name=None):
+    return send_file("favicon/"+name)
+
 @app.route('/<name>')
-def test3(name=None):
+def refresh_app(name=None):
     return render_template('build/index.html')
 
 @app.route('/<name>/<num>')
-def test4(name=None, num=None):
+def refresh_app_reportage(name=None, num=None):
     return render_template('build/index.html')
 
 @app.route('/hello')
@@ -175,10 +182,10 @@ def get_image_information():
             print("MySQL connection is closed")
 
 if __name__ == "__main__":
-    # app.run(debug=True, host="0.0.0.0", port=5000)
-    for i in range(1, 4):
-        if i < 10:
-            link = "D:\ANGELINE/portfolio2/0" + str(i) +".jpg"
-        else:
-            link = "D:/ANGELINE/belleile2/" + str(i) +".jpg"
-        insertBLOB(link, False, 6, i)
+    app.run(debug=True, host="0.0.0.0", port=5000)
+    # for i in range(1, 4):
+    #     if i < 10:
+    #         link = "D:\ANGELINE/portfolio2/0" + str(i) +".jpg"
+    #     else:
+    #         link = "D:/ANGELINE/belleile2/" + str(i) +".jpg"
+    #     insertBLOB(link, False, 6, i)

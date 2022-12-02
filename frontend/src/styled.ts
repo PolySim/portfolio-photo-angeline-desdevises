@@ -239,48 +239,54 @@ export const GridPortfolio = styled.div`
   justify-content: center;
   grid-template-columns: repeat(3, max-content);
 
-  img {
-    width: 32vw;
-    height: auto;
-    margin: 0.5vw;
-  }
-
-  div {
-    width: 33vw;
-  }
-
   > div {
-    transition: transform 0.25s;
-    min-height: 21.5vw;
-    height: fit-content;
-    cursor: pointer;
+    img {
+      width: 32vw;
+      height: auto;
+      margin: 0.5vw;
+    }
 
-    :hover {
-      transform: scale(0.95);
-      z-index: 10;
+    div {
+      width: 33vw;
+    }
+
+    > div {
+      transition: transform 0.25s;
+      min-height: 21.5vw;
+      height: fit-content;
+      cursor: pointer;
+
+      :hover {
+        transform: scale(0.95);
+        z-index: 10;
+      }
     }
   }
 
   @media screen and (max-width: 520px) {
     grid-template: repeat(8, max-content) / repeat(2, max-content);
-    img {
-      width: 48vw;
-      margin: 1vw;
-    }
+    > div {
+      img {
+        width: 48vw;
+        margin: 1vw;
+      }
 
-    div {
-      width: 50vw;
+      div {
+        width: 50vw;
+      }
     }
   }
 
   @media screen and (min-width: 1100px) {
-    div {
-      width: 360px;
-      margin: 6px;
-    }
+    > div {
+      div {
+        width: 360px;
+        margin: 6px;
+      }
 
-    img {
-      width: 360px;
+      img {
+        width: 360px;
+      }
     }
   }
 `;

@@ -26,6 +26,12 @@ export default function Grid(): JSX.Element {
     getData();
   }, [reportage]);
 
+  useEffect(() => {
+    if (text() !== "") {
+      setImagesData((imagesData) => imagesData.splice(1, 0, [0, 0]));
+    }
+  }, [reportage]);
+
   const text: () => string = () => {
     let shortText: string = "";
     pagesInformation.forEach((page) => {
@@ -49,25 +55,21 @@ export default function Grid(): JSX.Element {
         <>
           <GridPortfolio>
             {imagesData.map((elt, i: number) => (
-              <>
-                {" "}
+              <div key={i}>
                 {i === 1 && text() !== "" ? (
                   <>
                     <DescriptionView text={text()} setFocus={setFocus} />
-                    <Image
-                      indices={elt[0]}
-                      key={`${elt[0]}portfolioImage`}
-                      setFocus={setFocus}
-                    />
                   </>
                 ) : (
                   <Image
-                    indices={i === 0 ? elt[0] : elt[0]}
+                    indices={
+                      i === 0 ? elt[0] : text() === "" ? elt[0] : elt[0] - 1
+                    }
                     key={`${elt[0]}portfolioImage`}
                     setFocus={setFocus}
                   />
                 )}
-              </>
+              </div>
             ))}
           </GridPortfolio>
           <Share footer={true} />

@@ -13,7 +13,7 @@ export default function Grid(): JSX.Element {
   const reportage = params.numero || "1";
   const { displayImage, setDisplayImage, pagesInformation } =
     useContext(MainContext);
-  const [imagesData, setImagesData] = useState<[number, number][]>([]);
+  const [imagesData, setImagesData] = useState<[number][]>([]);
   const [focus, setFocus] = useState<number>(-1);
   useEffect(() => setDisplayImage(false), []);
 
@@ -28,14 +28,14 @@ export default function Grid(): JSX.Element {
 
   useEffect(() => {
     if (text() !== "") {
-      setImagesData((imagesData) => imagesData.splice(1, 0, [0, 0]));
+      setImagesData((imagesData) => imagesData.splice(1, 0, [0]));
     }
   }, [reportage]);
 
   const text: () => string = () => {
     let shortText: string = "";
     pagesInformation.forEach((page) => {
-      if (page[1] === parseInt(reportage) && page[2]) {
+      if (page[0] === parseInt(reportage) && page[2]) {
         shortText = page[2].slice(0, 100);
       }
     });

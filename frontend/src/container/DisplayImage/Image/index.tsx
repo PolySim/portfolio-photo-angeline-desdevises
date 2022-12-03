@@ -134,7 +134,7 @@ export default function BigImage({
         <img
           onLoad={() => handleResize()}
           style={style[bigger]}
-          data-src={`${cleAPI}/image?num=${id}`}
+          data-src={`${cleAPI}/image/${id}`}
           alt={`${id}`}
           ref={ref}
           onContextMenu={(e) => e.preventDefault()}

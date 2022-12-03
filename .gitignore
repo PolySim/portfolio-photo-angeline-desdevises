@@ -12,6 +12,9 @@ package-lock.json
 /build
 build
 
+img
+/img
+
 # misc
 .DS_Store
 .env.local

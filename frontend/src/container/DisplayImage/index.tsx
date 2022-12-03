@@ -8,7 +8,7 @@ export default function Images({
   imagesData,
   focus,
 }: {
-  imagesData: [number][];
+  imagesData: [number, number][];
   focus: number;
 }): JSX.Element {
   const { pagesInformation } = useContext(MainContext);
@@ -18,7 +18,7 @@ export default function Images({
   const text: () => string = () => {
     let description: string = "";
     pagesInformation.forEach((page) => {
-      if (page[0] === parseInt(reportage) && page[2]) {
+      if (page[1] === parseInt(reportage) && page[2]) {
         description = page[2];
       }
     });

@@ -35,10 +35,10 @@ export default function Contact(): JSX.Element {
         <div>
           <h2>Contact</h2>
           <p>
-            Basée à Rennes, je suis disponible sur toute la France. I'm
-            available for local projects as well as potential employment
-            opportunities. Use the form to inquire about rates and availability,
-            or just to say hi.
+            Basé à Rennes, je suis disponible sur toute la France. I'm available
+            for local projects as well as potential employment opportunities.
+            Use the form to inquire about rates and availability, or just to say
+            hi.
           </p>
           <div>
             <div>

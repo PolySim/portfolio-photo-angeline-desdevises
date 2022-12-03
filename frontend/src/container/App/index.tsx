@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FirstPage from "src/component/FirstPage";
 import Header from "src/container/Header";
 import Grid from "src/component/Portfolio";
+import Images from "src/container/DisplayImage";
 import { Routes, Route } from "react-router-dom";
 import { MainContext } from "src/context";
 import APropos from "src/component/A_Propos";
@@ -13,7 +14,7 @@ function App() {
   const [click, setClick] = useState<boolean>(false);
   const [displayImage, setDisplayImage] = useState<boolean>(false);
   const [pagesInformation, setPagesInformation] = useState<
-    [number, string, string][]
+    [string, number, string][]
   >([]);
 
   useEffect(() => {

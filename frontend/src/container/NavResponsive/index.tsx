@@ -11,7 +11,7 @@ export default function NavResponsive({
 }: {
   click: boolean;
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
-  reportage: [number, string][];
+  reportage: [string, number][];
 }): JSX.Element {
   const [load, setLoad] = useState<boolean>(false);
 
@@ -34,7 +34,7 @@ export default function NavResponsive({
       {click ? (
         <ArticleNavBarPhone>
           <Link
-            to="/portfolio/3"
+            to="/portfolio/6"
             style={{ textDecoration: "none", color: "#000" }}
             onClick={() => setClick(false)}
           >
@@ -45,12 +45,12 @@ export default function NavResponsive({
             {reportage.map((article, i) => {
               return (
                 <Link
-                  to={`/reportage/${article[0]}`}
+                  to={`/reportage/${article[1]}`}
                   style={{ textDecoration: "none", color: "#000" }}
                   key={article[0]}
                   onClick={() => setClick(false)}
                 >
-                  {article[1]}
+                  {article[0]}
                 </Link>
               );
             })}

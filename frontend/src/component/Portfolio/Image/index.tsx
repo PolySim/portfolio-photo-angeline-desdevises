@@ -26,7 +26,7 @@ export default function Image({
     >
       <img
         ref={ref}
-        data-src={`${cleAPI}/image/${indices}`}
+        data-src={`${cleAPI}/image?num=${indices}`}
         alt="landscape"
         style={{
           animationDelay: `${indices * 0.2}s`,

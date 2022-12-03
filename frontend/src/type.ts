@@ -3,7 +3,7 @@ import React from "react";
 export type MainContextType = {
   displayImage: boolean;
   setDisplayImage: React.Dispatch<React.SetStateAction<boolean>>;
-  pagesInformation: [number, string, string][];
+  pagesInformation: [string, number, string][];
 };
 
 export type Style = {

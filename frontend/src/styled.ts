@@ -640,3 +640,38 @@ export const BigDescription = styled.main`
     z-index: 100;
   }
 `;
+
+export const AdminConnection = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    /* height: 400px; */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    > div:nth-of-type(1) {
+      padding: 10px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    > div:nth-of-type(2) {
+      cursor: pointer;
+      margin-bottom: 24px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #eee;
+    }
+    input {
+      outline: none;
+      margin: 24px 0;
+      padding: 4px;
+    }
+  }
+`;

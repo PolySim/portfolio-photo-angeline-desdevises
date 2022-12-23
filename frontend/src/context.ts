@@ -5,4 +5,6 @@ export const MainContext = React.createContext<MainContextType>({
   displayImage: false,
   setDisplayImage: () => {},
   pagesInformation: [],
+  connected: false,
+  setConnected: () => {},
 });

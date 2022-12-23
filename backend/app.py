@@ -150,5 +150,10 @@ def add_image(name, page, number):
     #         connection.close()
     #         print("MySQL connection is closed")
 
+# Create Album
+@application.route('/admin/CreateAlbum')
+def createAlbum():
+    pass
+
 if __name__ == "__main__":
     application.run(debug=True, host="0.0.0.0", port=5000)

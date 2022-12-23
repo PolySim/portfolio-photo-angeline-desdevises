@@ -4,6 +4,8 @@ export type MainContextType = {
   displayImage: boolean;
   setDisplayImage: React.Dispatch<React.SetStateAction<boolean>>;
   pagesInformation: [number, string, string][];
+  connected: boolean;
+  setConnected: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type Style = {

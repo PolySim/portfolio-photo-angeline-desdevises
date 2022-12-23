@@ -7,11 +7,13 @@ import { MainContext } from "src/context";
 import APropos from "src/component/A_Propos";
 import Contact from "src/component/Contact";
 import pages_information from "src/API/pages_information";
+import AdminConnectionView from "src/component/Admin/Update/Connection";
 
 function App() {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const [click, setClick] = useState<boolean>(false);
   const [displayImage, setDisplayImage] = useState<boolean>(false);
+  const [connected, setConnected] = useState<boolean>(false);
   const [pagesInformation, setPagesInformation] = useState<
     [number, string, string][]
   >([]);
@@ -38,6 +40,8 @@ function App() {
           displayImage,
           setDisplayImage,
           pagesInformation,
+          connected,
+          setConnected,
         }}
       >
         {displayImage ? (
@@ -56,6 +60,7 @@ function App() {
             <Route path="/publications/:numero" element={<Grid />} />
             <Route path="/apropos" element={<APropos />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminConnectionView />} />
           </Routes>
         )}
       </MainContext.Provider>

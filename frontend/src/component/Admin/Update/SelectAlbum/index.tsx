@@ -9,7 +9,6 @@ export default function SelectAlbumView(): JSX.Element {
   useEffect(() => {
     async function getData() {
       const data = await pages_information();
-      console.log(data);
       setPages((curr) => data);
     }
     if (pages.length === 0) {
@@ -23,8 +22,11 @@ export default function SelectAlbumView(): JSX.Element {
         <Link to="3">Portfolio</Link>
         <Link to="1">Portrait</Link>
         <Link to="2">Publication</Link>
+        <Link to="-1">Créer un reportage</Link>
         {pages.map((page) => (
-          <Link to={`${page[0]}`}>{page[1]}</Link>
+          <Link to={`${page[0]}`} key={page[1]}>
+            {page[1]}
+          </Link>
         ))}
       </div>
     </SelectAlbum>

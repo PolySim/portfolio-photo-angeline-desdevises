@@ -697,6 +697,7 @@ export const SelectAlbum = styled.main`
 
 export const UpdateAlbum = styled.main`
   display: flex;
+  justify-content: space-between;
 
   > div {
     width: 45%;
@@ -707,6 +708,7 @@ export const UpdateAlbum = styled.main`
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    height: fit-content;
 
     /* Titre */
     > div:nth-of-type(1) {
@@ -744,6 +746,17 @@ export const UpdateAlbum = styled.main`
         background-color: #eee;
         padding: 6px 12px;
         cursor: pointer;
+        margin-right: 24px;
+      }
+
+      a {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #eee;
+        padding: 6px 12px;
+        cursor: pointer;
+        color: #000;
+        text-decoration: none;
       }
     }
 
@@ -763,5 +776,43 @@ export const UpdateAlbum = styled.main`
   }
 
   > div:nth-of-type(2) {
+    margin: 12px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    > div:nth-of-type(1) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
+
+      > div {
+        margin: 6px;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: fit-content;
+
+        > div {
+          display: flex;
+          justify-content: center;
+          padding: 6px;
+          margin-top: 6px;
+          border-radius: 4px;
+          background-color: #bf1a2f;
+          cursor: pointer;
+        }
+      }
+
+      img {
+        width: 180px;
+        height: auto;
+      }
+    }
+
+    input {
+      padding: 6px;
+    }
   }
 `;

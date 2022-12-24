@@ -7,6 +7,7 @@ import os
 import sys
 from flask import Flask, request, send_file, render_template
 from flask_cors import CORS
+import shutil
 import json
 
 cur_path = os.path.abspath(".")
@@ -176,11 +177,18 @@ def sql_result_to_dict_admin_list_image(sql_result):
         if 'title' in result:
             result['images'].append(image[1])
         else:
-            result = {
+            if image[1] is None:
+                result = {
+                    'title': image[0],
+                    'content': image[2],
+                    'images': []
+                }
+            else:
+                result = {
                 'title': image[0],
                 'content': image[2],
                 'images': [image[1]]
-            }
+                }
     return result
 
 
@@ -192,7 +200,7 @@ def admin_list_image(id=None):
         request = """
         SELECT pages.name, images.id, presentation
         FROM pages 
-        JOIN images ON pages.id = images.page
+        LEFT JOIN images ON pages.id = images.page
         WHERE pages.id = %s"""
         cursor.execute(request, (id,))
         result = cursor.fetchall()
@@ -214,12 +222,14 @@ def update_album(id=None, create=None):
     try:
         connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
         cursor = connection.cursor()
-        if create == 0:
+        if create == '0':
             SQLrequest = "INSERT INTO pages VALUES (%s, %s, %s);"
             if content == "":
                 cursor.execute(SQLrequest, (id, title, None))
             else:
                 cursor.execute(SQLrequest, (id, title, content))
+            if not os.path.exists('img/' + id):
+                os.makedirs('img/' + id)
         else:
             SQLrequest = "UPDATE pages SET name = %s, presentation = %s WHERE id = %s"
             if content == "":
@@ -231,6 +241,115 @@ def update_album(id=None, create=None):
         return "Successfully"
     except mysql.connector.Error as error:
         print("Failed inserting BLOB data into MySQL table {}".format(error))
+
+
+@application.route('/removeImage/<id>')
+def remove_image(id= None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "SELECT name, page FROM images WHERE id = %s"
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        try:
+            request = "DELETE FROM images WHERE id= %s"
+            cursor.execute(request, (id,))
+            connection.commit()
+            os.remove(os.path.join('img/' + str(result[0][1]), result[0][0]))
+            return 'Image supprimée avec succès!'
+        except FileNotFoundError:
+            return 'Image introuvable.'
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+# Upload Image
+@application.route('/uploadImage/<id>', methods=['POST'])
+def upload_image(id:None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        SELECT MAX(id), MAX(number)
+        FROM images
+        WHERE page = %s;
+        """
+        cursor.execute(SQLrequest, (id,))
+        result = cursor.fetchall()[0]
+        print(result)
+        if result == (None, None):
+            (id_max, number_max) = (0, 0)
+        else:
+            (id_max, number_max) = result
+        image_files = request.files.getlist('images')
+        if image_files:
+            indice = 1
+            for image_file in image_files:
+                extension = image_file.filename.split('.')[-1]
+                image_file.save(os.path.join('img/' + id, str(id_max + indice) + '.' + extension))
+                SQLrequest = """
+                INSERT INTO images (name, page, number)
+                VALUES (%s, %s, %s)
+                """
+                cursor.execute(SQLrequest, (str(id_max + indice) + '.' + extension, id, number_max + indice))
+                connection.commit()
+                indice += 1
+        return flask.jsonify({'message' : 'Images téléchargées avec succes'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+
+@application.route('/maxIdAlbum')
+def max_id_album():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT MAX(id)
+        FROM pages;"""
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return [result[0][0]]
+    except mysql.connector.Error as error:
+        print("Failed inserting BLOB data into MySQL table {}".format(error))
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/deleteAlbum/<id>')
+def delete_album(id=None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "DELETE FROM images WHERE page = %s"
+        cursor.execute(request, (id,))
+        connection.commit()
+        request = "DELETE FROM pages WHERE id= %s"
+        cursor.execute(request, (id,))
+        connection.commit()
+        shutil.rmtree('img/' + id)
+        return 'Image supprimée avec succès!'
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
 
 
 if __name__ == "__main__":

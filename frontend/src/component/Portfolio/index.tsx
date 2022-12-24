@@ -62,9 +62,7 @@ export default function Grid(): JSX.Element {
                   </>
                 ) : (
                   <Image
-                    indices={
-                      i === 0 ? elt[0] : text() === "" ? elt[0] : elt[0] - 1
-                    }
+                    indices={i === 0 ? elt[0] : text() === "" ? elt[0] : elt[0]}
                     key={`${elt[0]}portfolioImage`}
                     setFocus={setFocus}
                   />

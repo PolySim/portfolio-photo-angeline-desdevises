@@ -20,3 +20,9 @@ export type BigImageProps = {
   listImages: number[];
   text: string;
 };
+
+export type AdminImagesType = {
+  title: string;
+  content: string | null;
+  images: number[];
+};

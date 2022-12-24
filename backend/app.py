@@ -22,6 +22,7 @@ application.config['UPLOAD_FOLDER'] = picFolder
 
 FRONTEND_URL = "http://localhost:3000"
 
+
 def add_response_headers(response):
     response.headers.add('Access-Control-Allow-Origin', FRONTEND_URL)
     response.headers.add('Access-Control-Allow-Credentials', 'true')
@@ -36,31 +37,38 @@ def add_response_headers(response):
 def main():
     return render_template('build/index.html')
 
+
 @application.route('/portfolio-photo-angeline-desdevises/static/<path>/<name>')
 def static_file(path=None, name=None):
-    return send_file("static/"+path+"/"+name)
+    return send_file("static/" + path + "/" + name)
+
 
 @application.route('/favicon/<name>')
 def favicon(name=None):
-    return send_file("favicon/"+name)
+    return send_file("favicon/" + name)
+
 
 @application.route('/<article>/favicon/<name>')
 def favicon_in_article(article=None, name=None):
-    return send_file("favicon/"+name)
+    return send_file("favicon/" + name)
+
 
 @application.route('/<article>/e/favicon/<name>')
 def favicon_in_article_e(article=None, name=None):
-    return send_file("favicon/"+name)
+    return send_file("favicon/" + name)
+
 
 @application.route('/<name>/<num>')
 def refresh_app_reportage(name=None, num=None):
     return render_template('build/index.html')
 
+
 @application.route('/hello')
 #  Test Connection
 def say_hello_world():
     return flask.jsonify({'result': "Hello Connected React World!!!"})
-    
+
+
 @application.route('/api/pages', methods=['GET'])
 # Return reportage information
 def get_pages_information():
@@ -85,6 +93,7 @@ def get_pages_information():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+
 
 @application.route('/api/images', methods=['GET'])
 # Return image information
@@ -111,7 +120,8 @@ def get_image_information():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
-            
+
+
 @application.route('/image/<name>')
 def get_image(name=None):
     try:
@@ -133,10 +143,12 @@ def get_image(name=None):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
-            
+
+
 def add_image(name, page, number):
     try:
-        connection = mysql.connector.connect(host='zmdenlzpolysim.mysql.db', database='zmdenlzpolysim', user='zmdenlzpolysim', password='Simon256')
+        connection = mysql.connector.connect(host='zmdenlzpolysim.mysql.db', database='zmdenlzpolysim',
+                                             user='zmdenlzpolysim', password='Simon256')
         cursor = connection.cursor()
         request = "INSERT INTO images (name, page, number) VALUES (%s, %s, %s);"
         result = cursor.execute(request, (name, page, number))
@@ -150,10 +162,76 @@ def add_image(name, page, number):
     #         connection.close()
     #         print("MySQL connection is closed")
 
+
 # Create Album
 @application.route('/admin/CreateAlbum')
-def createAlbum():
+def create_album():
     pass
+
+
+# Send Album and Image information
+def sql_result_to_dict_admin_list_image(sql_result):
+    result = {}
+    for image in sql_result:
+        if 'title' in result:
+            result['images'].append(image[1])
+        else:
+            result = {
+                'title': image[0],
+                'content': image[2],
+                'images': [image[1]]
+            }
+    return result
+
+
+@application.route('/admin/listImage/<id>')
+def admin_list_image(id=None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT pages.name, images.id, presentation
+        FROM pages 
+        JOIN images ON pages.id = images.page
+        WHERE pages.id = %s"""
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return sql_result_to_dict_admin_list_image(result)
+    except mysql.connector.Error as error:
+        print("Failed inserting BLOB data into MySQL table {}".format(error))
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+# UPDATE or CREATE Album information
+@application.route('/admin/updateAlbum/<id>/<create>')
+def update_album(id=None, create=None):
+    title = request.args.get('title')
+    content = request.args.get('content')
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        if create == 0:
+            SQLrequest = "INSERT INTO pages VALUES (%s, %s, %s);"
+            if content == "":
+                cursor.execute(SQLrequest, (id, title, None))
+            else:
+                cursor.execute(SQLrequest, (id, title, content))
+        else:
+            SQLrequest = "UPDATE pages SET name = %s, presentation = %s WHERE id = %s"
+            if content == "":
+                cursor.execute(SQLrequest, (title, None, id))
+            else:
+                cursor.execute(SQLrequest, (title, content, id))
+        connection.commit()
+        print("Image and file inserted successfully as a BLOB into python_employee table")
+        return "Successfully"
+    except mysql.connector.Error as error:
+        print("Failed inserting BLOB data into MySQL table {}".format(error))
+
 
 if __name__ == "__main__":
     application.run(debug=True, host="0.0.0.0", port=5000)

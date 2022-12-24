@@ -675,3 +675,93 @@ export const AdminConnection = styled.main`
     }
   }
 `;
+
+export const SelectAlbum = styled.main`
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    > a {
+      margin: 12px 24px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #eee;
+      cursor: pointer;
+      color: #000;
+      text-decoration: none;
+    }
+  }
+`;
+
+export const UpdateAlbum = styled.main`
+  display: flex;
+
+  > div {
+    width: 45%;
+  }
+
+  > div:nth-of-type(1) {
+    margin: 12px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    /* Titre */
+    > div:nth-of-type(1) {
+      margin-bottom: 24px;
+
+      > div:nth-of-type(1) {
+        margin-bottom: 12px;
+      }
+    }
+
+    /* Content */
+    > div:nth-of-type(2) {
+      margin-bottom: 24px;
+
+      > div:nth-of-type(1) {
+        margin-bottom: 12px;
+      }
+    }
+
+    /* Button */
+    > div:nth-of-type(3) {
+      display: flex;
+
+      > div:nth-of-type(1) {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #eee;
+        padding: 6px 12px;
+        margin-right: 24px;
+        cursor: pointer;
+      }
+      > div:nth-of-type(2) {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #eee;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+    }
+
+    input {
+      padding: 6px;
+      width: 75%;
+      outline: none;
+    }
+
+    textarea {
+      padding: 6px;
+      width: 90%;
+      min-height: 100px;
+      outline: none;
+      resize: vertical;
+    }
+  }
+
+  > div:nth-of-type(2) {
+  }
+`;

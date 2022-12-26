@@ -7,7 +7,7 @@ export default function AdminConnectionView(): JSX.Element {
   const ref: any = useRef();
 
   const checkValid: (text: string) => void = (text) => {
-    //if (text === "SppADlmdt_2022!") {
+    // if (text === "SppADlmdt_2022!") {
     if (text === "a") {
       setConnected(true);
     }

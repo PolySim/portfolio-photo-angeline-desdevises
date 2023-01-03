@@ -43,19 +43,17 @@ export default function UpdateAlbumView(): JSX.Element {
   };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     if (album.title !== "") {
-      event.preventDefault();
-
       const formData = new FormData();
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);
       }
       try {
-        const response = await fetch(`${cleAPI}/uploadImage/${albumId}`, {
+        await fetch(`${cleAPI}/uploadImage/${albumId}`, {
           method: "POST",
           body: formData,
         });
-        // const result = await response.json();
         const dataListImage = await getAdminListImage(albumId.toString());
         setAlbum((curr) => dataListImage);
       } catch (error) {
@@ -63,6 +61,17 @@ export default function UpdateAlbumView(): JSX.Element {
       }
     }
   }
+
+  const reorder: (
+    images: number[],
+    id: number,
+    destination: number,
+    from: number
+  ) => number[] = (images, id, destination, from) => {
+    images.splice(from, 1);
+    images.splice(destination, 0, id);
+    return images;
+  };
 
   async function onDragEnd(result: any) {
     if (!result.destination) {
@@ -72,41 +81,52 @@ export default function UpdateAlbumView(): JSX.Element {
     if (result.destination.index === result.source.index) {
       return;
     }
-    result.source.index > result.destination.index
-      ? await fetch(`${cleAPI}/changeOrder`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: result.draggableId,
-            destination: result.destination.index,
-            ids: album.images.slice(
-              result.destination.index,
-              result.source.index
-            ),
-            add: false,
-            order: result.destination.index,
-          }),
-        })
-      : await fetch(`${cleAPI}/changeOrder`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: result.draggableId,
-            destination: result.destination.index,
-            ids: album.images.slice(
-              result.source.index + 1,
-              result.destination.index + 1
-            ),
-            add: true,
-            order: result.source.index,
-          }),
-        });
-    const dataListImage = await getAdminListImage(albumId.toString());
-    setAlbum((curr) => dataListImage);
+
+    if (result.source.index > result.destination.index) {
+      await fetch(`${cleAPI}/changeOrder`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: result.draggableId,
+          destination: result.destination.index,
+          ids: album.images.slice(
+            result.destination.index,
+            result.source.index
+          ),
+          add: false,
+          order: result.destination.index,
+        }),
+      });
+    } else {
+      await fetch(`${cleAPI}/changeOrder`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: result.draggableId,
+          destination: result.destination.index,
+          ids: album.images.slice(
+            result.source.index + 1,
+            result.destination.index + 1
+          ),
+          add: true,
+          order: result.source.index,
+        }),
+      });
+    }
+
+    setAlbum((curr) => ({
+      ...curr,
+      images: reorder(
+        curr.images,
+        result.draggableId,
+        result.destination.index,
+        result.source.index
+      ),
+    }));
   }
 
   return (

@@ -62,7 +62,10 @@ function App() {
             <Route path="/apropos" element={<APropos />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminView />} />
-            <Route path="/admin/:id" element={<UpdateAlbumView />} />
+            <Route
+              path="/admin/:id"
+              element={connected ? <UpdateAlbumView /> : <AdminView />}
+            />
           </Routes>
         )}
       </MainContext.Provider>

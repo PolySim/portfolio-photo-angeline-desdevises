@@ -164,12 +164,6 @@ def add_image(name, page, number):
     #         print("MySQL connection is closed")
 
 
-# Create Album
-@application.route('/admin/CreateAlbum')
-def create_album():
-    pass
-
-
 # Send Album and Image information
 def sql_result_to_dict_admin_list_image(sql_result):
     result = {}
@@ -201,7 +195,8 @@ def admin_list_image(id=None):
         SELECT pages.name, images.id, presentation
         FROM pages 
         LEFT JOIN images ON pages.id = images.page
-        WHERE pages.id = %s"""
+        WHERE pages.id = %s
+        ORDER BY number"""
         cursor.execute(request, (id,))
         result = cursor.fetchall()
         return sql_result_to_dict_admin_list_image(result)
@@ -350,6 +345,38 @@ def delete_album(id=None):
         response = flask.make_response(
             "Dataset screen display unsuccessful...", 403)
         return response
+
+
+@application.route('/changeOrder', methods=['POST'])
+def change_order():
+    args = request.json
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        index = 1
+        for imageId in args['ids']:
+            SQLrequest = """
+                UPDATE images
+                SET number = %s
+                WHERE id = %s
+            """
+            if args['add']:
+                cursor.execute(SQLrequest, (args['order'] + index, imageId))
+            else:
+                cursor.execute(SQLrequest, (args['order'] + index + 1, imageId))
+            connection.commit()
+            index += 1
+        SQLrequest = """
+                        UPDATE images
+                        SET number = %s
+                        WHERE id = %s
+                    """
+        cursor.execute(SQLrequest, (args['destination'] + 1, args['id']))
+        connection.commit()
+        print("Image order changed successfully")
+        return "Successfully"
+    except mysql.connector.Error as error:
+        print("Failed inserting BLOB data into MySQL table {}".format(error))
 
 
 if __name__ == "__main__":

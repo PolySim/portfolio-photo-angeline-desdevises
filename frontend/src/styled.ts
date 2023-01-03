@@ -781,10 +781,11 @@ export const UpdateAlbum = styled.main`
     border: 1px solid #ccc;
     border-radius: 4px;
 
+    /* List Image */
     > div:nth-of-type(1) {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       margin-bottom: 24px;
 
       > div {
@@ -806,7 +807,7 @@ export const UpdateAlbum = styled.main`
       }
 
       img {
-        width: 180px;
+        width: 240px;
         height: auto;
       }
     }

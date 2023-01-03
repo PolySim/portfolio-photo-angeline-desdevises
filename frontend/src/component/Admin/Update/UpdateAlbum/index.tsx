@@ -64,8 +64,7 @@ export default function UpdateAlbumView(): JSX.Element {
     }
   }
 
-  function onDragEnd(result: any) {
-    console.log(result);
+  async function onDragEnd(result: any) {
     if (!result.destination) {
       return;
     }
@@ -73,6 +72,41 @@ export default function UpdateAlbumView(): JSX.Element {
     if (result.destination.index === result.source.index) {
       return;
     }
+    result.source.index > result.destination.index
+      ? await fetch(`${cleAPI}/changeOrder`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: result.draggableId,
+            destination: result.destination.index,
+            ids: album.images.slice(
+              result.destination.index,
+              result.source.index
+            ),
+            add: false,
+            order: result.destination.index,
+          }),
+        })
+      : await fetch(`${cleAPI}/changeOrder`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: result.draggableId,
+            destination: result.destination.index,
+            ids: album.images.slice(
+              result.source.index + 1,
+              result.destination.index + 1
+            ),
+            add: true,
+            order: result.source.index,
+          }),
+        });
+    const dataListImage = await getAdminListImage(albumId.toString());
+    setAlbum((curr) => dataListImage);
   }
 
   return (

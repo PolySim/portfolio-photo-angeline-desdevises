@@ -62,13 +62,25 @@ export default function Grid(): JSX.Element {
                   </>
                 ) : (
                   <Image
-                    indices={i === 0 ? elt[0] : text() === "" ? elt[0] : elt[0]}
+                    indices={
+                      i === 0 ? elt[0] : text() === "" ? elt[0] : elt[0] - 1
+                    }
                     key={`${elt[0]}portfolioImage`}
                     setFocus={setFocus}
                   />
                 )}
               </div>
             ))}
+            {text() === "" || imagesData.length === 0 ? (
+              <></>
+            ) : (
+              <div>
+                <Image
+                  indices={imagesData[imagesData.length - 1][0]}
+                  setFocus={setFocus}
+                />
+              </div>
+            )}
           </GridPortfolio>
           <Share footer={true} />
         </>

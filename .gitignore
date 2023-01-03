@@ -27,6 +27,7 @@ img
 templates
 static
 venv
+favicon
 __pycache__
 .vscode
 .env

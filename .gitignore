@@ -12,9 +12,6 @@ package-lock.json
 /build
 build
 
-img
-/img
-
 # misc
 .DS_Store
 .env.local
@@ -25,3 +22,13 @@ img
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+img
+templates
+static
+venv
+__pycache__
+.vscode
+.env
+.idea
+deploy

@@ -80,7 +80,7 @@ export default function Images({
         style={{
           display: "flex",
           transform: `translateX(${-100 * display}%)`,
-          transition: "transform 0.8s ease-in-out",
+          transition: "transform 0.6s ease-in-out",
         }}
       >
         {imagesData.map((elt, i: number) => (

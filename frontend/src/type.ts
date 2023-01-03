@@ -4,6 +4,8 @@ export type MainContextType = {
   displayImage: boolean;
   setDisplayImage: React.Dispatch<React.SetStateAction<boolean>>;
   pagesInformation: [number, string, string][];
+  connected: boolean;
+  setConnected: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type Style = {
@@ -17,4 +19,10 @@ export type BigImageProps = {
   onToggleDisplay: (add: boolean) => void;
   listImages: number[];
   text: string;
+};
+
+export type AdminImagesType = {
+  title: string;
+  content: string | null;
+  images: number[];
 };

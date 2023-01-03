@@ -27,7 +27,7 @@ export default function Header({
         <>
           <H1>
             <Link to="/" style={{ textDecoration: "none", color: "#000" }}>
-              <h1>Angeline Desdevises</h1>
+              <h1>Angéline Desdevises</h1>
             </Link>
           </H1>
           <Navigation reportage={nameReportage} />

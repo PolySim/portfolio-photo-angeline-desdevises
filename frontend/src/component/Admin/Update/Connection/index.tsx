@@ -2,13 +2,14 @@ import React, { useContext, useRef, useEffect } from "react";
 import { AdminConnection } from "src/styled";
 import { MainContext } from "src/context";
 
+const MDP = process.env.REACT_APP_CONNECT_MDP;
+
 export default function AdminConnectionView(): JSX.Element {
   const { setConnected } = useContext(MainContext);
   const ref: any = useRef();
 
   const checkValid: (text: string) => void = (text) => {
-    // if (text === "SppADlmdt_2022!") {
-    if (text === "a") {
+    if (text === MDP) {
       setConnected(true);
     }
   };

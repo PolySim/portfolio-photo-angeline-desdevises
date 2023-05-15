@@ -8,6 +8,7 @@ import sys
 from flask import Flask, request, send_file, render_template
 from flask_cors import CORS
 import shutil
+from PIL import Image
 import json
 
 cur_path = os.path.abspath(".")
@@ -291,6 +292,9 @@ def upload_image(id:None):
             indice = 1
             for image_file in image_files:
                 extension = image_file.filename.split('.')[-1]
+                image_file = Image.open(image_file)
+                max_size = (3000, 3000)
+                image_file.thumbnail(max_size, Image.ANTIALIAS)
                 image_file.save(os.path.join('img/' + id, str(id_max + indice) + '.' + extension))
                 SQLrequest = """
                 INSERT INTO images (name, page, number)
@@ -377,6 +381,25 @@ def change_order():
         return "Successfully"
     except mysql.connector.Error as error:
         print("Failed inserting BLOB data into MySQL table {}".format(error))
+
+
+@application.route('/reduceImageSize', methods=['GET'])
+def reduce_image_size():
+    try:
+        folders = os.listdir('img')
+        for folder in folders:
+            files = os.listdir(f'img/{folder}')
+            for file in files:
+                image = Image.open(f"img/{folder}/{file}")
+                max_size = (2000, 2000)
+                image.thumbnail(max_size, Image.ANTIALIAS)
+                image.save(f"img/{folder}/{file}")
+        return "succes"
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
 
 
 if __name__ == "__main__":

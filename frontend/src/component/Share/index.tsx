@@ -52,7 +52,7 @@ export default function Share({ footer }: { footer: boolean }): JSX.Element {
           <p>
             Développé par{" "}
             <a
-              href="https://www.instagram.com/simondesdevises/?hl=fr"
+              href="https://www.simondesdevises.com"
               target="_blank"
               rel="noreferrer"
             >

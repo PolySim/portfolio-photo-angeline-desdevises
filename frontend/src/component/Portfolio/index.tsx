@@ -24,9 +24,7 @@ export default function Grid(): JSX.Element {
       setImagesData(data);
     }
     getData();
-  }, [reportage]);
 
-  useEffect(() => {
     if (text() !== "") {
       setImagesData((imagesData) => imagesData.splice(1, 0, [0]));
     }

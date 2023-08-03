@@ -1,4 +1,4 @@
-import HeaderLaptop from "@/Components/Header/laptop.tsx";
+import Header from "@/Components/Header";
 import { MainContext } from "@/context.ts";
 import { useEffect, useState } from "react";
 import { Reports } from "@/type.ts";
@@ -29,7 +29,7 @@ export default function App(): JSX.Element {
   return (
     <>
       <MainContext.Provider value={{ reports }}>
-        <HeaderLaptop />
+        <Header />
       </MainContext.Provider>
     </>
   );

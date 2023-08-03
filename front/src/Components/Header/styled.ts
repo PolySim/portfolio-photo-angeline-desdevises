@@ -9,6 +9,18 @@ export const MainTitle = styled.div`
   height: 12.5vh;
   width: 100%;
   font-size: 32px;
+
+  @media screen and (max-width: 700px) {
+    font-size: 25px;
+    justify-content: start;
+    align-items: center;
+    margin-left: 24px;
+    height: 64px;
+
+    > a {
+      margin-top: 0;
+    }
+  }
 `;
 
 export const TitleLink = styled(Link)`
@@ -20,7 +32,12 @@ export const TitleLink = styled(Link)`
   margin-bottom: 20px;
 
   &:hover {
-    color: #7cc4c5;
+    color: ${colors.lightBleu};
+  }
+
+  @media screen and (max-width: 700px) {
+    margin-top: 35px;
+    margin-bottom: 0;
   }
 `;
 
@@ -55,6 +72,18 @@ export const ReportsLink = styled(Link)`
   &:hover {
     background-color: #eee;
   }
+
+  @media screen and (max-width: 700px) {
+    justify-content: center;
+    margin-top: 20px;
+    height: auto;
+    padding: 0;
+
+    &:hover {
+      background-color: white;
+      color: ${colors.lightBleu};
+    }
+  }
 `;
 
 export const ReportsTitle = styled.p`
@@ -64,7 +93,7 @@ export const ReportsTitle = styled.p`
   font-weight: bold;
 
   &:hover {
-    color: #7cc4c5;
+    color: ${colors.lightBleu};
   }
 `;
 
@@ -72,7 +101,11 @@ export const Reports = styled.div`
   position: relative;
 
   &:hover {
-    color: #7cc4c5;
+    color: ${colors.lightBleu};
+
+    p {
+      color: ${colors.lightBleu};
+    }
 
     > div:nth-of-type(2) {
       display: flex;
@@ -95,5 +128,58 @@ export const Reports = styled.div`
     padding-top: 12px;
 
     background-color: white;
+  }
+`;
+
+export const NavBarPhoneStyle = styled.div<{ $open: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: transform 0.3s ease-in-out;
+  transform: ${(props) =>
+    props.$open ? "translateX(0)" : "translateX(-100%)"};
+
+  p {
+    margin-top: 60px;
+  }
+`;
+
+export const ButtonOpenMenu = styled.div<{ $open: boolean }>`
+  position: absolute;
+  top: 36px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease-in-out;
+  transform: ${(props) =>
+    props.$open ? "translateX(0)" : "translateX(100vw)"};
+
+  > span {
+    position: absolute;
+    background-color: ${colors.black};
+    height: 2px;
+    width: 50px;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.1s ease-out;
+  }
+
+  > span:nth-of-type(1) {
+    transform: ${(props) =>
+      props.$open ? "translateY(0) rotate(135deg)" : "translateY(-10px)"};
+  }
+
+  > span:nth-of-type(2) {
+    opacity: ${(props) => (props.$open ? "0" : "1")};
+  }
+
+  > span:nth-of-type(3) {
+    transform: ${(props) =>
+      props.$open ? "translateY(0) rotate(-135deg)" : "translateY(10px)"};
   }
 `;

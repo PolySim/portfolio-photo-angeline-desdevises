@@ -8,6 +8,7 @@ import Home from "@/Components/Home";
 import Footer from "@/Components/Footer";
 import Contact from "@/Components/Contact";
 import About from "@/Components/About";
+import Portfolio from "@/Components/Portfolio";
 
 export default function App(): JSX.Element {
   const [reports, setReports] = useState<Reports>([
@@ -23,7 +24,6 @@ export default function App(): JSX.Element {
       try {
         const data = await getReportsInformation();
         setReports(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -40,6 +40,7 @@ export default function App(): JSX.Element {
           <Route path="*" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/apropos" element={<About />} />
+          <Route path="/portfolio/:id" element={<Portfolio />} />
         </Routes>
 
         <Footer />

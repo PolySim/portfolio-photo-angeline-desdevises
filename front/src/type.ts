@@ -11,3 +11,18 @@ type Report = {
   title: string;
   article: string;
 };
+
+export type ImagesID = {
+  id: number;
+}[];
+
+export type FullScreenType = {
+  open: boolean;
+  imageClick: number;
+};
+
+export type HandleScroll = (
+  element: HTMLElement | null,
+  add: boolean,
+  step: number,
+) => void;

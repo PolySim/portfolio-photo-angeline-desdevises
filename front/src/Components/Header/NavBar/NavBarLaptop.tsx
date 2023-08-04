@@ -25,7 +25,7 @@ export default function NavBarLaptop(): JSX.Element {
           {reports.map((report, i) => (
             <ReportsLink
               key={`${i}${report.title}`}
-              to={`/${report.title}/${report.index}`}
+              to={`/portfolio/${report.index}`}
             >
               {report.title}
             </ReportsLink>
@@ -34,10 +34,10 @@ export default function NavBarLaptop(): JSX.Element {
       </Reports>
       <span>⚫</span>
 
-      <TitleLink to="/portraits/1">PORTRAITS</TitleLink>
+      <TitleLink to="/portfolio/1">PORTRAITS</TitleLink>
       <span>⚫</span>
 
-      <TitleLink to="/publications/2">PUBLICATIONS</TitleLink>
+      <TitleLink to="/portfolio/2">PUBLICATIONS</TitleLink>
       <span>⚫</span>
 
       <TitleLink to="/contact">CONTACT</TitleLink>

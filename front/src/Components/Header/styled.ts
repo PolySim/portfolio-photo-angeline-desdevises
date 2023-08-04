@@ -5,17 +5,18 @@ import { colors } from "@/constCSS.ts";
 export const MainTitle = styled.div`
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   justify-content: center;
   height: 12.5vh;
   width: 100%;
   font-size: 32px;
-  box-sizing: border-box;
 
   @media screen and (max-width: 700px) {
     font-size: 25px;
     justify-content: start;
     align-items: center;
     margin-left: 24px;
+    width: fit-content;
     height: 64px;
 
     > a {

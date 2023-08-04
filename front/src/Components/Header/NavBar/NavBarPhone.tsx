@@ -24,15 +24,15 @@ export default function NavBarPhone(): JSX.Element {
       {reports.map((report, i) => (
         <ReportsLink
           key={`${i}${report.title}`}
-          to={`/${report.title}/${report.index}`}
+          to={`/portfolio/${report.index}`}
         >
           {report.title}
         </ReportsLink>
       ))}
-      <TitleLink style={{ marginTop: "55px" }} to="/portraits/1">
+      <TitleLink style={{ marginTop: "55px" }} to="/portfolio/1">
         PORTRAITS
       </TitleLink>
-      <TitleLink to="/publications/2">PUBLICATIONS</TitleLink>
+      <TitleLink to="/portfolio/2">PUBLICATIONS</TitleLink>
       <TitleLink to="/contact">CONTACT</TitleLink>
       <TitleLink to="/apropos">A PROPOS</TitleLink>
     </NavBarPhoneStyle>

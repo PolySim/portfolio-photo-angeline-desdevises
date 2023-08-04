@@ -140,6 +140,7 @@ export const NavBarPhoneStyle = styled.div<{ $open: boolean }>`
   top: 0;
   width: 100vw;
   height: 100vh;
+  background-color: white;
   transition: transform 0.3s ease-in-out;
   transform: ${(props) =>
     props.$open ? "translateX(0)" : "translateX(-100%)"};
@@ -150,7 +151,7 @@ export const NavBarPhoneStyle = styled.div<{ $open: boolean }>`
 `;
 
 export const ButtonOpenMenu = styled.div<{ $open: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 36px;
   right: 24px;
   width: 50px;

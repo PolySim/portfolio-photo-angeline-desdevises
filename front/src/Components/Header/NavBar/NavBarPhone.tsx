@@ -8,7 +8,7 @@ import {
 import { MainContext } from "@/context.ts";
 
 export default function NavBarPhone(): JSX.Element {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { reports } = useContext(MainContext);
 
   return (

@@ -6,6 +6,7 @@ import getReportsInformation from "@/API/pages_information.ts";
 import { Route, Routes } from "react-router-dom";
 import Home from "@/Components/Home";
 import Footer from "@/Components/Footer";
+import Contact from "@/Components/Contact";
 
 export default function App(): JSX.Element {
   const [reports, setReports] = useState<Reports>([
@@ -36,6 +37,7 @@ export default function App(): JSX.Element {
 
         <Routes>
           <Route path="*" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
 
         <Footer />

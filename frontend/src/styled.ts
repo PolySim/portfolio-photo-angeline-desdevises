@@ -43,6 +43,7 @@ export const NavBar = styled.div`
   font-weight: bold;
   width: 80%;
   margin: 0 auto;
+
   a,
   p {
     width: max-content;
@@ -120,10 +121,12 @@ export const Footer = styled.div`
   color: #555555;
   font-size: 80%;
   text-align: center;
+
   p:nth-of-type(2) {
     margin-top: 6px;
     margin-bottom: 24px;
   }
+
   a {
     text-decoration: underline;
 
@@ -349,6 +352,7 @@ export const DisplayImage = styled.div`
         rgba(0, 0, 0, 0.0001) 100%
       );
     }
+
     button:nth-of-type(2):hover {
       background-image: linear-gradient(
         to right,
@@ -421,6 +425,7 @@ export const Propos = styled.div`
       top: 3%;
       width: 50%;
       height: max-content;
+
       img {
         width: 80%;
         height: auto;
@@ -501,8 +506,10 @@ export const ContactPage = styled.div`
       display: flex;
       width: 50%;
       margin: 20px auto 0;
+
       > div:nth-of-type(1) {
         width: 50%;
+
         p {
           font-size: 12px;
           color: #555555;
@@ -528,6 +535,7 @@ export const ContactPage = styled.div`
           border: 1px solid #555555;
           width: 100%;
           height: max-content;
+
           input {
             box-sizing: border-box;
             width: 100%;
@@ -552,6 +560,7 @@ export const ContactPage = styled.div`
             height: 130px;
           }
         }
+
         > input {
           display: flex;
           justify-content: center;
@@ -611,11 +620,13 @@ export const Description = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
+
   div:nth-of-type(1) {
     width: 80%;
     font-size: 16px;
     color: #333;
   }
+
   div:nth-of-type(2) {
     font-weight: bold;
     font-size: 14px;
@@ -629,6 +640,7 @@ export const BigDescription = styled.main`
   justify-content: center;
   align-items: center;
   height: 70%;
+
   div {
     width: 60%;
     max-height: 100%;
@@ -645,6 +657,7 @@ export const AdminConnection = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
+
   > div {
     display: flex;
     flex-direction: column;
@@ -660,6 +673,7 @@ export const AdminConnection = styled.main`
       font-size: 24px;
       font-weight: bold;
     }
+
     > div:nth-of-type(2) {
       cursor: pointer;
       margin-bottom: 24px;
@@ -668,6 +682,7 @@ export const AdminConnection = styled.main`
       border-radius: 4px;
       background-color: #eee;
     }
+
     input {
       outline: none;
       margin: 24px 0;
@@ -711,6 +726,7 @@ export const UpdateAlbum = styled.main`
     height: fit-content;
 
     /* Titre */
+
     > div:nth-of-type(1) {
       margin-bottom: 24px;
 
@@ -720,6 +736,7 @@ export const UpdateAlbum = styled.main`
     }
 
     /* Content */
+
     > div:nth-of-type(2) {
       margin-bottom: 24px;
 
@@ -729,6 +746,7 @@ export const UpdateAlbum = styled.main`
     }
 
     /* Button */
+
     > div:nth-of-type(3) {
       display: flex;
 
@@ -740,6 +758,7 @@ export const UpdateAlbum = styled.main`
         margin-right: 24px;
         cursor: pointer;
       }
+
       > div:nth-of-type(2) {
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -782,6 +801,7 @@ export const UpdateAlbum = styled.main`
     border-radius: 4px;
 
     /* List Image */
+
     > div:nth-of-type(1) {
       display: flex;
       flex-direction: column;

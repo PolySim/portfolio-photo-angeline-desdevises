@@ -2,6 +2,7 @@ import { MainTitle, TitleLink } from "@/Components/Header/styled.ts";
 import NavBarLaptop from "@/Components/Header/NavBar/NavBarLaptop.tsx";
 import { useEffect, useState } from "react";
 import NavBarPhone from "@/Components/Header/NavBar/NavBarPhone.tsx";
+import SocialLink from "@/Components/SocialLink";
 
 export default function Header(): JSX.Element {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -20,7 +21,14 @@ export default function Header(): JSX.Element {
       <MainTitle>
         <TitleLink to="/">Angeline Desdevises</TitleLink>
       </MainTitle>
-      {width > 700 ? <NavBarLaptop /> : <NavBarPhone />}
+      {width > 700 ? (
+        <>
+          <NavBarLaptop />
+          <SocialLink footer={false} />
+        </>
+      ) : (
+        <NavBarPhone />
+      )}
     </>
   );
 }

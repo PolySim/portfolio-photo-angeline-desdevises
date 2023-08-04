@@ -3,6 +3,9 @@ import { MainContext } from "@/context.ts";
 import { useEffect, useState } from "react";
 import { Reports } from "@/type.ts";
 import getReportsInformation from "@/API/pages_information.ts";
+import { Route, Routes } from "react-router-dom";
+import Home from "@/Components/Home";
+import Footer from "@/Components/Footer";
 
 export default function App(): JSX.Element {
   const [reports, setReports] = useState<Reports>([
@@ -30,6 +33,12 @@ export default function App(): JSX.Element {
     <>
       <MainContext.Provider value={{ reports }}>
         <Header />
+
+        <Routes>
+          <Route path="*" element={<Home />} />
+        </Routes>
+
+        <Footer />
       </MainContext.Provider>
     </>
   );

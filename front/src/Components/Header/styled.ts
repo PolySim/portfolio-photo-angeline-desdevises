@@ -9,6 +9,7 @@ export const MainTitle = styled.div`
   height: 12.5vh;
   width: 100%;
   font-size: 32px;
+  box-sizing: border-box;
 
   @media screen and (max-width: 700px) {
     font-size: 25px;
@@ -137,6 +138,7 @@ export const NavBarPhoneStyle = styled.div<{ $open: boolean }>`
   justify-content: center;
   align-items: center;
   position: fixed;
+  z-index: 1000;
   top: 0;
   width: 100vw;
   height: 100vh;

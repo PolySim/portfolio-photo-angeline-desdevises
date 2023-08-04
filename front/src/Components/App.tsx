@@ -9,6 +9,7 @@ import Footer from "@/Components/Footer";
 import Contact from "@/Components/Contact";
 import About from "@/Components/About";
 import Portfolio from "@/Components/Portfolio";
+import Admin from "@/Components/Admin";
 
 export default function App(): JSX.Element {
   const [reports, setReports] = useState<Reports>([
@@ -41,6 +42,8 @@ export default function App(): JSX.Element {
           <Route path="/contact" element={<Contact />} />
           <Route path="/apropos" element={<About />} />
           <Route path="/portfolio/:id" element={<Portfolio />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/:id" element={<Admin />} />
         </Routes>
 
         <Footer />

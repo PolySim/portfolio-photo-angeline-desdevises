@@ -6,17 +6,5 @@ const API_KEY = import.meta.env.PROD
 
 export default async function getReportsInformation(): Promise<Reports> {
   const res = await fetch(`${API_KEY}/api/pages`);
-  const data = (await res.json()) as [number, string, string][];
-  return changeValue(data);
+  return (await res.json()) as Reports;
 }
-
-const changeValue: (values: [number, string, string][]) => Reports = (
-  values,
-) => {
-  const result: Reports = values.map((value) => ({
-    index: value[0],
-    title: value[1],
-    article: value[2],
-  }));
-  return result;
-};

@@ -7,13 +7,5 @@ export default async function images_information(
   number: string,
 ): Promise<ImagesID> {
   const res = await fetch(`${API_KEY}/api/images?num=${number}`);
-  const data = (await res.json()) as [number][];
-  return convertData(data);
+  return (await res.json()) as ImagesID;
 }
-
-const convertData: (values: [number][]) => ImagesID = (values) => {
-  const data: ImagesID = values.map((value) => ({
-    id: value[0],
-  }));
-  return data;
-};

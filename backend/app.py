@@ -180,9 +180,9 @@ def sql_result_to_dict_admin_list_image(sql_result):
                 }
             else:
                 result = {
-                'title': image[0],
-                'content': image[2],
-                'images': [image[1]]
+                    'title': image[0],
+                    'content': image[2],
+                    'images': [image[1]]
                 }
     return result
 
@@ -240,7 +240,7 @@ def update_album(id=None, create=None):
 
 
 @application.route('/removeImage/<id>')
-def remove_image(id= None):
+def remove_image(id=None):
     try:
         connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
         cursor = connection.cursor()
@@ -271,7 +271,7 @@ def remove_image(id= None):
 
 # Upload Image
 @application.route('/uploadImage/<id>', methods=['POST'])
-def upload_image(id:None):
+def upload_image(id: None):
     try:
         connection = mysql.connector.connect(host='127.0.0.1', database='angeline', user='root', password='Simon_256')
         cursor = connection.cursor()
@@ -303,7 +303,7 @@ def upload_image(id:None):
                 cursor.execute(SQLrequest, (str(id_max + indice) + '.' + extension, id, number_max + indice))
                 connection.commit()
                 indice += 1
-        return flask.jsonify({'message' : 'Images téléchargées avec succes'})
+        return flask.jsonify({'message': 'Images téléchargées avec succes'})
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
@@ -386,11 +386,11 @@ def change_order():
 @application.route('/reduceImageSize', methods=['GET'])
 def reduce_image_size():
     try:
-        folders = os.listdir('img')
+        folders = os.listdir('../img')
         for folder in folders:
-            files = os.listdir(f'img/{folder}')
+            files = os.listdir(f'../img/{folder}')
             for file in files:
-                image = Image.open(f"img/{folder}/{file}")
+                image = Image.open(f"../img/{folder}/{file}")
                 max_size = (2000, 2000)
                 image.thumbnail(max_size, Image.ANTIALIAS)
                 image.save(f"img/{folder}/{file}")
@@ -403,4 +403,4 @@ def reduce_image_size():
 
 
 if __name__ == "__main__":
-    application.run(debug=True, host="0.0.0.0", port=5000)
+    application.run(debug=True, host="0.0.0.0", port=5050)

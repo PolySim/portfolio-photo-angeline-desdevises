@@ -1,3 +1,10 @@
-Site professionnel de photographie pour Angeline Desdevises
+# Site professionnel de photographie pour **Angeline Desdevises**
 
-Vous pouvez retrouver le site sur https://angelinedesdevises.fr
+Vous pouvez le retrouver [ici](https://angelinedesdevises.fr])
+
+## il a été conçu avec :
+
+- `ReactJS`
+- `Typescript`
+- `Flask`
+- `MySQL`

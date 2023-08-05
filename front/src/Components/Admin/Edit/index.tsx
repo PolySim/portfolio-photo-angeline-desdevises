@@ -1,22 +1,17 @@
-import {
-  AdminForm,
-  AdminImage,
-  AdminImages,
-  BackMenu,
-  EditStyle,
-} from "@/Components/Admin/styled.ts";
-import { useParams } from "react-router-dom";
+import { AdminForm, BackMenu, EditStyle } from "@/Components/Admin/styled.ts";
+import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AdminFormType, ImagesID } from "@/type.ts";
 import images_information from "@/API/images_information.ts";
 import { useForm } from "react-hook-form";
 import { MainContext } from "@/context.ts";
 import { article, title } from "@/Components/Admin/Edit/data.ts";
+import AdminImages from "@/Components/Admin/Edit/Images";
 
 export default function Edit(): JSX.Element {
   const params = useParams();
-  const { reports } = useContext(MainContext);
   const reportId = params.id || "-1";
+  const { reports } = useContext(MainContext);
   const [images, setImages] = useState<ImagesID>([
     {
       id: -1,
@@ -63,16 +58,16 @@ export default function Edit(): JSX.Element {
           <div>
             <input type="submit" value="Valider" />
             <input type="button" value="Annuler" />
+            {parseInt(reportId) > 3 ? (
+              <Link to={"/admin"}>
+                <input type="button" value="Delete" />
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
         </AdminForm>
-        <AdminImages>
-          <div>
-            {images.map((image) => (
-              <AdminImage key={image.id}>{image.id}</AdminImage>
-            ))}
-          </div>
-          <div></div>
-        </AdminImages>
+        <AdminImages images={images} setImages={setImages} />
       </EditStyle>
     </>
   );

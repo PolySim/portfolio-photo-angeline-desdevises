@@ -31,6 +31,7 @@ export default function UpdateAlbumView(): JSX.Element {
       const data = await getMaxAlbumId();
       setAlbumId((curr) => data + 1);
     }
+
     if (id === "-1") {
       maxId();
     } else {
@@ -66,7 +67,7 @@ export default function UpdateAlbumView(): JSX.Element {
     images: number[],
     id: number,
     destination: number,
-    from: number
+    from: number,
   ) => number[] = (images, id, destination, from) => {
     images.splice(from, 1);
     images.splice(destination, 0, id);
@@ -93,7 +94,7 @@ export default function UpdateAlbumView(): JSX.Element {
           destination: result.destination.index,
           ids: album.images.slice(
             result.destination.index,
-            result.source.index
+            result.source.index,
           ),
           add: false,
           order: result.destination.index,
@@ -110,7 +111,7 @@ export default function UpdateAlbumView(): JSX.Element {
           destination: result.destination.index,
           ids: album.images.slice(
             result.source.index + 1,
-            result.destination.index + 1
+            result.destination.index + 1,
           ),
           add: true,
           order: result.source.index,
@@ -124,7 +125,7 @@ export default function UpdateAlbumView(): JSX.Element {
         curr.images,
         result.draggableId,
         result.destination.index,
-        result.source.index
+        result.source.index,
       ),
     }));
   }
@@ -160,10 +161,10 @@ export default function UpdateAlbumView(): JSX.Element {
                 }));
                 id === "-1"
                   ? fetch(
-                      `${cleAPI}/admin/updateAlbum/${albumId}/0?title=${titleRef.current.value}&content=${contentRef.current.value}`
+                      `${cleAPI}/admin/updateAlbum/${albumId}/0?title=${titleRef.current.value}&content=${contentRef.current.value}`,
                     )
                   : fetch(
-                      `${cleAPI}/admin/updateAlbum/${albumId}/1?title=${titleRef.current.value}&content=${contentRef.current.value}`
+                      `${cleAPI}/admin/updateAlbum/${albumId}/1?title=${titleRef.current.value}&content=${contentRef.current.value}`,
                     );
               }
             }}
@@ -209,7 +210,7 @@ export default function UpdateAlbumView(): JSX.Element {
                     >
                       {(provided) => (
                         <div
-                          key={image}
+                          // key={image}
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
@@ -224,7 +225,7 @@ export default function UpdateAlbumView(): JSX.Element {
                               setAlbum((curr) => ({
                                 ...curr,
                                 images: curr.images.filter(
-                                  (imageId) => imageId !== image
+                                  (imageId) => imageId !== image,
                                 ),
                               }));
                             }}

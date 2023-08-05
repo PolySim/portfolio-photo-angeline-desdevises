@@ -90,7 +90,7 @@ export const AdminForm = styled.form`
     min-height: 100px;
   }
 
-  > div > input {
+  > div input {
     cursor: pointer;
     font-size: 16px;
     margin-top: 24px;
@@ -102,14 +102,50 @@ export const AdminForm = styled.form`
   }
 `;
 
-export const AdminImages = styled.div`
+export const AdminImagesStyle = styled.div`
   width: 45%;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 12px;
+
+  > div:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //flex-wrap: wrap;
+  }
+
+  > div:nth-of-type(2) {
+    margin-top: 24px;
+
+    > p {
+      margin-bottom: 6px;
+    }
+  }
 `;
 
-export const AdminImage = styled.div``;
+export const AdminImage = styled.div`
+  width: 240px;
+  margin: 6px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  > img {
+    width: 100%;
+  }
+
+  > div {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    padding: 6px;
+    margin: 6px auto 0;
+    border-radius: 4px;
+    background-color: #bf1a2f;
+    cursor: pointer;
+  }
+`;
 
 export const BackMenu = styled(Link)`
   color: ${colors.black};

@@ -26,3 +26,8 @@ export type HandleScroll = (
   add: boolean,
   step: number,
 ) => void;
+
+export type AdminFormType = {
+  title: string;
+  article: string;
+};

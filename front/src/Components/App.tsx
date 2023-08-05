@@ -10,8 +10,10 @@ import Contact from "@/Components/Contact";
 import About from "@/Components/About";
 import Portfolio from "@/Components/Portfolio";
 import Admin from "@/Components/Admin";
+import Edit from "@/Components/Admin/Edit";
 
 export default function App(): JSX.Element {
+  const [isConnected, setIsConnected] = useState<boolean>(false);
   const [reports, setReports] = useState<Reports>([
     {
       index: 0,
@@ -42,8 +44,28 @@ export default function App(): JSX.Element {
           <Route path="/contact" element={<Contact />} />
           <Route path="/apropos" element={<About />} />
           <Route path="/portfolio/:id" element={<Portfolio />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/:id" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <Admin
+                isConnected={isConnected}
+                setIsConnected={setIsConnected}
+              />
+            }
+          />
+          <Route
+            path="/admin/:id"
+            element={
+              isConnected ? (
+                <Edit />
+              ) : (
+                <Admin
+                  isConnected={isConnected}
+                  setIsConnected={setIsConnected}
+                />
+              )
+            }
+          />
         </Routes>
 
         <Footer />

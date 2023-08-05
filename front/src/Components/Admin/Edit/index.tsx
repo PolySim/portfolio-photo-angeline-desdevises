@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { MainContext } from "@/context.ts";
 import { article, title } from "@/Components/Admin/Edit/data.ts";
 import AdminImages from "@/Components/Admin/Edit/Images";
+import { update_title } from "@/API/update_title.ts";
 
 export default function Edit(): JSX.Element {
   const params = useParams();
@@ -23,8 +24,10 @@ export default function Edit(): JSX.Element {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await images_information(reportId);
-        setImages(data);
+        if (reportId !== "-1") {
+          const data = await images_information(reportId);
+          setImages(data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -33,7 +36,14 @@ export default function Edit(): JSX.Element {
   }, [reportId]);
 
   const onSubmit = (data: AdminFormType) => {
-    console.log(data);
+    const sendData = async () => {
+      try {
+        void update_title(data, reportId);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    void sendData();
   };
 
   return (

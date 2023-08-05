@@ -163,5 +163,32 @@ def get_image(name=None):
             print("MySQL connection is closed")
 
 
+@application.route('/updateTitle/', methods=['POST', 'GET'])
+def update_title():
+    try:
+        args = request.json
+        title = args['title']
+        article = args['article']
+        reportId = args['reportId']
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        sql_request = f'UPDATE pages SET name = "{title}", presentation = "{article}" WHERE id = {reportId};'
+        cursor.execute(sql_request)
+        connection.commit()
+        return flask.jsonify({'result': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
 if __name__ == "__main__":
     application.run(debug=True, host="0.0.0.0", port=5000)

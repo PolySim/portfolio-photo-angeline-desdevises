@@ -327,5 +327,36 @@ def create_report():
             print("MySQL connection is closed")
 
 
+@application.route('/reorder', methods=['POST'])
+def reorder():
+    try:
+        args = request.json
+        images = args['images']
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        i = 1
+        for image in images:
+            sql_request = f"UPDATE images SET number = {i} WHERE id = {image['id']};"
+            cursor.execute(sql_request)
+            connection.commit()
+            i += 1
+        return flask.jsonify({
+            'reorder': 'success'
+        })
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
 if __name__ == "__main__":
     application.run(debug=True, host="0.0.0.0", port=5000)

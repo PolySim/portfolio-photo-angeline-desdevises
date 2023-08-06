@@ -1,6 +1,12 @@
-export default function DeleteSVG(): JSX.Element {
+export default function DeleteSVG({
+  handleDelete,
+  id,
+}: {
+  handleDelete: (id: number) => void;
+  id: number;
+}): JSX.Element {
   return (
-    <div>
+    <div onClick={() => handleDelete(id)}>
       <svg x="0px" y="0px" viewBox="0 0 458.5 458.5" width="20px" height="20px">
         <g>
           <g>

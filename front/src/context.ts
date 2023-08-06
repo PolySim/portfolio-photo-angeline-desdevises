@@ -9,4 +9,5 @@ export const MainContext = React.createContext<MainContextType>({
       article: "",
     },
   ],
+  setReports: () => {},
 });

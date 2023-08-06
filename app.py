@@ -1,6 +1,5 @@
 # this_file = "venv/bin/activate_this.py"
 # exec(open(this_file).read(), {'__file__': this_file})
-
 import mysql.connector
 import flask
 import sys
@@ -176,6 +175,78 @@ def update_title():
         cursor.execute(sql_request)
         connection.commit()
         return flask.jsonify({'result': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+# Upload Image
+@application.route('/upload_images/<report_id>', methods=['POST'])
+def upload_image(report_id=None):
+    try:
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        sql_request = f"SELECT MAX(number) FROM images WHERE page = {report_id};"
+        cursor.execute(sql_request)
+        number_max = cursor.fetchall()[0][0]
+        if number_max is None:
+            number_max = 0
+        image_files = request.files.getlist('images')
+        if image_files:
+            i = 1
+            for image_file in image_files:
+                filename = image_file.filename
+                image_file = Image.open(image_file)
+                max_size = (2000, 2000)
+                image_file.thumbnail(max_size, Image.LANCZOS)
+                image_file.save(os.path.join('img/' + report_id, filename))
+                SQLrequest = f"""
+                INSERT INTO images (name, page, number) 
+                VALUES ('{filename}', {report_id}, {i + number_max})"""
+                cursor.execute(SQLrequest)
+                connection.commit()
+                i += 1
+        return flask.jsonify({'download': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/delete_image', methods=['POST', 'GET'])
+def delete_image():
+    try:
+        args = request.json
+        image_id = args['image_id']
+        article_id = args['report_id']
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        sql_request = f"SELECT name FROM images WHERE id = {image_id}"
+        cursor.execute(sql_request)
+        filename = cursor.fetchall()[0][0]
+        sql_request = f"DELETE FROM images WHERE id = {image_id}"
+        cursor.execute(sql_request)
+        connection.commit()
+        os.remove(os.path.join(f'img/{article_id}', filename))
+        return flask.jsonify({
+            'delete': 'success'
+        })
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(

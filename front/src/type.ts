@@ -1,7 +1,8 @@
-// import React from "react";
+import React from "react";
 
 export type MainContextType = {
   reports: Reports;
+  setReports: React.Dispatch<React.SetStateAction<Reports>>;
 };
 
 export type Reports = Report[];

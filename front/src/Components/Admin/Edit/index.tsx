@@ -8,11 +8,12 @@ import { MainContext } from "@/context.ts";
 import { article, title } from "@/Components/Admin/Edit/data.ts";
 import AdminImages from "@/Components/Admin/Edit/Images";
 import { update_title } from "@/API/update_title.ts";
+import { updateReports } from "@/Components/Admin/Edit/updateReports.ts";
 
 export default function Edit(): JSX.Element {
   const params = useParams();
   const reportId = params.id || "-1";
-  const { reports } = useContext(MainContext);
+  const { reports, setReports } = useContext(MainContext);
   const [images, setImages] = useState<ImagesID>([
     {
       id: -1,
@@ -39,6 +40,7 @@ export default function Edit(): JSX.Element {
     const sendData = async () => {
       try {
         void update_title(data, reportId);
+        setReports(updateReports(reports, data, parseInt(reportId)));
       } catch (e) {
         console.log(e);
       }
@@ -67,7 +69,13 @@ export default function Edit(): JSX.Element {
           />
           <div>
             <input type="submit" value="Valider" />
-            <input type="button" value="Annuler" />
+            <input
+              onClick={() => {
+                formRef.current?.reset();
+              }}
+              type="button"
+              value="Annuler"
+            />
             {parseInt(reportId) > 3 ? (
               <Link to={"/admin"}>
                 <input type="button" value="Delete" />
@@ -77,7 +85,11 @@ export default function Edit(): JSX.Element {
             )}
           </div>
         </AdminForm>
-        <AdminImages images={images} setImages={setImages} />
+        <AdminImages
+          reportId={parseInt(reportId)}
+          images={images}
+          setImages={setImages}
+        />
       </EditStyle>
     </>
   );

@@ -36,7 +36,7 @@ export default function App(): JSX.Element {
 
   return (
     <>
-      <MainContext.Provider value={{ reports }}>
+      <MainContext.Provider value={{ reports, setReports }}>
         <Header />
 
         <Routes>

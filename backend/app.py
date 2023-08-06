@@ -288,13 +288,14 @@ def upload_image(id: None):
         else:
             (id_max, number_max) = result
         image_files = request.files.getlist('images')
+        print(image_files)
         if image_files:
             indice = 1
             for image_file in image_files:
                 extension = image_file.filename.split('.')[-1]
                 image_file = Image.open(image_file)
                 max_size = (3000, 3000)
-                image_file.thumbnail(max_size, Image.ANTIALIAS)
+                image_file.thumbnail(max_size, Image.LANCZOS)
                 image_file.save(os.path.join('img/' + id, str(id_max + indice) + '.' + extension))
                 SQLrequest = """
                 INSERT INTO images (name, page, number)
@@ -392,7 +393,7 @@ def reduce_image_size():
             for file in files:
                 image = Image.open(f"../img/{folder}/{file}")
                 max_size = (2000, 2000)
-                image.thumbnail(max_size, Image.ANTIALIAS)
+                image.thumbnail(max_size, Image.LANCZOS)
                 image.save(f"img/{folder}/{file}")
         return "succes"
     except Exception as e:

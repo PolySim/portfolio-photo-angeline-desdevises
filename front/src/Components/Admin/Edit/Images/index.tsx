@@ -70,41 +70,45 @@ export default function AdminImages({
 
   return (
     <AdminImagesStyle>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable" key={images[0].id}>
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {images.map((image, index) => (
-                <React.Fragment key={image.id}>
-                  {image.id === -1 ? (
-                    <></>
-                  ) : (
-                    <Draggable draggableId={`${image.id}`} index={index}>
-                      {(provided) => (
-                        <AdminImage
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <img
-                            src={`${API_KEY}/image/${image.id}`}
-                            alt={`${image.id}`}
-                          />
-                          <DeleteSVG
-                            handleDelete={handleDelete}
-                            id={image.id}
-                          />
-                        </AdminImage>
-                      )}
-                    </Draggable>
-                  )}
-                </React.Fragment>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      {images.length === 0 ? (
+        <></>
+      ) : (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable" key={images[0].id}>
+            {(provided) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {images.map((image, index) => (
+                  <React.Fragment key={image.id}>
+                    {image.id === -1 ? (
+                      <></>
+                    ) : (
+                      <Draggable draggableId={`${image.id}`} index={index}>
+                        {(provided) => (
+                          <AdminImage
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <img
+                              src={`${API_KEY}/image/${image.id}`}
+                              alt={`${image.id}`}
+                            />
+                            <DeleteSVG
+                              handleDelete={handleDelete}
+                              id={image.id}
+                            />
+                          </AdminImage>
+                        )}
+                      </Draggable>
+                    )}
+                  </React.Fragment>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )}
       <div>
         <p>Sélectionner vos images</p>
         <form onSubmit={handleSubmit}>

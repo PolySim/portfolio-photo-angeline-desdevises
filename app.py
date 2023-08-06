@@ -261,5 +261,71 @@ def delete_image():
             print("MySQL connection is closed")
 
 
+@application.route('/delete_report', methods=['POST'])
+def delete_report():
+    try:
+        args = request.json
+        report_id = args['report_id']
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        sql_request = f"DELETE FROM images WHERE page = {report_id}"
+        cursor.execute(sql_request)
+        connection.commit()
+        sql_request = f"DELETE FROM pages WHERE id = {report_id}"
+        cursor.execute(sql_request)
+        connection.commit()
+        shutil.rmtree(f'img/{report_id}')
+        return flask.jsonify({
+            'delete': 'success'
+        })
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/create_report', methods=['POST'])
+def create_report():
+    try:
+        args = request.json
+        title = args['title']
+        article = args['article']
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        sql_request = f"INSERT INTO pages (name, presentation) VALUES ('{title}', '{article}');"
+        cursor.execute(sql_request)
+        connection.commit()
+        sql_request = f"SELECT MAX(id) FROM pages;"
+        cursor.execute(sql_request)
+        report_id = cursor.fetchall()[0][0]
+        if not os.path.exists(f'img/{report_id}'):
+            os.makedirs(f'img/{report_id}')
+        return flask.jsonify({
+            'report_id': report_id
+        })
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
 if __name__ == "__main__":
     application.run(debug=True, host="0.0.0.0", port=5000)

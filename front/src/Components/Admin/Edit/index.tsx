@@ -9,10 +9,12 @@ import { article, title } from "@/Components/Admin/Edit/data.ts";
 import AdminImages from "@/Components/Admin/Edit/Images";
 import { update_title } from "@/API/update_title.ts";
 import { updateReports } from "@/Components/Admin/Edit/updateReports.ts";
+import { delete_report } from "@/API/delete_report.ts";
+import { create_report } from "@/API/create_report.ts";
 
 export default function Edit(): JSX.Element {
   const params = useParams();
-  const reportId = params.id || "-1";
+  const [reportId, setReportId] = useState<string>(params.id || "-1");
   const { reports, setReports } = useContext(MainContext);
   const [images, setImages] = useState<ImagesID>([
     {
@@ -39,13 +41,37 @@ export default function Edit(): JSX.Element {
   const onSubmit = (data: AdminFormType) => {
     const sendData = async () => {
       try {
-        void update_title(data, reportId);
-        setReports(updateReports(reports, data, parseInt(reportId)));
+        if (reportId === "-1") {
+          const response = await create_report(data);
+          setReportId(response.report_id);
+          setReports((curr) => [
+            ...curr,
+            {
+              index: parseInt(response.report_id),
+              title: data.title,
+              article: data.article,
+            },
+          ]);
+        } else {
+          void update_title(data, reportId);
+          setReports(updateReports(reports, data, parseInt(reportId)));
+        }
       } catch (e) {
         console.log(e);
       }
     };
     void sendData();
+  };
+
+  const handleDelete = () => {
+    try {
+      void delete_report(parseInt(reportId));
+      setReports((curr) =>
+        curr.filter((report) => report.index !== parseInt(reportId)),
+      );
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -77,7 +103,7 @@ export default function Edit(): JSX.Element {
               value="Annuler"
             />
             {parseInt(reportId) > 3 ? (
-              <Link to={"/admin"}>
+              <Link onClick={handleDelete} to={"/admin"}>
                 <input type="button" value="Delete" />
               </Link>
             ) : (

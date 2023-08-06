@@ -12,6 +12,7 @@ import { reorderImages } from "@/Components/Admin/Edit/Images/reorder.ts";
 import { upload_images } from "@/API/upload_image.ts";
 import images_information from "@/API/images_information.ts";
 import { delete_image } from "@/API/delete_image.ts";
+import { reorder_images } from "@/API/reorder_images.ts";
 
 const API_KEY = import.meta.env.PROD
   ? import.meta.env.VITE_PUBLIC_BACK_URL_PROD
@@ -34,6 +35,9 @@ export default function AdminImages({
     if (result.source.index !== result.destination.index) {
       setImages((curr) =>
         reorderImages(curr, result.source.index, result.destination?.index),
+      );
+      void reorder_images(
+        reorderImages(images, result.source.index, result.destination?.index),
       );
     }
   };

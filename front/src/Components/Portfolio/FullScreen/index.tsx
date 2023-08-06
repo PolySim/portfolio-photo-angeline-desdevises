@@ -63,6 +63,7 @@ export default function Index({
             <p>{text}</p>
           ) : (
             <img
+              onContextMenu={(e) => e.preventDefault()}
               src={`${API_KEY}/image/${image.id}`}
               alt={`image${image.id}`}
             />

@@ -5,7 +5,11 @@ export default function About(): JSX.Element {
   return (
     <AboutStyle>
       <div>
-        <img src="/static/portrait.jpg" alt="portrait d'Angeline Desdevises" />
+        <img
+          onContextMenu={(e) => e.preventDefault()}
+          src="/static/portrait.jpg"
+          alt="portrait d'Angeline Desdevises"
+        />
       </div>
       <Description>
         <h1>Biographie (fr)</h1>

@@ -34,7 +34,11 @@ export default function Contact(): JSX.Element {
   return (
     <ContactStyle>
       <div>
-        <img src="/static/contact.jpg" alt="Landscape" />
+        <img
+          onContextMenu={(e) => e.preventDefault()}
+          src="/static/contact.jpg"
+          alt="Landscape"
+        />
       </div>
       <Available>
         <h2>Contact</h2>

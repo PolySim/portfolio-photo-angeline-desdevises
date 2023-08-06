@@ -76,6 +76,7 @@ export default function Portfolio(): JSX.Element {
               </>
             ) : (
               <img
+                onContextMenu={(e) => e.preventDefault()}
                 loading="lazy"
                 src={`${API_KEY}/image/${image.id}`}
                 alt={`image${image.id}`}

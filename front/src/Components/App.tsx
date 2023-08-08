@@ -11,6 +11,7 @@ import About from "@/Components/About";
 import Portfolio from "@/Components/Portfolio";
 import Admin from "@/Components/Admin";
 import Edit from "@/Components/Admin/Edit";
+import ReportageOrder from "@/Components/Admin/ReportageOrder";
 
 export default function App(): JSX.Element {
   const [isConnected, setIsConnected] = useState<boolean>(false);
@@ -51,6 +52,19 @@ export default function App(): JSX.Element {
                 isConnected={isConnected}
                 setIsConnected={setIsConnected}
               />
+            }
+          />
+          <Route
+            path="/admin/0"
+            element={
+              isConnected ? (
+                <ReportageOrder />
+              ) : (
+                <Admin
+                  isConnected={isConnected}
+                  setIsConnected={setIsConnected}
+                />
+              )
             }
           />
           <Route

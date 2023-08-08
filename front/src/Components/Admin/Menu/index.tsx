@@ -7,6 +7,7 @@ export default function AdminMenu(): JSX.Element {
 
   return (
     <AdminMenuStyle>
+      <AdminOptionLink to="0">Reportage Order</AdminOptionLink>
       <AdminOptionLink to="3">Portfolio</AdminOptionLink>
       <AdminOptionLink to="1">Portrait</AdminOptionLink>
       <AdminOptionLink to="2">Publication</AdminOptionLink>

@@ -84,7 +84,7 @@ def get_pages_information():
     try:
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
-        sql_requests = "SELECT * FROM pages WHERE (id > 3);"
+        sql_requests = "SELECT * FROM pages WHERE (id > 3) ORDER BY sort;"
         cursor.execute(sql_requests)
         result = cursor.fetchall()
         return flask.jsonify(format_api_pages(result))
@@ -171,7 +171,7 @@ def update_title():
         reportId = args['reportId']
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
-        sql_request = f'UPDATE pages SET name = "{title}", presentation = "{article}" WHERE id = {reportId};'
+        sql_request = f"""UPDATE pages SET name = "{title}", presentation = "{article}" WHERE id = {reportId};"""
         cursor.execute(sql_request)
         connection.commit()
         return flask.jsonify({'result': 'success'})
@@ -301,7 +301,7 @@ def create_report():
         article = args['article']
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
-        sql_request = f"INSERT INTO pages (name, presentation) VALUES ('{title}', '{article}');"
+        sql_request = f"""INSERT INTO pages (name, presentation) VALUES ("{title}", "{article}");"""
         cursor.execute(sql_request)
         connection.commit()
         sql_request = f"SELECT MAX(id) FROM pages;"
@@ -337,6 +337,37 @@ def reorder():
         i = 1
         for image in images:
             sql_request = f"UPDATE images SET number = {i} WHERE id = {image['id']};"
+            cursor.execute(sql_request)
+            connection.commit()
+            i += 1
+        return flask.jsonify({
+            'reorder': 'success'
+        })
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/reports_order', methods=['PUT'])
+def reports_order():
+    try:
+        args = request.json
+        reports = args['reports']
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        i = 4
+        for report in reports:
+            sql_request = f"UPDATE pages SET sort = {i} WHERE id = {report['index']};"
             cursor.execute(sql_request)
             connection.commit()
             i += 1

@@ -162,6 +162,10 @@ def get_image(name=None):
             print("MySQL connection is closed")
 
 
+def reformat_title_simple_code(text):
+    return "''".join(text.split("'"))
+
+
 @application.route('/updateTitle/', methods=['POST', 'GET'])
 def update_title():
     try:
@@ -171,7 +175,7 @@ def update_title():
         reportId = args['reportId']
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
-        sql_request = f"""UPDATE pages SET name = "{title}", presentation = "{article}" WHERE id = {reportId};"""
+        sql_request = f"""UPDATE pages SET name = '{reformat_title_simple_code(title)}', presentation = '{reformat_title_simple_code(article)}' WHERE id = {reportId};"""
         cursor.execute(sql_request)
         connection.commit()
         return flask.jsonify({'result': 'success'})
@@ -301,7 +305,7 @@ def create_report():
         article = args['article']
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
-        sql_request = f"""INSERT INTO pages (name, presentation) VALUES ("{title}", "{article}");"""
+        sql_request = f"""INSERT INTO pages (name, presentation) VALUES ('{reformat_title_simple_code(title)}', '{reformat_title_simple_code(article)}');"""
         cursor.execute(sql_request)
         connection.commit()
         sql_request = f"SELECT MAX(id) FROM pages;"

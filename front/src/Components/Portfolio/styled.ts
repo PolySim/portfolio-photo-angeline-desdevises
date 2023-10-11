@@ -16,16 +16,32 @@ export const SmallImage = styled.div`
   align-items: center;
   margin-top: 12px;
   width: 30%;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s linear;
   position: relative;
   cursor: pointer;
 
   &:hover {
     transform: scale(95%);
+
+    span {
+      transform: translateY(-100%);
+      opacity: 1;
+    }
   }
 
   img {
     width: 100%;
+  }
+
+  span {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: all 0.2s linear;
   }
 
   p:nth-of-type(1) {

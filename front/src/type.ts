@@ -15,6 +15,7 @@ type Report = {
 
 export type ImagesID = {
   id: number;
+  description?: string;
 }[];
 
 export type FullScreenType = {

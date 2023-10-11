@@ -28,6 +28,7 @@ export default function Portfolio(): JSX.Element {
       try {
         const data = await images_information(portfolioId);
         setImages(data);
+        console.log(portfolioId);
       } catch (error) {
         console.log(error);
       }
@@ -75,12 +76,19 @@ export default function Portfolio(): JSX.Element {
                 <p>READ MORE</p>
               </>
             ) : (
-              <img
-                onContextMenu={(e) => e.preventDefault()}
-                loading="lazy"
-                src={`${API_KEY}/image/${image.id}`}
-                alt={`image${image.id}`}
-              />
+              <>
+                <img
+                  onContextMenu={(e) => e.preventDefault()}
+                  loading="lazy"
+                  src={`${API_KEY}/image/${image.id}`}
+                  alt={`image${image.id}`}
+                />
+                {portfolioId === "2" && image.description ? (
+                  <span>{image.description}</span>
+                ) : (
+                  <></>
+                )}
+              </>
             )}
           </SmallImage>
         ))}

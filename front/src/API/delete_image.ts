@@ -17,7 +17,7 @@ export const delete_image: (
     if (response.status >= 400) {
       window.alert("error");
     } else {
-      console.log(response.json());
+      console.log(await response.json());
     }
   } catch (error) {
     console.error(error);

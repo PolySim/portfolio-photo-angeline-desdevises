@@ -53,6 +53,7 @@ export default function AdminImages({
       for (let i = 0; i < imagesDownload.length; i++) {
         formData.append(`images`, imagesDownload[i]);
       }
+      formData.append("hikingId", "1");
       try {
         void (await upload_images(formData, reportId));
         const newImages = await images_information(reportId.toString());

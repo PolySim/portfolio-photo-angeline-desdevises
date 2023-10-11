@@ -103,12 +103,18 @@ def get_pages_information():
             print("MySQL connection is closed")
 
 
-def format_api_images(data):
+def format_api_images(data, publication):
     result = []
     for image in data:
-        result.append({
-            'id': image[0]
-        })
+        if publication == '2':
+            result.append({
+                'id': image[0],
+                'description': image[1]
+            })
+        else:
+            result.append({
+                'id': image[0]
+            })
     return result
 
 
@@ -120,10 +126,18 @@ def get_image_information():
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
         # SELECT ALL images in one reportage
-        sql_requests = "SELECT id FROM images WHERE page = %s ORDER BY number;"
+        if num[0] == '2':
+            sql_requests = """
+            SELECT images.id, description 
+            FROM images
+            LEFT JOIN publication_desc ON publication_desc.publicationId = images.id
+            WHERE page = %s 
+            ORDER BY number;"""
+        else:
+            sql_requests = "SELECT id FROM images WHERE page = %s ORDER BY number;"
         cursor.execute(sql_requests, num)
         result = cursor.fetchall()
-        return flask.jsonify(format_api_images(result))
+        return flask.jsonify(format_api_images(result, num[0]))
 
     except Exception as e:
         print(f"Failed with message: {str(e)}")
@@ -205,6 +219,7 @@ def upload_image(report_id=None):
         if number_max is None:
             number_max = 0
         image_files = request.files.getlist('images')
+        print(request.files.getlist("hikingId"))
         if image_files:
             i = 1
             for image_file in image_files:

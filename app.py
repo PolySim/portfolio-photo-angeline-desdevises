@@ -216,9 +216,26 @@ def update_description():
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
         sql_request = """
-        UPDATE publication_desc 
-        SET description = %s
-        WHERE publicationId = %s ;"""
+        SELECT *
+        FROM publication_desc
+        WHERE publicationId = %s
+        """
+        cursor.execute(sql_request, (image_id,))
+        result = cursor.fetchall()
+
+        if len(result) != 0:
+            sql_request = """
+                UPDATE publication_desc 
+                SET description = %s
+                WHERE publicationId = %s ;
+            """
+
+        else:
+            sql_request = """
+                INSERT INTO publication_desc (description, publicationId)
+                VALUES (%s, %s);
+            """
+
         cursor.execute(sql_request, (description, image_id))
         connection.commit()
         return flask.jsonify({'result': 'success'})

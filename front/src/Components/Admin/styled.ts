@@ -147,6 +147,26 @@ export const AdminImage = styled.div`
   }
 `;
 
+export const Description = styled.form`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 6px;
+
+  input[type="text"] {
+    padding: 3px 6px;
+    outline: none;
+    border: 1px solid ${colors.gray};
+    border-radius: 5px;
+  }
+
+  input[type="submit"] {
+    padding: 3px 6px;
+    border: 1px solid ${colors.gray};
+    border-radius: 5px;
+  }
+`;
+
 export const BackMenu = styled(Link)`
   color: ${colors.black};
   text-decoration: none;

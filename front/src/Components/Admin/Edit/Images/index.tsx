@@ -1,4 +1,8 @@
-import { AdminImage, AdminImagesStyle } from "@/Components/Admin/styled.ts";
+import {
+  AdminImage,
+  AdminImagesStyle,
+  Description,
+} from "@/Components/Admin/styled.ts";
 import {
   DragDropContext,
   Droppable,
@@ -13,6 +17,7 @@ import { upload_images } from "@/API/upload_image.ts";
 import images_information from "@/API/images_information.ts";
 import { delete_image } from "@/API/delete_image.ts";
 import { reorder_images } from "@/API/reorder_images.ts";
+import { update_description } from "@/API/update_description.ts";
 
 const API_KEY = import.meta.env.PROD
   ? import.meta.env.VITE_PUBLIC_BACK_URL_PROD
@@ -73,6 +78,15 @@ export default function AdminImages({
     }
   };
 
+  const handleSubmitDescription = (data: any, imageId: number) => {
+    data.preventDefault();
+    try {
+      void update_description(data.target.description.value, imageId);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <AdminImagesStyle>
       {images.length === 0 ? (
@@ -98,6 +112,22 @@ export default function AdminImages({
                               src={`${API_KEY}/image/${image.id}`}
                               alt={`${image.id}`}
                             />
+                            {reportId === 2 ? (
+                              <Description
+                                onSubmit={(data) =>
+                                  handleSubmitDescription(data, image.id)
+                                }
+                              >
+                                <input
+                                  type="text"
+                                  name="description"
+                                  defaultValue={image.description}
+                                />
+                                <input type="submit" value="Valider" />
+                              </Description>
+                            ) : (
+                              <></>
+                            )}
                             <DeleteSVG
                               handleDelete={handleDelete}
                               id={image.id}

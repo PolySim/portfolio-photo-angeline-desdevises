@@ -18,23 +18,24 @@ export default function NavBarPhone(): JSX.Element {
         <span />
         <span />
       </ButtonOpenMenu>
-      <TitleLink to="/portfolio/3">PORTFOLIO</TitleLink>
+      <TitleLink to="/portfolio/3" onClick={() => setIsOpen((curr) => !curr)}>PORTFOLIO</TitleLink>
       <br />
       <p>REPORTAGE</p>
       {reports.map((report, i) => (
         <ReportsLink
           key={`${i}${report.title}`}
           to={`/portfolio/${report.index}`}
+          onClick={() => setIsOpen((curr) => !curr)}
         >
           {report.title}
         </ReportsLink>
       ))}
-      <TitleLink style={{ marginTop: "55px" }} to="/portfolio/1">
+      <TitleLink style={{ marginTop: "55px" }} to="/portfolio/1" onClick={() => setIsOpen((curr) => !curr)}>
         PORTRAITS
       </TitleLink>
-      <TitleLink to="/portfolio/2">PUBLICATIONS</TitleLink>
-      <TitleLink to="/contact">CONTACT</TitleLink>
-      <TitleLink to="/apropos">A PROPOS</TitleLink>
+      <TitleLink to="/portfolio/2" onClick={() => setIsOpen((curr) => !curr)}>PUBLICATIONS</TitleLink>
+      <TitleLink to="/contact" onClick={() => setIsOpen((curr) => !curr)}>CONTACT</TitleLink>
+      <TitleLink to="/apropos" onClick={() => setIsOpen((curr) => !curr)}>A PROPOS</TitleLink>
     </NavBarPhoneStyle>
   );
 }

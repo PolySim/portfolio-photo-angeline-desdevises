@@ -1,7 +1,23 @@
 import { AboutStyle, Description } from "@/Components/About/styled.ts";
-import { aboutContent } from "@/Components/About/AboutContent.ts";
+import {useEffect, useState} from "react";
+import {get_biography} from "@/API/get_biography.ts";
+
+type Biography = {
+  fr: string;
+  en: string;
+}
 
 export default function About(): JSX.Element {
+  const [biography, setBiography] = useState<Biography | null>(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await get_biography("fr");
+      setBiography(data);
+    }
+    void getData();
+  }, []);
+
   return (
     <AboutStyle>
       <div>
@@ -13,9 +29,9 @@ export default function About(): JSX.Element {
       </div>
       <Description>
         <h1>Biographie (fr)</h1>
-        <p>{aboutContent.fr}</p>
+        <p>{biography?.fr}</p>
         <h4>Biographie (en)</h4>
-        <p>{aboutContent.en}</p>
+        <p>{biography?.en}</p>
       </Description>
     </AboutStyle>
   );

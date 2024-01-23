@@ -67,6 +67,22 @@ def send_image(folder=None, file=None):
     return send_file(f'front/dist/{folder}/{file}')
 
 
+@application.route('/about/biography/<lang>', methods=['GET'])
+def get_biography(lang=None):
+    try:
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        sql_requests = "SELECT information FROM personal_information WHERE id = 1 OR id = 2;"
+        cursor.execute(sql_requests)
+        result = cursor.fetchall()
+        return flask.jsonify({"fr": result[0][0], "en": result[1][0]})
+    except Exception as e:
+        print(f"Get biography failed with message: {str(e)}")
+        response = flask.make_response(
+            "Biography screen display unsuccessful...", 403)
+        return response
+
+
 def format_api_pages(data):
     result = []
     for page in data:

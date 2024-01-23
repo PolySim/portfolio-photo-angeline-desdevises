@@ -24,6 +24,16 @@ export default function Connexion({
     if (inputRef.current) {
       inputRef.current.focus();
     }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        setIsConnexion(validPassword(inputRef.current));
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (

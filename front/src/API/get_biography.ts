@@ -8,8 +8,6 @@ type Biography = {
 };
 
 export const get_biography = async () => {
-  console.log("get_biography");
-  console.log(API_KEY);
   const res = await fetch(`${API_KEY}/about/biography`);
   if (res.status >= 400) throw new Error("Cannot fetch biography");
   const data = (await res.json()) as Biography;

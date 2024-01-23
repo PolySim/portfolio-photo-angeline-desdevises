@@ -33,3 +33,8 @@ export type AdminFormType = {
   title: string;
   article: string;
 };
+
+export type AdminAboutFormType = {
+  biography_fr: string;
+  biography_us: string;
+};

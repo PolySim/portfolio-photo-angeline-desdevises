@@ -3,7 +3,7 @@
 import mysql.connector
 import flask
 import sys
-from flask import Flask, request, send_file, render_template
+from flask import Flask, request, send_file
 from flask_cors import CORS
 import shutil
 from PIL import Image
@@ -26,6 +26,7 @@ PASSWORD = os.getenv('DATABASE_PASSWORD')
 
 # Response Header Wrapper function, setting appropriate header permissions
 
+# @application.after_request
 def add_response_headers(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
@@ -470,17 +471,17 @@ def reports_order():
             print("MySQL connection is closed")
 
 
-@application.route('/about/update_biography', methods=['POST'])
+@application.route('/update_biography', methods=['POST'])
 def update_biography():
     try:
         args = request.json
-        print(args['biography_fr'])
+        print(args)
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
-        # sql_request = f"UPDATE personal_information SET information = '{args['biography_fr']}' WHERE id = 1;"
-        # cursor.execute(sql_request)
-        # sql_request = f"UPDATE personal_information SET information = '{args['biography_us']}' WHERE id = 2;"
-        # cursor.execute(sql_request)
+        sql_request = f"UPDATE personal_information SET information = %s WHERE id = 1;"
+        cursor.execute(sql_request, (args['biography_fr'],))
+        sql_request = f"UPDATE personal_information SET information = %s WHERE id = 2;"
+        cursor.execute(sql_request, (args['biography_us'],))
         connection.commit()
         return flask.jsonify({
             'update': 'success'
@@ -490,6 +491,11 @@ def update_biography():
         response = flask.make_response(
             "Biography update unsuccessful...", 403)
         return response
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
 
 
 if __name__ == "__main__":

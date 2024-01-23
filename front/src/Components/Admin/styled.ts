@@ -88,6 +88,8 @@ export const AdminForm = styled.form`
     width: 90%;
     outline: none;
     min-height: 100px;
+    height: max-content;
+    overflow: auto;
   }
 
   > div input {

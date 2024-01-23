@@ -30,7 +30,7 @@ export default function About(): JSX.Element {
       <Description>
         <h1>Biographie (fr)</h1>
         <p>{biography?.fr}</p>
-        <h4>Biographie (en)</h4>
+        <h4>Biography (en)</h4>
         <p>{biography?.en}</p>
       </Description>
     </AboutStyle>

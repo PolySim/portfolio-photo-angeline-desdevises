@@ -67,8 +67,8 @@ def send_image(folder=None, file=None):
     return send_file(f'front/dist/{folder}/{file}')
 
 
-@application.route('/about/biography/<lang>', methods=['GET'])
-def get_biography(lang=None):
+@application.route('/about/biography', methods=['GET'])
+def get_biography():
     try:
         connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
         cursor = connection.cursor()
@@ -468,6 +468,28 @@ def reports_order():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+
+
+@application.route('/about/update_biography', methods=['POST'])
+def update_biography():
+    try:
+        args = request.json
+        print(args['biography_fr'])
+        connection = mysql.connector.connect(host=HOST, database=NAME, user=USER, password=PASSWORD)
+        cursor = connection.cursor()
+        # sql_request = f"UPDATE personal_information SET information = '{args['biography_fr']}' WHERE id = 1;"
+        # cursor.execute(sql_request)
+        # sql_request = f"UPDATE personal_information SET information = '{args['biography_us']}' WHERE id = 2;"
+        # cursor.execute(sql_request)
+        connection.commit()
+        return flask.jsonify({
+            'update': 'success'
+        })
+    except Exception as e:
+        print(f"Update biography failed with message: {str(e)}")
+        response = flask.make_response(
+            "Biography update unsuccessful...", 403)
+        return response
 
 
 if __name__ == "__main__":

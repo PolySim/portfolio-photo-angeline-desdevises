@@ -61,6 +61,7 @@ export const NavBarLaptopStyle = styled.header`
 export const ReportsLink = styled(Link)`
   display: flex;
   align-items: center;
+  text-align: center;
 
   text-decoration: none;
   color: ${colors.black};

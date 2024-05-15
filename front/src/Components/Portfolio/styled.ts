@@ -2,11 +2,19 @@ import styled from "styled-components";
 import { colors } from "@/constCSS.ts";
 
 export const PortfolioStyle = styled.main`
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  width: min(100vw, 1200px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  justify-content: space-between;
+  width: calc(100% - 48px);
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
+
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
 `;
 
 export const SmallImage = styled.div`
@@ -14,8 +22,7 @@ export const SmallImage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 12px;
-  width: 30%;
+  width: 100%;
   transition: transform 0.2s linear;
   position: relative;
   cursor: pointer;
@@ -56,10 +63,6 @@ export const SmallImage = styled.div`
     font-size: 14px;
     color: #070707;
     padding-bottom: 24px;
-  }
-
-  @media screen and (max-width: 700px) {
-    width: 45%;
   }
 `;
 

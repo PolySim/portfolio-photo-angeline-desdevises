@@ -1,16 +1,12 @@
-import { PortfolioStyle, SmallImage } from "@/Components/Portfolio/styled.ts";
+import { PortfolioStyle } from "@/Components/Portfolio/styled.ts";
 import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "@/context.ts";
 import { FullScreenType, ImagesID } from "@/type.ts";
 import images_information from "@/API/images_information.ts";
 import { getText } from "@/Components/Portfolio/getText.ts";
-import { shortText } from "@/Components/Portfolio/shortText.ts";
 import Index from "@/Components/Portfolio/FullScreen";
-
-const API_KEY = import.meta.env.PROD
-  ? import.meta.env.VITE_PUBLIC_BACK_URL_PROD
-  : import.meta.env.VITE_PUBLIC_BACK_URL_DEV;
+import SmallImageComponent from "@/Components/Portfolio/SmallImage.tsx";
 
 export default function Portfolio(): JSX.Element {
   const [images, setImages] = useState<ImagesID>([]);
@@ -64,33 +60,13 @@ export default function Portfolio(): JSX.Element {
           [],
         )
         .map((image, i) => (
-          <SmallImage
-            onClick={() => setFullScreen({ imageClick: i, open: true })}
-            key={image.id}
-          >
-            {image.id === -1 ? (
-              <>
-                <p>
-                  {shortText(getText(reports, parseInt(portfolioId)) || "")}
-                </p>
-                <p>READ MORE</p>
-              </>
-            ) : (
-              <>
-                <img
-                  onContextMenu={(e) => e.preventDefault()}
-                  loading="lazy"
-                  src={`${API_KEY}/image/${image.id}`}
-                  alt={`image${image.id}`}
-                />
-                {portfolioId === "2" && image.description ? (
-                  <span>{image.description}</span>
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
-          </SmallImage>
+          <React.Fragment key={image.id}>
+            <SmallImageComponent
+              image={image}
+              setFullScreen={setFullScreen}
+              index={i}
+            />
+          </React.Fragment>
         ))}
     </PortfolioStyle>
   );

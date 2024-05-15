@@ -46,16 +46,39 @@ export const AdminMenuStyle = styled.main`
   width: 100vw;
 `;
 
+export const AdminOptionTable = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 700px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+`;
+
+export const AdminOptionTableHead = styled.div`
+  height: fit-content;
+  text-align: center;
+`;
+
+export const AdminOptionTableCell = styled.div`
+  height: fit-content;
+  text-align: start;
+`;
+
 export const AdminOptionLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  width: max-content;
-  margin: 50px;
-  border-radius: 10px;
+  color: ${colors.lightBleu};
+  border: 1px solid ${colors.lightBleu};
+  border-radius: 8px;
   text-decoration: none;
   padding: 6px 12px;
-  background-color: ${colors.lightBleu};
-  color: ${colors.black};
+  transition: all 0.15s;
+
+  &:hover {
+    background-color: ${colors.lightBleu};
+    color: white;
+  }
 `;
 
 export const EditStyle = styled.main`

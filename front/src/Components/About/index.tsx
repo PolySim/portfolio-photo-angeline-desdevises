@@ -1,6 +1,6 @@
 import { AboutStyle, Description } from "@/Components/About/styled.ts";
 import { useEffect, useState } from "react";
-import { get_biography } from "@/API/get_biography.ts";
+import { get_about } from "@/API/get_about.ts";
 
 type Biography = {
   fr: string;
@@ -12,7 +12,7 @@ export default function About(): JSX.Element {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await get_biography();
+      const data = await get_about();
       setBiography(data);
     };
     void getData();

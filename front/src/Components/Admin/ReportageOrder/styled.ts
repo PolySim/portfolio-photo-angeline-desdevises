@@ -16,5 +16,6 @@ export const Report = styled.div`
   padding: 12px;
   margin: 12px;
   background-color: ${colors.lightBleu};
-  border-radius: 10px;
+  color: white;
+  border-radius: 8px;
 `;

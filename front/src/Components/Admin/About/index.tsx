@@ -2,7 +2,7 @@ import { AdminForm, BackMenu } from "@/Components/Admin/styled.ts";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AdminAboutFormType } from "@/type.ts";
-import { get_biography } from "@/API/get_biography.ts";
+import { get_about } from "@/API/get_about.ts";
 import { AdminBiographyContainer } from "@/Components/Admin/About/styled.ts";
 import { update_biography } from "@/API/update_biography.ts";
 
@@ -18,7 +18,7 @@ const AdminAbout = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await get_biography();
+      const data = await get_about();
       setBiography(data);
     };
     void getData();

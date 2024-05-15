@@ -7,8 +7,8 @@ type Biography = {
   en: string;
 };
 
-export const get_biography = async () => {
-  const res = await fetch(`${API_KEY}/about/biography`);
+export const get_about = async () => {
+  const res = await fetch(`${API_KEY}/api/about`);
   if (res.status >= 400) throw new Error("Cannot fetch biography");
   const data = (await res.json()) as Biography;
   if (!data) throw new Error("Cannot fetch categories");

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneMenu from "@/features/Header/PhoneMenu.tsx";
 import NavBar from "@/features/Header/NavBar.tsx";
+import SocialNetwork from "@/features/SocialNetwork/SocialNetwork.tsx";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Header: React.FC = () => {
         <PhoneMenu />
       </div>
       <NavBar />
+      <SocialNetwork className="hidden md:flex mt-10 mb-10" />
     </>
   );
 };

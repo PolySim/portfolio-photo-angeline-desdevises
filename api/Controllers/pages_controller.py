@@ -26,11 +26,29 @@ def find_pages():
         return response
 
 
+def find_page(report_id=None):
+    try:
+        connection = create_connection()
+        cursor = connection.cursor()
+        sql_requests = f"SELECT * FROM pages WHERE id = {report_id};"
+        cursor.execute(sql_requests)
+        result = cursor.fetchall()
+        if not result or len(result) == 0:
+            return flask.jsonify({})
+        return flask.jsonify(pages_formatter(result)[0])
+
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+
 def create_page():
     try:
-        args = request.json
-        title = args['title']
-        article = args['article']
+        body = request.json
+        title = body['title']
+        article = body['article']
         connection = create_connection()
         cursor = connection.cursor()
         sql_request = f"""INSERT INTO pages (name, presentation) VALUES (%s, %s);"""
@@ -41,9 +59,7 @@ def create_page():
         report_id = cursor.fetchall()[0][0]
         if not os.path.exists(f'img/{report_id}'):
             os.makedirs(f'img/{report_id}')
-        return flask.jsonify({
-            'report_id': report_id
-        })
+        return find_page(report_id)
 
     except Exception as e:
         print(f"Failed with message: {str(e)}")
@@ -52,12 +68,11 @@ def create_page():
         return response
 
 
-def update_page():
+def update_page(report_id=None):
     try:
         connection = create_connection()
         cursor = connection.cursor()
         args = request.args
-        report_id = args.get('reportId')
         title = args.get('title')
         article = args.get('article')
         status = args.get('status')
@@ -70,7 +85,7 @@ def update_page():
             cursor.execute(sql_request, (status, report_id))
 
         connection.commit()
-        return flask.jsonify({'result': 'success'})
+        return find_page(report_id)
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
@@ -78,10 +93,8 @@ def update_page():
         return response
 
 
-def delete_page():
+def delete_page(report_id=None):
     try:
-        args = request.json
-        report_id = args['report_id']
         connection = create_connection()
         cursor = connection.cursor()
         sql_request = f"DELETE FROM images WHERE page = {report_id}"
@@ -91,9 +104,7 @@ def delete_page():
         cursor.execute(sql_request)
         connection.commit()
         shutil.rmtree(f'img/{report_id}')
-        return flask.jsonify({
-            'delete': 'success'
-        })
+        return report_id
 
     except Exception as e:
         print(f"Failed with message: {str(e)}")

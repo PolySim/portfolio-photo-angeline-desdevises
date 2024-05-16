@@ -1,0 +1,4 @@
+GET http://127.0.0.1:5000/helloWorld
+
+###
+GET http://127.0.0.1:5000/api/pages/3

@@ -10,6 +10,6 @@ def about():
     return get_information()
 
 
-@about_bp.route('/about/update', methods=['PUT'])
+@about_bp.route('/about', methods=['PUT'])
 def update_about():
     return update_biography()

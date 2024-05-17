@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
       <div className="flex flex-col relative group">
         <p className="group-hover:text-customblue-300 transition">REPORTAGE</p>
         <div className="hidden absolute w-max top-0 mt-5 pt-3 -left-3 text-left group-hover:flex flex-col gap-1 bg-white">
-          {reports.map((report, i) => (
+          {(reports || []).map((report, i) => (
             <a
               key={`${i}${report.title}`}
               href={`/portfolio/${report.index}`}

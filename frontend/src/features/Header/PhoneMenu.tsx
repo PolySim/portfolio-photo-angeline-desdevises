@@ -37,7 +37,7 @@ const PhoneMenu: React.FC = () => {
         </a>
         <div className="flex flex-col w-full justify-center items-center gap-5">
           <p className="text-md font-medium">REPORTAGE</p>
-          {reports.map((report, i) => (
+          {(reports || []).map((report, i) => (
             <a
               key={`${i}${report.title}`}
               href={`/portfolio/${report.index}`}

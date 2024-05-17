@@ -9,7 +9,7 @@ import {
 } from "@/services/reportApi.ts";
 
 type ReportStore = {
-  reports: ReportType[];
+  reports: ReportType[] | null;
   report: ReportType | null;
   initReports: () => void;
   initReport: (index: number) => void;
@@ -19,7 +19,7 @@ type ReportStore = {
 };
 
 export const useReport = create<ReportStore>()((set) => ({
-  reports: [],
+  reports: null,
   report: null,
   initReports: async () => {
     await findReports().then((reports) => set({ reports }));
@@ -29,13 +29,13 @@ export const useReport = create<ReportStore>()((set) => ({
   },
   createReport: async (report: ReportType) => {
     await createReport(report).then((report) =>
-      set((state) => ({ reports: [...state.reports, report] })),
+      set((state) => ({ reports: [...(state.reports || []), report] })),
     );
   },
   updateReport: async (report: ReportType) => {
     await updateReport(report).then((report) =>
       set((state) => ({
-        reports: state.reports.map((r) =>
+        reports: (state.reports || []).map((r) =>
           r.index === report.index ? report : r,
         ),
       })),
@@ -44,7 +44,9 @@ export const useReport = create<ReportStore>()((set) => ({
   deleteReport: async (index: number) => {
     await deleteReport(index).then(() =>
       set((state) => ({
-        reports: state.reports.filter((report) => report.index !== index),
+        reports: (state.reports || []).filter(
+          (report) => report.index !== index,
+        ),
       })),
     );
   },

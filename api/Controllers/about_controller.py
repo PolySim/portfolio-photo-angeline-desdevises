@@ -29,9 +29,7 @@ def update_biography():
         sql_request = "UPDATE personal_information SET information = %s WHERE id = 2;"
         cursor.execute(sql_request, (args['biography_us'],))
         connection.commit()
-        return flask.jsonify({
-            'update': 'success'
-        })
+        return get_information()
     except Exception as e:
         print(f"Update biography failed with message: {str(e)}")
         response = flask.make_response(

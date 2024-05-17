@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneMenu from "@/features/Header/PhoneMenu.tsx";
 import NavBar from "@/features/Header/NavBar.tsx";
 import SocialNetwork from "@/features/SocialNetwork/SocialNetwork.tsx";
+import { useReport } from "@/store/reportStore.ts";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const reports = useReport((state) => state.reports);
+  const initReports = useReport((state) => state.initReports);
+
+  useEffect(() => {
+    if (!reports) initReports();
+  }, [reports]);
 
   return (
     <>

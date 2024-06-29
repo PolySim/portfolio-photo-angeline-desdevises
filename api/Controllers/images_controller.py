@@ -13,18 +13,15 @@ def find_images():
         num = (request.args.get('num'),)
         connection = create_connection()
         cursor = connection.cursor()
-        if num[0] == '2':
-            sql_requests = """
-            SELECT images.id, description 
-            FROM images
-            LEFT JOIN publication_desc ON publication_desc.publicationId = images.id
-            WHERE page = %s 
-            ORDER BY number;"""
-        else:
-            sql_requests = "SELECT id FROM images WHERE page = %s ORDER BY number;"
+        sql_requests = """
+        SELECT images.id, description 
+        FROM images
+        LEFT JOIN publication_desc ON publication_desc.publicationId = images.id
+        WHERE page = %s 
+        ORDER BY number;"""
         cursor.execute(sql_requests, num)
         result = cursor.fetchall()
-        return flask.jsonify(formatter_images(result, num[0]))
+        return flask.jsonify(formatter_images(result))
 
     except Exception as e:
         print(f"Failed with message: {str(e)}")
@@ -62,6 +59,7 @@ def update_description():
         """
         cursor.execute(sql_request, (image_id,))
         result = cursor.fetchall()
+        print(result)
 
         if len(result) != 0:
             sql_request = """
@@ -131,7 +129,8 @@ def delete_image():
         sql_request = f"DELETE FROM images WHERE id = {image_id}"
         cursor.execute(sql_request)
         connection.commit()
-        os.remove(os.path.join(f'img/{article_id}', filename))
+        if os.path.exists(os.path.join(f'img/{article_id}', filename)):
+            os.remove(os.path.join(f'img/{article_id}', filename))
         return flask.jsonify({
             'delete': 'success'
         })

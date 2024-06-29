@@ -25,9 +25,9 @@ def update_biography():
         connection = create_connection()
         cursor = connection.cursor()
         sql_request = "UPDATE personal_information SET information = %s WHERE id = 1;"
-        cursor.execute(sql_request, (args['biography_fr'],))
+        cursor.execute(sql_request, (args['fr'],))
         sql_request = "UPDATE personal_information SET information = %s WHERE id = 2;"
-        cursor.execute(sql_request, (args['biography_us'],))
+        cursor.execute(sql_request, (args['en'],))
         connection.commit()
         return get_information()
     except Exception as e:

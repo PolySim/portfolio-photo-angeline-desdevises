@@ -51,8 +51,13 @@ def create_page():
         article = body['article']
         connection = create_connection()
         cursor = connection.cursor()
-        sql_request = f"""INSERT INTO pages (name, presentation) VALUES (%s, %s);"""
-        cursor.execute(sql_request, (title, article))
+        sql_request = f"SELECT MAX(sort) FROM pages;"
+        cursor.execute(sql_request)
+        sort = cursor.fetchall()[0][0]
+        if sort is None:
+            sort = 0
+        sql_request = f"""INSERT INTO pages (name, presentation, sort, display) VALUES (%s, %s, %s, 1);"""
+        cursor.execute(sql_request, (title, article, sort + 1))
         connection.commit()
         sql_request = f"SELECT MAX(id) FROM pages;"
         cursor.execute(sql_request)
@@ -72,15 +77,14 @@ def update_page(report_id=None):
     try:
         connection = create_connection()
         cursor = connection.cursor()
-        args = request.args
-        title = args.get('title')
-        article = args.get('article')
-        status = args.get('status')
-
-        if title:
+        args = request.json
+        title = args['title']
+        article = args['article']
+        status = args['status']
+        if title != "":
             sql_request = "UPDATE pages SET name = %s, presentation = %s WHERE id = %s;"
             cursor.execute(sql_request, (title, article, report_id))
-        if status:
+        if status != "":
             sql_request = "UPDATE pages SET display = %s WHERE id = %s;"
             cursor.execute(sql_request, (status, report_id))
 

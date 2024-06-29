@@ -22,7 +22,7 @@ def image(name):
     return send_image(name)
 
 
-@images_bp.route('/images/update_description>', methods=['PUT', 'POST'])
+@images_bp.route('/images/update_description', methods=['PUT', 'POST'])
 def description():
     return update_description()
 

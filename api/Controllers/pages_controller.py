@@ -62,8 +62,10 @@ def create_page():
         sql_request = f"SELECT MAX(id) FROM pages;"
         cursor.execute(sql_request)
         report_id = cursor.fetchall()[0][0]
-        if not os.path.exists(f'img/{report_id}'):
-            os.makedirs(f'img/{report_id}')
+        PATH_IMG = os.getenv('PATH_IMG')
+        print(f'{PATH_IMG}/img/{report_id}', not os.path.exists(f'{PATH_IMG}/img/{report_id}'))
+        if not os.path.exists(f'{PATH_IMG}/img/{report_id}'):
+            os.makedirs(f'{PATH_IMG}/img/{report_id}')
         return find_page(report_id)
 
     except Exception as e:
@@ -107,7 +109,8 @@ def delete_page(report_id=None):
         sql_request = f"DELETE FROM pages WHERE id = {report_id}"
         cursor.execute(sql_request)
         connection.commit()
-        shutil.rmtree(f'img/{report_id}')
+        PATH_IMG = os.getenv('PATH_IMG')
+        shutil.rmtree(f'{PATH_IMG}/img/{report_id}')
         return report_id
 
     except Exception as e:

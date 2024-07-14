@@ -37,7 +37,8 @@ def send_image(name=None):
         sql_request = f"SELECT name, page FROM images WHERE id = {name}"
         cursor.execute(sql_request)
         result = cursor.fetchall()
-        return send_file(f'img/{result[0][1]}/{result[0][0]}')
+        PATH_IMG = os.getenv('PATH_IMG')
+        return send_file(f'{PATH_IMG}/img/{result[0][1]}/{result[0][0]}')
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
@@ -59,7 +60,6 @@ def update_description():
         """
         cursor.execute(sql_request, (image_id,))
         result = cursor.fetchall()
-        print(result)
 
         if len(result) != 0:
             sql_request = """
@@ -94,6 +94,7 @@ def upload_image(report_id=None):
         if number_max is None:
             number_max = 0
         image_files = request.files.getlist('images')
+        PATH_IMG = os.getenv('PATH_IMG')
         if image_files:
             i = 1
             for image_file in image_files:
@@ -101,7 +102,7 @@ def upload_image(report_id=None):
                 image_file = Image.open(image_file)
                 max_size = (2000, 2000)
                 image_file.thumbnail(max_size, Image.LANCZOS)
-                image_file.save(os.path.join('img/' + report_id, filename))
+                image_file.save(os.path.join(f'{PATH_IMG}/img/' + report_id, filename))
                 sql_request = """
                 INSERT INTO images (name, page, number) 
                 VALUES (%s, %s, %s)"""
@@ -129,8 +130,9 @@ def delete_image():
         sql_request = f"DELETE FROM images WHERE id = {image_id}"
         cursor.execute(sql_request)
         connection.commit()
-        if os.path.exists(os.path.join(f'img/{article_id}', filename)):
-            os.remove(os.path.join(f'img/{article_id}', filename))
+        PATH_IMG = os.getenv('PATH_IMG')
+        if os.path.exists(os.path.join(f'{PATH_IMG}/img/{article_id}', filename)):
+            os.remove(os.path.join(f'{PATH_IMG}/img/{article_id}', filename))
         return flask.jsonify({
             'delete': 'success'
         })

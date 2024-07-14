@@ -8,15 +8,14 @@ from flask import Flask
 from flask_cors import CORS
 
 from api.Routes.about_route import about_bp
-from api.Routes.file_route import file_bp
 from api.Routes.helloWorld_route import hello_world_bp
 from api.Routes.images_route import images_bp
 from api.Routes.pages_route import pages_bp
 
-load_dotenv()
-
-cur_path = os.path.abspath(".")
-sys.path.append(cur_path)
+env_mode = 'dev'
+# env_mode = 'prod'
+env_file = f'.env.{env_mode}'
+load_dotenv(env_file)
 
 application = Flask(__name__)
 CORS(application, supports_credentials=True)
@@ -31,7 +30,6 @@ def create_app():
     app = Flask(__name__)
     CORS(app, supports_credentials=True)
 
-    app.register_blueprint(file_bp, url_prefix='/')
     app.register_blueprint(hello_world_bp, url_prefix='/helloWorld')
     app.register_blueprint(about_bp, url_prefix='/api')
     app.register_blueprint(pages_bp, url_prefix='/api')
@@ -51,4 +49,7 @@ def create_app():
 
 if __name__ == "__main__":
     application = create_app()
-    application.run(debug=True, host="0.0.0.0", port=5000)
+    if env_mode == 'local':
+        application.run(debug=True, host="0.0.0.0", port=5066)
+    else:
+        application.run(host="0.0.0.0", port=5066)

@@ -22,7 +22,7 @@ def find_pages():
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
-            "Dataset screen display unsuccessful...", 403)
+            f"Dataset screen display unsuccessful... {e}", 403)
         return response
 
 
@@ -82,6 +82,7 @@ def update_page(report_id=None):
         args = request.json
         title = args['title']
         article = args['article']
+        print(article)
         status = args['status']
         if title != "":
             sql_request = "UPDATE pages SET name = %s, presentation = %s WHERE id = %s;"

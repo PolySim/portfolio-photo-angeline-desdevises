@@ -6,7 +6,7 @@ from api.Controllers.images_controller import (
     update_description,
     upload_image,
     delete_image,
-    reorder_images
+    reorder_images, send_image_blur
 )
 
 images_bp = Blueprint('images', __name__)
@@ -20,6 +20,11 @@ def images():
 @images_bp.route('/images/<name>', methods=['GET'])
 def image(name):
     return send_image(name)
+
+
+@images_bp.route('/images/<name>/blur', methods=['GET'])
+def image_blur(name):
+    return send_image_blur(name)
 
 
 @images_bp.route('/images/update_description', methods=['PUT', 'POST'])

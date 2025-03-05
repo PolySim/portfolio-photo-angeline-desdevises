@@ -46,6 +46,28 @@ def send_image(name=None):
         return response
 
 
+def send_image_blur(name=None):
+    try:
+        connection = create_connection()
+        cursor = connection.cursor()
+        sql_request = f"SELECT name, page FROM images WHERE id = {name}"
+        cursor.execute(sql_request)
+        result = cursor.fetchall()
+        PATH_IMG = os.getenv('PATH_IMG')
+        name_with_blur = result[0][0].split('.')[0] + '.blur' + '.' + result[0][0].split('.')[1]
+        if not os.path.exists(f'{PATH_IMG}/img/{result[0][1]}/{name_with_blur}'):
+            image_file = Image.open(f'{PATH_IMG}/img/{result[0][1]}/{result[0][0]}')
+            max_size = (10, 10)
+            image_file.thumbnail(max_size, Image.LANCZOS)
+            image_file.save(f'{PATH_IMG}/img/{result[0][1]}/{name_with_blur}')
+        return send_file(f'{PATH_IMG}/img/{result[0][1]}/{name_with_blur}')
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+
 def update_description():
     try:
         args = request.json
@@ -100,8 +122,8 @@ def upload_image(report_id=None):
             for image_file in image_files:
                 filename = image_file.filename
                 image_file = Image.open(image_file)
-                max_size = (2000, 2000)
-                image_file.thumbnail(max_size, Image.LANCZOS)
+                # max_size = (2000, 2000)
+                # image_file.thumbnail(max_size, Image.LANCZOS)
                 image_file.save(os.path.join(f'{PATH_IMG}/img/' + report_id, filename))
                 sql_request = """
                 INSERT INTO images (name, page, number) 

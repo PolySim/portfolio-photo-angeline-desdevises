@@ -1,7 +1,4 @@
-# this_file = "venv/bin/activate_this.py"
-# exec(open(this_file).read(), {'__file__': this_file})
 import os
-import sys
 
 from dotenv import load_dotenv
 from flask import Flask
@@ -12,8 +9,8 @@ from api.Routes.helloWorld_route import hello_world_bp
 from api.Routes.images_route import images_bp
 from api.Routes.pages_route import pages_bp
 
-env_mode = 'dev'
-# env_mode = 'prod'
+# env_mode = 'dev'
+env_mode = 'prod'
 env_file = f'.env.{env_mode}'
 load_dotenv(env_file)
 
@@ -49,7 +46,7 @@ def create_app():
 
 if __name__ == "__main__":
     application = create_app()
-    if env_mode == 'local':
+    if env_mode == 'dev':
         application.run(debug=True, host="0.0.0.0", port=5066)
     else:
         application.run(host="0.0.0.0", port=5066)
